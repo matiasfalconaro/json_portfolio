@@ -2,7 +2,7 @@
   "basics": {
     "name": "Matias Falconaro",
     "label": "Software Developer",
-    "image": "/profile_pic.drawio.jpeg",
+    "image": "/1736345293938.jfif",
     "email": "matiasfalconaro@gmail.com",
     "phone": "54 9 (011) 15-3271-1841",
     "url": "https://www.mfalconaro.dev",
@@ -74,18 +74,9 @@
   ],
   "education": [
     {
-      "institution": "UP - Universidad de Palermo",
-      "url": "https://up.edu.ar/es/",
-      "area": "BSc Computer engineering",
-      "studyType": "Bachelor of Science Degree",
-      "startDate": "2023-03-01",
-      "endDate": "2029-12-01",
-      "score": null
-    },
-    {
-      "institution": "UP - Universidad de Palermo",
-      "url": "https://up.edu.ar/es/",
-      "area": "ASc Computer science",
+      "institution": "UTN - Universidad Tecnologica Nacional",
+      "url": "https://up.edu.ar/",
+      "area": "Systems Analysis",
       "studyType": "Associate of Science Degree",
       "startDate": "2023-03-01",
       "endDate": "2026-12-01",
@@ -93,8 +84,8 @@
     },
     {
     "institution": "UTN - Universidad Tecnologica Nacional",
-    "url": "https://utn.edu.ar/es/",
-    "area": "Python development diploma",
+    "url": "https://utn.edu.ar/",
+    "area": "Python development",
     "studyType": "Diploma",
     "startDate": "2023-10-01",
     "endDate": "2024-06-01",
@@ -105,16 +96,29 @@
       "999190966 - Python 3 - Advanced"
     ]
   }],
-  "certificates": [{
-    "name": "Python Diploma",
-    "date": "2024-06-01",
-    "issuer": "Universidad Tecnologica Nacional",
-    "url": null
-  }],
+  "certificates": [
+    {
+        "name": "Python Diploma",
+        "date": "2024-06-01",
+        "issuer": "Universidad Tecnologica Nacional",
+        "url": null
+    },
+    {
+        "name": "AWS Certified Solutions Architect",
+        "date": "2024-06-01",
+        "issuer": "Amazon Web Servises",
+        "url": null
+    },
+    {
+        "name": "Google IT SUpport",
+        "date": "2024-06-01",
+        "issuer": "Google",
+        "url": null
+    }],
   "skills": [
     {
       "name": "Front-End Development",
-      "level": "Advanced",
+      "level": "Intermediate",
       "keywords": [
         "HTML",
         "CSS",
