@@ -1,0 +1,315 @@
+{
+  "basics": {
+    "name": "Matias Falconaro",
+    "label": "Software Developer",
+    "image": "/1736345293938.jfif",
+    "email": "matiasfalconaro@gmail.com",
+    "phone": "54 9 (011) 15-3271-1841",
+    "url": "https://www.mfalconaro.dev",
+    "summary": "As a dedicated software developer, I am driven by the excitement of understanding and defining business requirements to create meaningful and impactful solutions. Analyzing processes, identifying needs, and developing strategies that not only solve business problems but also bring value and efficiency is at the core of my work. Some of my soft skills are being analytical, adaptable, collaborative, and committed. I also enjoy spending time with my family and friends, cycling, and swimming.",
+    "location": {
+      "address": "Street 123",
+      "postalCode": "B1842EJJ",
+      "city": "Monte Grande",
+      "countryCode": "AR",
+      "region": "Buenos Aires"
+    },
+    "profiles": [
+      {
+        "network": "GitHub",
+        "username": "matiasfalconaro",
+        "url": "https://github.com/matiasfalconaro"
+      },
+      {
+        "network": "LinkedIn",
+        "username": "matiasfalconaro",
+        "url": "https://linkedin.com/in/matiasfalconaro"
+      }]
+  },
+  "work": [
+    {
+      "name": "Baitcon SA",
+      "position": "Python Developer",
+      "url": "https://www.baitcon.com/",
+      "startDate": "2022-12-01",
+      "endDate": null,
+      "summary": "Designed database schemas using ER diagrams, DDL, and SQL for efficient data storage and retrieval, and developed ETL processes to centralize data from various sources. Built RESTful APIs, integrated AI APIs and MMLs, ensured data security, and collaborated with data analysts, while managing data pipelines, backup strategies, and CI/CD pipelines for backend services.",
+      "highlights": [
+        "Corporate software, automation and pipelining factory"
+        ]
+    },
+    {
+      "name": "Freelance web developer",
+      "position": "Jr.FS Developer",
+      "url": null,
+      "startDate": "2018-12-01",
+      "endDate": "2023-12-01",
+      "summary": "Developed and maintained web pages, including landing pages and e-commerce sites, focusing on enterprise clients. Leveraged Python for backend development and the Flask framework for web application interfaces.",
+      "highlights": [
+        "Commercial landing pages development, deployment, hosting, maintenance and improvement"
+        ]
+    },
+    {
+      "name": "Pilcomayo SRL",
+      "position": "IT Support",
+      "url": "https://b2argentina.com.ar/hotsite/pilcomayosrl/details",
+      "startDate": "2015-01-01",
+      "endDate": "2022-02-01",
+      "summary": "Managed and maintained the company's IT infrastructure, including servers, networks, and workstations, ensuring performance, uptime, and secure connectivity through the configuration of routers, switches, firewalls, and VPNs. Provided technical support to employees, handled software installations and updates, managed user accounts and data backup solutions, enforced IT security policies, and coordinated with vendors for hardware and software procurement.",
+      "highlights": [
+        "Systems maintenance, update and implementation"
+        ]
+      },
+    {
+    "name": "Etex Group Argentina",
+    "position": "SAP Base Line Support",
+    "url": "https://www.etexgroup.com/es-ar/",
+    "startDate": "2013-11-01",
+    "endDate": "2014-12-01",
+    "summary": "Configured technical locations and maintenance plans in SAP to support asset management, ensuring efficient scheduling and execution of preventive maintenance tasks. Managed work orders, purchase requests, and equipment master data, while providing user training and support on SAP maintenance functionalities.",
+    "highlights": [
+      "Started the SAP PM module implementation."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "UTN - Universidad Tecnologica Nacional",
+      "url": "https://up.edu.ar/",
+      "area": "Systems Analysis",
+      "studyType": "Associate of Science Degree",
+      "startDate": "2023-03-01",
+      "endDate": "2026-12-01",
+      "score": null
+    },
+    {
+    "institution": "UTN - Universidad Tecnologica Nacional",
+    "url": "https://utn.edu.ar/",
+    "area": "Python development",
+    "studyType": "Diploma",
+    "startDate": "2023-10-01",
+    "endDate": "2024-06-01",
+    "score": "100.00",
+    "courses": [
+      "999190962 - Python 3 - Introduction",
+      "999190964 - Python 3 - Intermediate",
+      "999190966 - Python 3 - Advanced"
+    ]
+  }],
+  "certificates": [
+    {
+        "name": "Python Diploma",
+        "date": "2024-06-01",
+        "issuer": "Universidad Tecnologica Nacional",
+        "url": null
+    },
+    {
+        "name": "AWS Certified Solutions Architect",
+        "date": "2024-06-01",
+        "issuer": "Amazon Web Servises",
+        "url": null
+    },
+    {
+        "name": "Google IT SUpport",
+        "date": "2024-06-01",
+        "issuer": "Google",
+        "url": null
+    }],
+  "skills": [
+    {
+      "name": "Front-End Development",
+      "level": "Intermediate",
+      "keywords": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "React",
+        "Bootstrap"
+      ]
+    },
+    {
+      "name": "Back-End Development",
+      "level": "Advanced",
+      "keywords": [
+        "Python",
+        "SQLAlchemy",
+        "Flask",
+        "Pandas",
+        "TDD",
+        "pETL"
+      ]
+    },
+    {
+      "name": "Database",
+      "level": "Advanced",
+      "keywords": [
+        "PostgreSQL",
+        "MongoDB",
+        "SQLite3",
+        "SAP HANA Cloud",
+        "SAP S/4 Hana"
+      ]
+    },
+    {
+      "name": "Systems management",
+      "level": "Intermediate",
+      "keywords": [
+        "linux",
+        "Git",
+        "GitHub",
+        "Bash Scripting"
+      ]
+    },
+    {
+      "name": "Cloud Computing",
+      "level": "Advanced",
+      "keywords": [
+        "AWS",
+        "SAP BTP",
+        "Docker",
+        "CloudFoundry"
+      ]
+    },
+    {
+      "name": "AI and Machine Learning",
+      "level": "Intermediate",
+      "keywords": [
+        "Open AI API",
+        "Ollama",
+        "Llama 2",
+        "nomic-embed-text",
+        "LangChain",
+        "GPT-4 Turbo",
+        "GPT-3.5 Turbo"
+      ]
+    },
+    {
+      "name": "Project Management",
+      "level": "Intermediate",
+      "keywords": [
+        "Scrum",
+        "Kaban"
+      ]
+    },
+    {
+      "name": "Data Analysis and Reporting",
+      "level": "Intermediate",
+      "keywords": [
+        "MS Excel",
+        "SAP Analytics Cloud",
+        "Tableu"
+      ]
+    }
+  ],
+  "languages": [
+    {
+      "language": "Spanish",
+      "fluency": "Native Speaker"
+    },
+    {
+      "language": "English",
+      "fluency": "Professional completion"
+    }
+  ],
+  "interests": [{
+    "name": null,
+    "keywords": [
+      null,
+      null
+    ]
+  }],
+  "references": [{
+    "name": null,
+    "reference": null
+  }],
+  "projects": [
+    {
+      "name": "Expense manager",
+      "role": "Lead",
+      "isActive": true,
+      "description": "Desktop CRUD application for managing, tracking, exporting, and visually analyzing financial transactions including expenses and revenues.",
+      "highlights": [
+        "Python",
+        "Data",
+        "Desktop",
+        "SQLite3"
+      ],
+      "url": null,
+      "github": "https://github.com/matiasfalconaro/Tkinter_expense_manager"
+  },
+  {
+    "name": "Investment App",
+    "role": "Lead",
+    "isActive": true,
+    "description": "Cloud-based application for mass data import, processing, and management of engineering project investment data, integrated for use with SAP Analytics Cloud.",
+    "highlights": [
+      "SAP HANA",
+      "SAP BTP",
+      "Python",
+      "Flask",
+      "Cloud"
+    ],
+    "url": null,
+    "github": null
+  },
+  {
+    "name": "GIS ETL pipeline",
+    "role": "Associate",
+    "isActive": true,
+    "description": "Back-end system to retrieve data from a database and GEOJSON files, process it, and compile into JSON files for geographic project information.",
+    "highlights": [
+      "API",
+      "SAP HANA",
+      "Python",
+      "GIS",
+      "GEOJSON",
+      "Pandas"
+    ],
+    "url": null,
+    "github": null
+  },
+  {
+    "name": "Direction mgmt. App",
+    "role": "Associate",
+    "isActive": true,
+    "description": "Cloud platform for managing the import, export, and monitoring of engineering projects within a corporate enterprise's presidency.",
+    "highlights": [
+      "API",
+      "SAP HANA",
+      "Flask",
+      "SQLAlchemy"
+    ],
+    "url": null,
+    "github": null
+  },
+  {
+    "name": "DBs ETL Pipeline",
+    "role": "Associate",
+    "isActive": true,
+    "description": "Executable ETL pipeline for extracting, processing, validating, and transferring data from an on-premise Oracle DB to a SAP HANA Cloud DB.",
+    "highlights": [
+      "SAP HANA",
+      "SQLAlchemy",
+      "SQL Server",
+      "Automation"
+    ],
+    "url": null,
+    "github": null
+  },
+  {
+    "name": "Chat AWS",
+    "role": "Lead",
+    "isActive": false,
+    "description": "Cloud Python application leveraging OpenAI's API models for natural language queries to fetch data from a database.",
+    "highlights": [
+      "API",
+      "AWS",
+      "PostgreSQL",
+      "OpenAI",
+      "ChatGpt"
+    ],
+    "url": null,
+    "github": null
+  }
+]
+}
