@@ -14,13 +14,33 @@ def load_portfolio() -> dict[str, Any]:
 data = load_portfolio()
 
 
+class ContactState(rx.State):
+    show_modal: bool = False
+
+    def toggle_modal(self):
+        self.show_modal = not self.show_modal
+
+
 def navbar() -> rx.Component:
     return rx.hstack(
         rx.hstack(
-            rx.link("Work", href="#work"),
-            rx.link("Education", href="#education"),
-            rx.link("Projects", href="#projects"),
-            rx.link("Contact", href="#contact"),
+            rx.link("Home",
+                    href="/",
+                    color="#94A2AF",
+                    font_weight="bold"),
+            rx.link("Work",
+                    href="#work",
+                    color="#94A2AF",
+                    font_weight="bold"),
+            rx.link("Education",
+                    href="#education",
+                    color="#94A2AF",
+                    font_weight="bold"),
+            rx.link("Projects",
+                    href="#projects",
+                    color="#94A2AF",
+                    font_weight="bold"),
+            color="#94A2AF",
             spacing="6"
         ),
 
@@ -28,11 +48,15 @@ def navbar() -> rx.Component:
 
         rx.hstack(
             rx.link(
-                rx.image(src="/github.svg", width="20px", height="20px"),
+                rx.image(src="/github.svg",
+                         width="20px",
+                         height="20px"),
                 is_external=True
             ),
             rx.link(
-                rx.image(src="/linkedin.svg", width="20px", height="20px"),
+                rx.image(src="/linkedin.svg",
+                         width="20px",
+                         height="20px"),
                 is_external=True
             ),
             spacing="3"
@@ -49,6 +73,74 @@ def navbar() -> rx.Component:
     )
 
 
+def contact_modal() -> rx.Component:
+    basics = data["basics"]
+    return rx.cond(
+        ContactState.show_modal,
+        rx.box(
+            rx.box(
+                rx.heading("Contact Information",
+                           size="5",
+                           margin_bottom="12px"),
+
+                rx.vstack(
+                    rx.hstack(
+                        rx.icon(tag="mail"),
+                        rx.text(basics["email"]),
+                        align_items="center"
+                    ),
+                    rx.hstack(
+                        rx.icon(tag="phone"),
+                        rx.text(basics.get("phone", "N/A")),
+                        align_items="center"
+                    ),
+                    rx.hstack(
+                        rx.icon(tag="map-pin"),
+                        rx.text(
+                            f"{basics['location']['city']}, "
+                            f"{basics['location']['region']}, "
+                            f"{basics['location']['countryCode']}"
+                        ),
+                        align_items="center"
+                    ),
+                    spacing="4",
+                    width="100%",
+                    padding_y="8px"
+                ),
+
+                rx.center(
+                    rx.button(
+                        "Close",
+                        on_click=ContactState.toggle_modal,
+                        background_color="#94A2AF",
+                        color="#FFFFFF"
+                    ),
+                    margin_top="16px"
+                ),
+
+                padding="24px",
+                background_color="white",
+                border_radius="10px",
+                box_shadow="2xl",
+                width="320px",
+                z_index="1001",
+                border="1px solid #e2e8f0"
+            ),
+            position="fixed",
+            top="0",
+            left="0",
+            width="100vw",
+            height="100vh",
+            background_color="rgba(0, 0, 0, 0.4)",
+            display="flex",
+            justify_content="center",
+            align_items="center",
+            z_index="1000"
+        ),
+        None
+    )
+
+
 def header_section() -> rx.Component:
     """Render header with name/title aligned vertically center with image."""
     basics = data["basics"]
@@ -56,9 +148,24 @@ def header_section() -> rx.Component:
     return rx.vstack(
         rx.grid(
             rx.vstack(
-                rx.heading(basics["name"], size="7"),
-                rx.text(basics["label"]),
-                spacing="2",
+                rx.heading(basics["name"],
+                           size="8"),
+                rx.text(basics["label"],
+                        font_weight="bold"),
+
+                rx.button(
+                    "Contact",
+                    on_click=ContactState.toggle_modal,
+                    background_color="#94A2AF",
+                    color="#E2E8F0F",
+                    _hover={"background_color": "#E2E8F0",
+                            "color":"#94A2AF"},
+                    border_radius="md",
+                    padding_x="16px",
+                    padding_y="8px"
+                ),
+
+                spacing="3",
                 align="start"
             ),
             rx.box(
@@ -94,7 +201,7 @@ def education_section() -> rx.Component:
         *[rx.box(
             rx.heading(f"{edu['studyType']} in {edu['area']}", size="5"),
             rx.text(edu["institution"]),
-            rx.text(f"{edu['startDate']} – {edu.get('endDate') or 'Present'}"),
+            rx.text(f"{edu['startDate']} – {edu.get('endDate') or 'Present'}"), 
             rx.text(f"GPA: {edu['score']}") if edu.get("score") else None,
             rx.unordered_list(
                 *[rx.list_item(course) for course in edu.get("courses", [])]
@@ -115,7 +222,9 @@ def certificates_section() -> rx.Component:
         *[rx.box(
             rx.heading(cert["name"], size="5"),
             rx.text(f"Issued by {cert['issuer']} on {cert['date']}"),
-            rx.link("View Certificate", href=cert["url"], is_external=True)
+            rx.link("View Certificate",
+                    href=cert["url"],
+                    is_external=True)
             if cert.get("url") else None,
             margin_bottom="4"
         )
@@ -209,7 +318,8 @@ def project_section() -> rx.Component:
 def footer() -> rx.Component:
     """Render footer."""
     return rx.vstack(
-        rx.text("© 2025 Matias Falconaro.", font_size="sm"),
+        rx.text("© 2025 Matias Falconaro.",
+                font_size="sm"),
         spacing="2",
         padding="4",
         align="center",
@@ -226,23 +336,33 @@ def index() -> rx.Component:
             header_section(),
             rx.divider(),
 
-            rx.heading("Work Experience", id="work", size="6"),
+            rx.heading("Work Experience",
+                       id="work",
+                       size="6"),
             work_section(),
             rx.divider(),
 
-            rx.heading("Education", id="education", size="6"),
+            rx.heading("Education",
+                       id="education",
+                       size="6"),
             education_section(),
             rx.divider(),
 
-            rx.heading("Certificates", id="certificates", size="6"),
+            rx.heading("Certificates",
+                       id="certificates",
+                       size="6"),
             certificates_section(),
             rx.divider(),
 
-            rx.heading("Projects", id="projects", size="6"),
+            rx.heading("Projects",
+                       id="projects",
+                       size="6"),
             project_section(),
             rx.divider(),
 
             footer(),
+
+            contact_modal(),
 
             spacing="6",
             align="center",
