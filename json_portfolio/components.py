@@ -88,9 +88,30 @@ def header_section() -> rx.Component:
             rx.vstack(
                 rx.heading(basics["name"], size="8"),
                 rx.text(basics["label"], font_weight="bold"),
-                rx.button("Contact",
-                          on_click=ContactState.toggle_modal,
-                          **contact_button_style),
+
+                rx.hstack(
+                    rx.button(
+                        "Contact",
+                        on_click=ContactState.toggle_modal,
+                        **contact_button_style
+                    ),
+                rx.link(
+                    rx.button(
+                        rx.hstack(
+                            rx.image(src="/download.svg", width="16px", height="16px"),
+                            rx.text("Resume"),
+                            spacing="2",
+                            align="center"
+                        ),
+                        **download_button_style
+                    ),
+                    href="/resume.pdf",
+                    is_external=True,
+                    download=True
+                ),
+                    spacing="3"
+                ),
+
                 **header_text_block
             ),
             rx.box(

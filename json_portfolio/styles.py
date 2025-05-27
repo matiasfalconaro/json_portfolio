@@ -74,11 +74,20 @@ section_heading_style = {
 
 contact_button_style = {
     "background_color": "#94A2AF",
-    "color": "#E2E8F0",
+    "color": "#FFFFFF",
     "_hover": {
         "background_color": "#E2E8F0",
         "color": "#94A2AF"
     },
+    "border_radius": "md",
+    "padding_x": "16px",
+    "padding_y": "8px"
+}
+
+download_button_style = {
+    "background_color": "#94A2AF",
+    "color": "#FFFFFF",
+    "_hover": {"background_color": "#E2E8F0", "color": "#94A2AF"},
     "border_radius": "md",
     "padding_x": "16px",
     "padding_y": "8px"
