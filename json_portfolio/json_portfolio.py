@@ -2,6 +2,7 @@ import reflex as rx
 import json
 
 from pathlib import Path
+from .styles import *
 from typing import Any
 
 
@@ -24,52 +25,28 @@ class ContactState(rx.State):
 def navbar() -> rx.Component:
     return rx.hstack(
         rx.hstack(
-            rx.link("Home",
-                    href="/",
-                    color="#94A2AF",
-                    font_weight="bold"),
-            rx.link("Work",
-                    href="#work",
-                    color="#94A2AF",
-                    font_weight="bold"),
-            rx.link("Education",
-                    href="#education",
-                    color="#94A2AF",
-                    font_weight="bold"),
-            rx.link("Projects",
-                    href="#projects",
-                    color="#94A2AF",
-                    font_weight="bold"),
-            color="#94A2AF",
-            spacing="6"
+            rx.link("Home", href="/", **link_style),
+            rx.link("Work", href="#work", **link_style),
+            rx.link("Education", href="#education", **link_style),
+            rx.link("Projects", href="#projects", **link_style),
+            **nav_links_container
         ),
 
         rx.spacer(),
 
         rx.hstack(
             rx.link(
-                rx.image(src="/github.svg",
-                         width="20px",
-                         height="20px"),
+                rx.image(src="/github.svg", **icon_image_size),
                 is_external=True
             ),
             rx.link(
-                rx.image(src="/linkedin.svg",
-                         width="20px",
-                         height="20px"),
+                rx.image(src="/linkedin.svg", **icon_image_size),
                 is_external=True
             ),
-            spacing="3"
+            **nav_icons_container
         ),
 
-        padding="4",
-        border_bottom="1px solid #e2e8f0",
-        position="sticky",
-        top="0",
-        z_index="10",
-        background_color="white",
-        width="100%",
-        align="center"
+        **navbar_style
     )
 
 
@@ -79,9 +56,7 @@ def contact_modal() -> rx.Component:
         ContactState.show_modal,
         rx.box(
             rx.box(
-                rx.heading("Contact Information",
-                           size="5",
-                           margin_bottom="12px"),
+                rx.heading("Contact Information", **section_heading_style),
 
                 rx.vstack(
                     rx.hstack(
@@ -103,39 +78,17 @@ def contact_modal() -> rx.Component:
                         ),
                         align_items="center"
                     ),
-                    spacing="4",
-                    width="100%",
-                    padding_y="8px"
+                    **contact_info_style
                 ),
 
                 rx.center(
-                    rx.button(
-                        "Close",
-                        on_click=ContactState.toggle_modal,
-                        background_color="#94A2AF",
-                        color="#FFFFFF"
-                    ),
+                    rx.button("Close", on_click=ContactState.toggle_modal, **modal_button_style),
                     margin_top="16px"
                 ),
 
-                padding="24px",
-                background_color="white",
-                border_radius="10px",
-                box_shadow="2xl",
-                width="320px",
-                z_index="1001",
-                border="1px solid #e2e8f0"
+                **modal_card_style
             ),
-            position="fixed",
-            top="0",
-            left="0",
-            width="100vw",
-            height="100vh",
-            background_color="rgba(0, 0, 0, 0.4)",
-            display="flex",
-            justify_content="center",
-            align_items="center",
-            z_index="1000"
+            **modal_overlay_style
         ),
         None
     )
@@ -148,114 +101,85 @@ def header_section() -> rx.Component:
     return rx.vstack(
         rx.grid(
             rx.vstack(
-                rx.heading(basics["name"],
-                           size="8"),
-                rx.text(basics["label"],
-                        font_weight="bold"),
-
-                rx.button(
-                    "Contact",
-                    on_click=ContactState.toggle_modal,
-                    background_color="#94A2AF",
-                    color="#E2E8F0F",
-                    _hover={"background_color": "#E2E8F0",
-                            "color":"#94A2AF"},
-                    border_radius="md",
-                    padding_x="16px",
-                    padding_y="8px"
-                ),
-
-                spacing="3",
-                align="start"
+                rx.heading(basics["name"], size="8"),
+                rx.text(basics["label"], font_weight="bold"),
+                rx.button("Contact", on_click=ContactState.toggle_modal, **contact_button_style),
+                **header_text_block
             ),
             rx.box(
-                rx.image(
-                    src=basics["image"],
-                    width="150px",
-                    border_radius="5px"
-                ),
+                rx.image(src=basics["image"], **header_image_style),
                 display="flex",
                 justify_content="flex-end"
             ),
-            columns="2",
-            spacing="4",
-            width="100%",
-            align_items="center"
+            **header_grid_style
         ),
-
-        rx.text(
-            basics["summary"],
-            max_width="800px",
-            text_align="start"
-        ),
-
-        spacing="4",
-        align="start",
-        padding="4"
+        rx.text(basics["summary"], **summary_text_style),
+        **header_section_style
     )
 
 
 def education_section() -> rx.Component:
     """Render the education section."""
     return rx.vstack(
-        *[rx.box(
-            rx.heading(f"{edu['studyType']} in {edu['area']}", size="5"),
-            rx.text(edu["institution"]),
-            rx.text(f"{edu['startDate']} – {edu.get('endDate') or 'Present'}"), 
-            rx.text(f"GPA: {edu['score']}") if edu.get("score") else None,
-            rx.unordered_list(
-                *[rx.list_item(course) for course in edu.get("courses", [])]
-            ) if edu.get("courses") else None,
-            margin_bottom="6"
-        )
-        for edu in data["education"]],
-        spacing="4",
-        align="start",
-        width="100%",
-        max_width="800px"
+        *[
+            rx.box(
+                rx.heading(
+                    f"{edu['studyType']} in {edu['area']}",
+                    **heading_education_style
+                ),
+                rx.text(edu["institution"]),
+                rx.text(f"{edu['startDate']} – {edu.get('endDate') or 'Present'}"),
+                rx.text(f"GPA: {edu['score']}") if edu.get("score") else None,
+                rx.unordered_list(
+                    *[rx.list_item(course) for course in edu.get("courses", [])]
+                ) if edu.get("courses") else None,
+                **education_item_style
+            )
+            for edu in data["education"]
+        ],
+        **education_section_style
     )
 
 
 def certificates_section() -> rx.Component:
     """Render the certificates section."""
     return rx.vstack(
-        *[rx.box(
-            rx.heading(cert["name"], size="5"),
-            rx.text(f"Issued by {cert['issuer']} on {cert['date']}"),
-            rx.link("View Certificate",
+        *[
+            rx.box(
+                rx.heading(cert["name"], **certificate_heading_style),
+                rx.text(f"Issued by {cert['issuer']} on {cert['date']}"),
+                rx.link(
+                    "View Certificate",
                     href=cert["url"],
-                    is_external=True)
-            if cert.get("url") else None,
-            margin_bottom="4"
-        )
-        for cert in data["certificates"]],
-        spacing="4",
-        align="start",
-        width="100%",
-        max_width="800px"
+                    is_external=True
+                ) if cert.get("url") else None,
+                **certificate_item_style
+            )
+            for cert in data["certificates"]
+        ],
+        **certificates_section_style
     )
 
 
 def work_section() -> rx.Component:
     """Render the work experience section."""
     return rx.vstack(
-        *[rx.box(
-            rx.heading(f'{job["position"]} @ {job["name"]}', size="5"),
-            rx.text(
-                f'{job["startDate"]} – '
-                f'{job.get("endDate") or "Present"}'
-            ),
-            rx.text(job["summary"]),
-            rx.unordered_list(
-                *[rx.list_item(item) for item in job["highlights"]]
-            ),
-            margin_bottom="6"
-        )
-        for job in data["work"]],
-        spacing="4",
-        align="start",
-        width="100%",
-        max_width="800px"
+        *[
+            rx.box(
+                rx.heading(f'{job["position"]} @ {job["name"]}', **work_heading_style),
+                rx.text(
+                    f'{job["startDate"]} – '
+                    f'{job.get("endDate") or "Present"}'
+                ),
+                rx.text(job["summary"]),
+                rx.unordered_list(
+                    *[rx.list_item(item) for item in job["highlights"]]
+                ),
+                **work_item_style
+            )
+            for job in data["work"]
+        ],
+        **work_section_style
     )
 
 
@@ -266,27 +190,18 @@ def project_section() -> rx.Component:
             *[
                 rx.box(
                     rx.vstack(
-                        rx.heading(project["name"], size="5"),
+                        rx.heading(project["name"], **project_heading_style),
                         rx.text(project["description"]),
 
-                        # Wrapp tech tags
                         rx.hstack(
                             *[
                                 rx.box(
                                     tech,
-                                    padding="5px",
-                                    border_radius="5px",
-                                    color="#2D3748",
-                                    background_color="#EDF2F7",
-                                    font_size="sm",
-                                    font_weight="medium",
-                                    margin="1",
-                                    display="inline-block"
+                                    **tech_tag_style
                                 )
                                 for tech in project["highlights"]
                             ],
-                            wrap="wrap",
-                            spacing="2"
+                            **tech_tag_container_style
                         ),
 
                         rx.text(project["role"], font_weight="bold"),
@@ -297,20 +212,13 @@ def project_section() -> rx.Component:
                             is_external=True
                         ) if project.get("github") else None,
 
-                        spacing="3",
-                        align="start"
+                        **project_content_style
                     ),
-                    padding="16px",
-                    border="1px solid #e2e8f0",
-                    border_radius="10px",
-                    box_shadow="sm",
-                    background_color="white",
-                    width="100%",
+                    **project_card_style
                 )
                 for project in data["projects"]
             ],
-            columns="3",
-            spacing="4"
+            **project_grid_style
         )
     )
 
@@ -318,14 +226,8 @@ def project_section() -> rx.Component:
 def footer() -> rx.Component:
     """Render footer."""
     return rx.vstack(
-        rx.text("© 2025 Matias Falconaro.",
-                font_size="sm"),
-        spacing="2",
-        padding="4",
-        align="center",
-        border_top="1px solid #e2e8f0",
-        width="100%",
-        background_color="#f7fafc"
+        rx.text("© 2025 Matias Falconaro.", **footer_text_style),
+        **footer_style
     )
 
 
@@ -336,27 +238,19 @@ def index() -> rx.Component:
             header_section(),
             rx.divider(),
 
-            rx.heading("Work Experience",
-                       id="work",
-                       size="6"),
+            rx.heading("Work Experience", id="work", **section_heading_style),
             work_section(),
             rx.divider(),
 
-            rx.heading("Education",
-                       id="education",
-                       size="6"),
+            rx.heading("Education", id="education", **section_heading_style),
             education_section(),
             rx.divider(),
 
-            rx.heading("Certificates",
-                       id="certificates",
-                       size="6"),
+            rx.heading("Certificates", id="certificates", **section_heading_style),
             certificates_section(),
             rx.divider(),
 
-            rx.heading("Projects",
-                       id="projects",
-                       size="6"),
+            rx.heading("Projects", id="projects", **section_heading_style),
             project_section(),
             rx.divider(),
 
@@ -364,13 +258,9 @@ def index() -> rx.Component:
 
             contact_modal(),
 
-            spacing="6",
-            align="center",
-            width="100%",
-            max_width="900px"
+            **page_layout_style
         ),
-        padding="6",
-        width="100%"
+        **page_wrapper_style
     )
 
 
