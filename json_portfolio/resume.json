@@ -286,7 +286,7 @@
     "name": "DBs ETL Pipeline",
     "role": "Associate",
     "isActive": true,
-    "description": "Executable ETL pipeline for extracting, processing, validating, and transferring data from an on-premise Oracle DB to a SAP HANA Cloud DB.",
+    "description": "Executable ETL pipeline for extracting, processing, validating, and transferring data from an Oracle DB to a HANA Cloud DB.",
     "highlights": [
       "SAP HANA",
       "SQLAlchemy",
