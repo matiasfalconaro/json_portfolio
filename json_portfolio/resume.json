@@ -98,12 +98,6 @@
   }],
   "certificates": [
     {
-        "name": "Python Diploma",
-        "date": "2024-06-01",
-        "issuer": "Universidad Tecnologica Nacional",
-        "url": null
-    },
-    {
         "name": "AWS Certified Solutions Architect",
         "date": "2024-06-01",
         "issuer": "Amazon Web Servises",

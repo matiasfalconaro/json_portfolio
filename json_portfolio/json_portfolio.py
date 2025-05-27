@@ -14,33 +14,77 @@ def load_portfolio() -> dict[str, Any]:
 data = load_portfolio()
 
 
-def header_section() -> rx.Component:
-    """Render the header with image, name, title, summary, and links."""
-    basics = data["basics"]
-    return rx.vstack(
-        rx.image(
-            src=basics["image"],
-            width="150px",
-            border_radius="full"
+def navbar() -> rx.Component:
+    return rx.hstack(
+        rx.hstack(
+            rx.link("Work", href="#work"),
+            rx.link("Education", href="#education"),
+            rx.link("Projects", href="#projects"),
+            rx.link("Contact", href="#contact"),
+            spacing="6"
         ),
-        rx.heading(basics["name"], size="7"),
-        rx.text(basics["label"]),
+
+        rx.spacer(),
+
+        # Use static SVG images
+        rx.hstack(
+            rx.link(
+                rx.image(src="/github.svg", width="20px", height="20px"),
+                is_external=True
+            ),
+            rx.link(
+                rx.image(src="/linkedin.svg", width="20px", height="20px"),
+                is_external=True
+            ),
+            spacing="3"
+        ),
+
+        padding="4",
+        border_bottom="1px solid #e2e8f0",
+        position="sticky",
+        top="0",
+        z_index="10",
+        background_color="white",
+        width="100%",
+        align="center"
+    )
+
+
+def header_section() -> rx.Component:
+    """Render header with name/title aligned vertically center with image."""
+    basics = data["basics"]
+
+    return rx.vstack(
+        rx.grid(
+            rx.vstack(
+                rx.heading(basics["name"], size="7"),
+                rx.text(basics["label"]),
+                spacing="2",
+                align="start"
+            ),
+            rx.box(
+                rx.image(
+                    src=basics["image"],
+                    width="150px",
+                    border_radius="5px"
+                ),
+                display="flex",
+                justify_content="flex-end"
+            ),
+            columns="2",
+            spacing="4",
+            width="100%",
+            align_items="center"
+        ),
+
         rx.text(
             basics["summary"],
-            max_width="700px",
-            text_align="center"
+            max_width="800px",
+            text_align="start"
         ),
-        rx.hstack(
-            *[rx.link(
-                p["network"],
-                href=p["url"],
-                is_external=True
-            )
-            for p in basics["profiles"]],
-            spacing="4"
-        ),
+
         spacing="4",
-        align="center",
+        align="start",
         padding="4"
     )
 
@@ -164,25 +208,25 @@ def project_section() -> rx.Component:
 
 
 def index() -> rx.Component:
-    """Truly centered layout with constrained section width and spacing."""
     return rx.center(
         rx.vstack(
+            navbar(),
             header_section(),
             rx.divider(),
 
-            rx.heading("Work Experience", size="6"),
+            rx.heading("Work Experience", id="work", size="6"),
             work_section(),
             rx.divider(),
 
-            rx.heading("Education", size="6"),
+            rx.heading("Education", id="education", size="6"),
             education_section(),
             rx.divider(),
 
-            rx.heading("Certificates", size="6"),
+            rx.heading("Certificates", id="certificates", size="6"),
             certificates_section(),
             rx.divider(),
-            
-            rx.heading("Projects", size="6"),
+
+            rx.heading("Projects", id="projects", size="6"),
             project_section(),
             rx.divider(),
 
@@ -190,7 +234,9 @@ def index() -> rx.Component:
             align="center",
             width="100%",
             max_width="900px"
-        )
+        ),
+        padding="6",
+        width="100%"
     )
 
 
