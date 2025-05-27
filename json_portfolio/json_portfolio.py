@@ -26,7 +26,6 @@ def navbar() -> rx.Component:
 
         rx.spacer(),
 
-        # Use static SVG images
         rx.hstack(
             rx.link(
                 rx.image(src="/github.svg", width="20px", height="20px"),
@@ -207,6 +206,19 @@ def project_section() -> rx.Component:
     )
 
 
+def footer() -> rx.Component:
+    """Render footer."""
+    return rx.vstack(
+        rx.text("© 2025 Matias Falconaro.", font_size="sm"),
+        spacing="2",
+        padding="4",
+        align="center",
+        border_top="1px solid #e2e8f0",
+        width="100%",
+        background_color="#f7fafc"
+    )
+
+
 def index() -> rx.Component:
     return rx.center(
         rx.vstack(
@@ -229,6 +241,8 @@ def index() -> rx.Component:
             rx.heading("Projects", id="projects", size="6"),
             project_section(),
             rx.divider(),
+
+            footer(),
 
             spacing="6",
             align="center",

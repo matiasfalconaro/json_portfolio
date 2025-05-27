@@ -89,12 +89,7 @@
     "studyType": "Diploma",
     "startDate": "2023-10-01",
     "endDate": "2024-06-01",
-    "score": "100.00",
-    "courses": [
-      "999190962 - Python 3 - Introduction",
-      "999190964 - Python 3 - Intermediate",
-      "999190966 - Python 3 - Advanced"
-    ]
+    "score": "100.00"
   }],
   "certificates": [
     {
