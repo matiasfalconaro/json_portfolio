@@ -1,5 +1,4 @@
 # Navbar
-
 link_style = {
     "color": "#94A2AF",
     "font_weight": "bold"
@@ -30,7 +29,6 @@ icon_image_size = {
 }
 
 # Contact
-
 modal_overlay_style = {
     "position": "fixed",
     "top": "0",
@@ -71,7 +69,6 @@ section_heading_style = {
 }
 
 # Header
-
 contact_button_style = {
     "background_color": "#94A2AF",
     "color": "#FFFFFF",
@@ -121,8 +118,23 @@ summary_text_style = {
     "text_align": "start"
 }
 
-# Education
+# Work experience
+work_section_style = {
+    "spacing": "4",
+    "align": "start",
+    "width": "100%",
+    "max_width": "800px"
+}
 
+work_item_style = {
+    "margin_bottom": "6"
+}
+
+work_heading_style = {
+    "size": "5"
+}
+
+# Education
 education_section_style = {
     "spacing": "4",
     "align": "start",
@@ -139,7 +151,6 @@ heading_education_style = {
 }
 
 # Certificates
-
 certificates_section_style = {
     "spacing": "4",
     "align": "start",
@@ -155,26 +166,7 @@ certificate_heading_style = {
     "size": "5"
 }
 
-# Work experience
-
-work_section_style = {
-    "spacing": "4",
-    "align": "start",
-    "width": "100%",
-    "max_width": "800px"
-}
-
-work_item_style = {
-    "margin_bottom": "6"
-}
-
-work_heading_style = {
-    "size": "5"
-}
-
 # Projects
-
-
 project_grid_style = {
     "columns": "3",
     "spacing": "4"
@@ -215,7 +207,6 @@ tech_tag_container_style = {
 }
 
 # Footer
-
 footer_style = {
     "spacing": "2",
     "padding": "4",
@@ -230,7 +221,6 @@ footer_text_style = {
 }
 
 # Layout
-
 page_layout_style = {
     "spacing": "6",
     "align": "center",

@@ -98,7 +98,6 @@ def header_section() -> rx.Component:
                 rx.link(
                     rx.button(
                         rx.hstack(
-                            rx.image(src="/download.svg", width="16px", height="16px"),
                             rx.text("Resume"),
                             spacing="2",
                             align="center"
@@ -123,6 +122,30 @@ def header_section() -> rx.Component:
         ),
         rx.text(basics["summary"], **summary_text_style),
         **header_section_style
+    )
+
+
+def work_section() -> rx.Component:
+    """Render the work experience section."""
+    return rx.vstack(
+        *[
+            rx.box(
+                rx.heading(f'{job["position"]} @ {job["name"]}',
+                           **work_heading_style),
+                rx.text(
+                    f'{job["startDate"]} – '
+                    f'{job.get("endDate") or "Present"}'
+                ),
+                rx.box(height="1em"),
+                rx.text(job["summary"]),
+                rx.unordered_list(
+                    *[rx.list_item(item) for item in job["highlights"]]
+                ),
+                **work_item_style
+            )
+            for job in data["work"]
+        ],
+        **work_section_style
     )
 
 
@@ -166,29 +189,6 @@ def certificates_section() -> rx.Component:
             for cert in data["certificates"]
         ],
         **certificates_section_style
-    )
-
-
-def work_section() -> rx.Component:
-    """Render the work experience section."""
-    return rx.vstack(
-        *[
-            rx.box(
-                rx.heading(f'{job["position"]} @ {job["name"]}',
-                           **work_heading_style),
-                rx.text(
-                    f'{job["startDate"]} – '
-                    f'{job.get("endDate") or "Present"}'
-                ),
-                rx.text(job["summary"]),
-                rx.unordered_list(
-                    *[rx.list_item(item) for item in job["highlights"]]
-                ),
-                **work_item_style
-            )
-            for job in data["work"]
-        ],
-        **work_section_style
     )
 
 

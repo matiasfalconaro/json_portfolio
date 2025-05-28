@@ -28,11 +28,22 @@
   },
   "work": [
     {
+      "name": "Scienza Argentina",
+      "position": "Python Developer",
+      "url": "https://www.scienza.com.ar/",
+      "startDate": "08/2024",
+      "endDate": "Present",
+      "summary": "Led automation initiatives using Python and virtualization tools. Integrated OpenAI API for document auditing, prescription analysis, and cross-referencing with lab delivery notes. Developed and consumed APIs using FastAPI. Created comprehensive documentation and training resources. Championed DevOps practices with Git/GitHub and enforced clean architecture through OOP, SOLID principles, and modular design.",
+      "highlights": [
+        "Process automation, AI, Systems migration"
+      ]
+    },
+    {
       "name": "Baitcon SA",
       "position": "Python Developer",
       "url": "https://www.baitcon.com/",
-      "startDate": "2022-12-01",
-      "endDate": null,
+      "startDate": "12/2022",
+      "endDate": "08/2024",
       "summary": "Designed database schemas using ER diagrams, DDL, and SQL for efficient data storage and retrieval, and developed ETL processes to centralize data from various sources. Built RESTful APIs, integrated AI APIs and MMLs, ensured data security, and collaborated with data analysts, while managing data pipelines, backup strategies, and CI/CD pipelines for backend services.",
       "highlights": [
         "Corporate software, automation and pipelining factory"
@@ -40,10 +51,10 @@
     },
     {
       "name": "Freelance web developer",
-      "position": "Jr.FS Developer",
+      "position": "FS Developer",
       "url": null,
-      "startDate": "2018-12-01",
-      "endDate": "2023-12-01",
+      "startDate": "12/2018",
+      "endDate": "12/2023",
       "summary": "Developed and maintained web pages, including landing pages and e-commerce sites, focusing on enterprise clients. Leveraged Python for backend development and the Flask framework for web application interfaces.",
       "highlights": [
         "Commercial landing pages development, deployment, hosting, maintenance and improvement"
@@ -53,8 +64,8 @@
       "name": "Pilcomayo SRL",
       "position": "IT Support",
       "url": "https://b2argentina.com.ar/hotsite/pilcomayosrl/details",
-      "startDate": "2015-01-01",
-      "endDate": "2022-02-01",
+      "startDate": "01/2015",
+      "endDate": "02/2022",
       "summary": "Managed and maintained the company's IT infrastructure, including servers, networks, and workstations, ensuring performance, uptime, and secure connectivity through the configuration of routers, switches, firewalls, and VPNs. Provided technical support to employees, handled software installations and updates, managed user accounts and data backup solutions, enforced IT security policies, and coordinated with vendors for hardware and software procurement.",
       "highlights": [
         "Systems maintenance, update and implementation"
@@ -64,8 +75,8 @@
     "name": "Etex Group Argentina",
     "position": "SAP Base Line Support",
     "url": "https://www.etexgroup.com/es-ar/",
-    "startDate": "2013-11-01",
-    "endDate": "2014-12-01",
+    "startDate": "11/2013",
+    "endDate": "12/2024",
     "summary": "Configured technical locations and maintenance plans in SAP to support asset management, ensuring efficient scheduling and execution of preventive maintenance tasks. Managed work orders, purchase requests, and equipment master data, while providing user training and support on SAP maintenance functionalities.",
     "highlights": [
       "Started the SAP PM module implementation."
@@ -78,8 +89,8 @@
       "url": "https://up.edu.ar/",
       "area": "Systems Analysis",
       "studyType": "Associate of Science Degree",
-      "startDate": "2023-03-01",
-      "endDate": "2026-12-01",
+      "startDate": "03/2023",
+      "endDate": "12/2026",
       "score": null
     },
     {
@@ -87,20 +98,20 @@
     "url": "https://utn.edu.ar/",
     "area": "Python development",
     "studyType": "Diploma",
-    "startDate": "2023-10-01",
-    "endDate": "2024-06-01",
+    "startDate": "10/2023",
+    "endDate": "06/2024",
     "score": "100.00"
   }],
   "certificates": [
     {
         "name": "AWS Certified Solutions Architect",
-        "date": "2024-06-01",
+        "date": "06/2023",
         "issuer": "Amazon Web Servises",
         "url": null
     },
     {
         "name": "Google IT SUpport",
-        "date": "2024-06-01",
+        "date": "03/2024",
         "issuer": "Google",
         "url": null
     }],
