@@ -2,7 +2,7 @@ import reflex as rx
 
 from .data import data
 from .styles import *
-from .states import ContactState
+from .states import States
 
 
 def navbar() -> rx.Component:
@@ -18,6 +18,11 @@ def navbar() -> rx.Component:
         rx.spacer(),
 
         rx.hstack(
+            rx.link(
+                rx.image(src="/code.svg", **icon_image_size),
+                on_click=States.toggle_code_modal,
+                cursor="pointer"
+            ),
             rx.link(
                 rx.image(src="/github.svg", **icon_image_size),
                 is_external=True
@@ -36,7 +41,7 @@ def navbar() -> rx.Component:
 def contact_modal() -> rx.Component:
     basics = data["basics"]
     return rx.cond(
-        ContactState.show_modal,
+        States.show_modal,
         rx.box(
             rx.box(
                 rx.heading("Contact Information", **section_heading_style),
@@ -66,7 +71,50 @@ def contact_modal() -> rx.Component:
 
                 rx.center(
                     rx.button("Close",
-                              on_click=ContactState.toggle_modal,
+                              on_click=States.toggle_modal,
+                              **modal_button_style),
+                    margin_top="16px"
+                ),
+
+                **modal_card_style
+            ),
+            **modal_overlay_style
+        ),
+        None
+    )
+
+
+def code_info_modal() -> rx.Component:
+    return rx.cond(
+        States.show_code_modal,
+        rx.box(
+            rx.box(
+                rx.heading("Page Info", **section_heading_style),
+
+                rx.vstack(
+                    rx.hstack(
+                        rx.icon(tag="git-branch"),
+                        rx.text("v1.0.0"),
+                        align_items="center"
+                    ),
+                    rx.hstack(
+                        rx.image(src="/python.svg", width="1.25em", height="1.25em"),
+                        rx.text("Python (Reflex)"),
+                        align_items="center"
+                    ),
+                    rx.hstack(
+                        rx.icon(tag="github"),
+                        rx.link("Source code",
+                                href="https://github.com/matiasfalconaro/json_portfolio",
+                                is_external=True),
+                        align_items="center"
+                    ),
+                    **contact_info_style
+                ),
+
+                rx.center(
+                    rx.button("Close",
+                              on_click=States.toggle_code_modal,
                               **modal_button_style),
                     margin_top="16px"
                 ),
@@ -92,7 +140,7 @@ def header_section() -> rx.Component:
                 rx.hstack(
                     rx.button(
                         "Contact",
-                        on_click=ContactState.toggle_modal,
+                        on_click=States.toggle_modal,
                         **contact_button_style
                     ),
                 rx.link(

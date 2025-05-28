@@ -36,9 +36,9 @@ def index() -> rx.Component:
             rx.divider(),
 
             footer(),
-
             contact_modal(),
-
+            code_info_modal(),
+            
             **page_layout_style
         ),
         **page_wrapper_style
