@@ -2,6 +2,7 @@
   "name": "reflex",
   "scripts": {
     "dev": "next dev ",
+    "build": "next build",
     "export": "next build ",
     "export-sitemap": "next build  && next-sitemap",
     "prod": "next start"
