@@ -5,10 +5,10 @@ import { Fragment, memo, useContext, useEffect, useState } from "react"
 import { Event, getBackendURL, isTrue, refs } from "$/utils/state"
 import { ColorModeContext, EventLoopContext } from "$/utils/context"
 import { Box as RadixThemesBox, Text as RadixThemesText } from "@radix-ui/themes"
+import { toast, Toaster } from "sonner"
 import { WifiOff as LucideWifiOff } from "lucide-react"
 import { jsx, keyframes } from "@emotion/react"
 import env from "$/env.json"
-import { toast, Toaster } from "sonner"
 
 
 
@@ -48,6 +48,21 @@ RadixThemesText,
 {as:"p",css:({ ["color"] : "var(--slate-1)", ["fontWeight"] : "600", ["fontFamily"] : "'Instrument Sans', sans-serif", ["--default-font-family"] : "'Instrument Sans', sans-serif", ["fontSize"] : "0.875rem", ["lineHeight"] : "1rem", ["letterSpacing"] : "-0.00656rem" })},
 "Built with Reflex"
 ,),),)
+      )
+
+})
+
+export const MemoizedToastProvider = memo(({}) => {
+    
+  const { resolvedColorMode } = useContext(ColorModeContext)
+
+  refs['__toast'] = toast
+
+
+
+    return(
+        jsx(Toaster,{closeButton:false,expand:true,position:"bottom-right",richColors:true,theme:resolvedColorMode},)
+
       )
 
 })
@@ -92,21 +107,6 @@ jsx(LucideWifiOff,{css:({ ["color"] : "crimson", ["zIndex"] : 9999, ["position"]
 ,)) : (jsx(Fragment,{},)
 )),),),jsx(Fragment,{},)
 ,)
-      )
-
-})
-
-export const MemoizedToastProvider = memo(({}) => {
-    
-  const { resolvedColorMode } = useContext(ColorModeContext)
-
-  refs['__toast'] = toast
-
-
-
-    return(
-        jsx(Toaster,{closeButton:false,expand:true,position:"bottom-right",richColors:true,theme:resolvedColorMode},)
-
       )
 
 })
