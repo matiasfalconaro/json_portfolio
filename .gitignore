@@ -2,7 +2,9 @@
 .states
 __pycache__/
 assets/external/
+.web
 *.db
 venv
 *.pem
 notes.md
+*.zip
