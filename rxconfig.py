@@ -1,5 +1,6 @@
 import reflex as rx
 
 config = rx.Config(
-    app_name="json_portfolio",
+    app_name="portfolio",
+    tailwind=None,
 )
