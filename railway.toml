@@ -1,5 +1,6 @@
 [build]
 builder = "NIXPACKS"
+nixPkgs = ["unzip"]
 
 [variables]
 PORT = "8000"
