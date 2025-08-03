@@ -3,7 +3,8 @@ builder = "NIXPACKS"
 nixPkgs = ["unzip"]
 
 [variables]
+PORT = "8000"
 API_URL = "https://mfalconaro.up.railway.app"
 
 [start]
-cmd = "reflex run --env prod"
+cmd = "reflex run --env prod --backend-port 3000 --frontend-port 3000"
