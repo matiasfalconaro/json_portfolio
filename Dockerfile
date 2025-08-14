@@ -6,7 +6,6 @@ RUN curl -fsSL https://bun.sh/install | bash && mv /root/.bun/bin/bun /usr/local
 
 COPY . .
 
-ENV API_URL=https://mfalconaro.onrender.com
 ENV LOGLEVEL=debug
 ENV FRONTEND_PORT=3000
 ENV BACKEND_PORT=8000
@@ -16,4 +15,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 3000
 EXPOSE 8000
 
-CMD ["reflex", "run", "--env", "prod", "--loglevel", "debug"]
+CMD ["reflex", "run",
+     "--env", "prod",
+     "--loglevel", "debug",
+     "--frontend-host", "0.0.0.0",
+     "--backend-host", "0.0.0.0",
+     "--port", "3000",
+     "--backend-port", "8000"]

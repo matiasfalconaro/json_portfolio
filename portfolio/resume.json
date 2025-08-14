@@ -6,7 +6,7 @@
     "email": "matiasfalconaro@gmail.com",
     "phone": "+54 9 (011) 15-3271-1841",
     "url": "https://www.mfalconaro.dev",
-    "summary": "As a dedicated software developer, I am driven by the excitement of understanding and defining business requirements to create meaningful and impactful solutions. Analyzing processes, identifying needs, and developing strategies that not only solve business problems but also bring value and efficiency is at the core of my work. Some of my soft skills are being analytical, adaptable, collaborative, and committed. I also enjoy spending time with my family and friends, cycling, and swimming.",
+    "summary": "As a developer, I'm driven by the excitement of creating meaningful and impactful solutions. Crafting code that not only solves business problems but also brings me joy is at the core of my work. Some of my soft skills are being analytical, adaptable, collaborative, and committed. I also enjoy spending time with my family and friends, cycling, and swimming.",
     "location": {
       "address": null,
       "postalCode": "B1828AAK",
@@ -224,6 +224,68 @@
   }],
   "projects": [
     {
+      "name": "Reflex-EC2 Toolkit",
+      "role": "Lead",
+      "isActive": true,
+      "description": "Automation toolkit to launch a production-ready AWS EC2 instance and deploy a Reflex app in Docker with Caddy as the reverse proxy.",
+      "highlights": [
+        "AWS EC2",
+        "Automation",
+        "Docker",
+        "Caddy",
+        "Reverse Proxy",
+        "Reflex"
+      ],
+      "url": null,
+      "github": "https://github.com/matiasfalconaro/json_portfolio_config"
+    },
+    {
+      "name": "Local LLM RAG Agent",
+      "role": "Lead",
+      "isActive": true,
+      "description": "Tool for creating local AI model RAG agents, performing semantic research from custom files, and testing AI models with embeddings-based context.",
+      "highlights": [
+        "Python",
+        "Ollama",
+        "Embeddings",
+        "Docker",
+        "Vector DB",
+        "Langchain"
+      ],
+      "url": null,
+      "github": "https://github.com/matiasfalconaro/NLP-vec-prep"
+    },
+    {
+      "name": "KPI Traking",
+      "role": "Lead",
+      "isActive": true,
+      "description": "Application for tracking and analyzing daily KPIs of call center agents, enabling monitoring of productivity, efficiency, and goal achievement.",
+      "highlights": [
+        "Reflex",
+        "PostgreSQL",
+        "Docker",
+        "AWS EC2",
+        "Pandas"
+      ],
+      "url": null,
+      "github": "https://github.com/matiasfalconaro/kpi_track"
+    },
+    {
+      "name": "PartyPrize API",
+      "role": "Lead",
+      "isActive": true,
+      "description": "Exposed FastAPI backend for managing guest and prize data for a company event, featuring a lightweight embedded file database and a Swagger interface.",
+      "highlights": [
+        "FastAPI",
+        "Embedded SQLite3",
+        "Swagger",
+        "API",
+        "Data"
+      ],
+      "url": null,
+      "github": "https://github.com/matiasfalconaro/API-backend-fiesta"
+    },
+    {
       "name": "Expense manager",
       "role": "Lead",
       "isActive": true,
@@ -236,80 +298,80 @@
       ],
       "url": null,
       "github": "https://github.com/matiasfalconaro/Tkinter_expense_manager"
-  },
-  {
-    "name": "Investment App",
-    "role": "Lead",
-    "isActive": true,
-    "description": "Cloud-based application for mass data import, processing, and management of engineering project investment data, integrated for use with SAP Analytics Cloud.",
-    "highlights": [
-      "SAP HANA",
-      "SAP BTP",
-      "Python",
-      "Flask",
-      "Cloud"
-    ],
-    "url": null,
-    "github": null
-  },
-  {
-    "name": "GIS ETL pipeline",
-    "role": "Associate",
-    "isActive": true,
-    "description": "Back-end system to retrieve data from a database and GEOJSON files, process it, and compile into JSON files for geographic project information.",
-    "highlights": [
-      "API",
-      "SAP HANA",
-      "Python",
-      "GIS",
-      "GEOJSON",
-      "Pandas"
-    ],
-    "url": null,
-    "github": null
-  },
-  {
-    "name": "Direction mgmt. App",
-    "role": "Associate",
-    "isActive": true,
-    "description": "Cloud platform for managing the import, export, and monitoring of engineering projects within a corporate enterprise's presidency.",
-    "highlights": [
-      "API",
-      "SAP HANA",
-      "Flask",
-      "SQLAlchemy"
-    ],
-    "url": null,
-    "github": null
-  },
-  {
-    "name": "DBs ETL Pipeline",
-    "role": "Associate",
-    "isActive": true,
-    "description": "Executable ETL pipeline for extracting, processing, validating, and transferring data from an Oracle DB to a HANA Cloud DB.",
-    "highlights": [
-      "SAP HANA",
-      "SQLAlchemy",
-      "SQL Server",
-      "Automation"
-    ],
-    "url": null,
-    "github": null
-  },
-  {
-    "name": "Chat AWS",
-    "role": "Lead",
-    "isActive": false,
-    "description": "Cloud Python application leveraging OpenAI's API models for natural language queries to fetch data from a database.",
-    "highlights": [
-      "API",
-      "AWS",
-      "PostgreSQL",
-      "OpenAI",
-      "ChatGpt"
-    ],
-    "url": null,
-    "github": null
-  }
-]
+    },
+    {
+      "name": "Investment App",
+      "role": "Associate",
+      "isActive": true,
+      "description": "Cloud-based application for mass data import, processing, and management of engineering project investment data, integrated for use with SAP Analytics Cloud.",
+      "highlights": [
+        "SAP HANA",
+        "SAP BTP",
+        "Python",
+        "Flask",
+        "Cloud"
+      ],
+      "url": null,
+      "github": "NDA"
+    },
+    {
+      "name": "GIS ETL pipeline",
+      "role": "Associate",
+      "isActive": true,
+      "description": "Back-end system to retrieve data from a database and GEOJSON files, process it, and compile into JSON files for geographic project information.",
+      "highlights": [
+        "API",
+        "SAP HANA",
+        "Python",
+        "GIS",
+        "GEOJSON",
+        "Pandas"
+      ],
+      "url": null,
+      "github": "NDA"
+    },
+    {
+      "name": "Direction mgmt. App",
+      "role": "Associate",
+      "isActive": true,
+      "description": "Cloud platform for managing the import, export, and monitoring of engineering projects within a corporate enterprise's presidency.",
+      "highlights": [
+        "API",
+        "SAP HANA",
+        "Flask",
+        "SQLAlchemy"
+      ],
+      "url": null,
+      "github": "NDA"
+    },
+    {
+      "name": "DBs ETL Pipeline",
+      "role": "Associate",
+      "isActive": true,
+      "description": "Executable ETL pipeline for extracting, processing, validating, and transferring data from an Oracle DB to a HANA Cloud DB.",
+      "highlights": [
+        "SAP HANA",
+        "SQLAlchemy",
+        "SQL Server",
+        "Automation"
+      ],
+      "url": null,
+      "github": "NDA"
+    },
+    {
+      "name": "Chat AWS",
+      "role": "Lead",
+      "isActive": false,
+      "description": "Cloud Python application leveraging OpenAI's API models for natural language queries to fetch data from a database.",
+      "highlights": [
+        "API",
+        "AWS",
+        "PostgreSQL",
+        "OpenAI",
+        "ChatGpt"
+      ],
+      "url": null,
+      "github": "NDA"
+    }
+  ]
 }

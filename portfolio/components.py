@@ -94,7 +94,7 @@ def code_info_modal() -> rx.Component:
                 rx.vstack(
                     rx.hstack(
                         rx.icon(tag="git-branch"),
-                        rx.text("v1.0.0"),
+                        rx.text("v1.1.0"),
                         align_items="center"
                     ),
                     rx.hstack(
@@ -262,12 +262,20 @@ def project_section() -> rx.Component:
                         ),
 
                         rx.text(project["role"], font_weight="bold"),
-
-                        rx.link(
-                            "GitHub",
-                            href=project["github"],
-                            is_external=True
-                        ) if project.get("github") else None,
+                        (
+                            rx.link(
+                                "GitHub",
+                                href=project["github"],
+                                is_external=True
+                            )
+                            if project.get("github") 
+                               and project["github"].startswith("http")
+                            else (
+                                rx.text("Code under NDA", font_style="italic")
+                                if project.get("github") == "NDA"
+                                else None
+                            )
+                        ),
 
                         **project_content_style
                     ),

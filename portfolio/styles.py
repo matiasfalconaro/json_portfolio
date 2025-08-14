@@ -1,7 +1,6 @@
 # Navbar
 link_style = {
-    "color": "#94A2AF",
-    "font_weight": "bold"
+    "color": "#94A2AF"
 }
 
 navbar_style = {
