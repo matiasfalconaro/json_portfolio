@@ -23,11 +23,11 @@ def index() -> rx.Component:
             education_section(),
             rx.divider(),
 
-            rx.heading("Certificates",
-                       id="certificates",
-                       **section_heading_style),
-            certificates_section(),
-            rx.divider(),
+            #rx.heading("Certificates",
+            #           id="certificates",
+            #           **section_heading_style),
+            #certificates_section(),
+            #rx.divider(),
 
             rx.heading("Projects",
                        id="projects",

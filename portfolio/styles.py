@@ -9,7 +9,9 @@ navbar_style = {
     "position": "sticky",
     "top": "0",
     "z_index": "10",
-    "background_color": "white",
+    "background_color": "background",
+    "color":"text",
+    "border_color":"border",
     "width": "100%",
     "align": "center"
 }
@@ -173,11 +175,13 @@ project_grid_style = {
 
 project_card_style = {
     "padding": "16px",
-    "border": "1px solid #e2e8f0",
+    "border": "1px solid",
+    "border_color":"gray.200",
     "border_radius": "10px",
     "box_shadow": "sm",
-    "background_color": "white",
-    "width": "100%"
+    "background_color": "backgrond",
+    "width": ["100%", "100%", "48%", "32%"],
+    "margin_bottom": "16px"
 }
 
 project_heading_style = {
@@ -205,14 +209,20 @@ tech_tag_container_style = {
     "spacing": "2"
 }
 
+project_flex_container = {
+    "flex_wrap": "wrap",
+    "justify_content": "space-between", 
+    "row_gap":"4",
+    "width": "100%",
+}
+
 # Footer
 footer_style = {
     "spacing": "2",
     "padding": "4",
     "align": "center",
-    "border_top": "1px solid #e2e8f0",
     "width": "100%",
-    "background_color": "#f7fafc"
+    "background_color": "background"
 }
 
 footer_text_style = {

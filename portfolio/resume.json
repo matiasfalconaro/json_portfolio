@@ -237,7 +237,7 @@
         "Reflex"
       ],
       "url": null,
-      "github": "https://github.com/matiasfalconaro/json_portfolio_config"
+      "github": "https://github.com/matiasfalconaro/ec2-reflex-toolkit"
     },
     {
       "name": "Local LLM RAG Agent",

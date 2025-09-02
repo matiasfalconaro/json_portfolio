@@ -243,13 +243,12 @@ def certificates_section() -> rx.Component:
 def project_section() -> rx.Component:
     """Render the projects section in a grid of cards."""
     return rx.box(
-        rx.grid(
+        rx.flex(
             *[
                 rx.box(
                     rx.vstack(
                         rx.heading(project["name"], **project_heading_style),
                         rx.text(project["description"]),
-
                         rx.hstack(
                             *[
                                 rx.box(
@@ -260,7 +259,6 @@ def project_section() -> rx.Component:
                             ],
                             **tech_tag_container_style
                         ),
-
                         rx.text(project["role"], font_weight="bold"),
                         (
                             rx.link(
@@ -276,15 +274,15 @@ def project_section() -> rx.Component:
                                 else None
                             )
                         ),
-
                         **project_content_style
                     ),
                     **project_card_style
                 )
                 for project in data["projects"]
             ],
-            **project_grid_style
-        )
+            **project_flex_container
+        ),
+        width="100%"
     )
 
 

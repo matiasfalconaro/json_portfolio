@@ -17,3 +17,12 @@
 
 ## Fixed
 - Improved "projects" section identation in `resume.json`
+
+# 2025-9-2 [v1.2.0]
+
+## Changed
+- Remove certificates.
+
+## Fixed
+- Project cards responsivess and theme compatibility.
+- Navbar and footer theme compatibility.
