@@ -25,4 +25,4 @@
 
 ## Fixed
 - Project cards responsivess and theme compatibility.
-- Navbar and footer theme compatibility.
+- Navbar, footer and modals theme compatibility.

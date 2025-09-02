@@ -45,12 +45,12 @@ modal_overlay_style = {
 
 modal_card_style = {
     "padding": "24px",
-    "background_color": "white",
+    "background_color": "background",
     "border_radius": "10px",
     "box_shadow": "2xl",
     "width": "320px",
     "z_index": "1001",
-    "border": "1px solid #e2e8f0"
+    "border": "1px solid"
 }
 
 modal_button_style = {
