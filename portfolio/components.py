@@ -94,7 +94,7 @@ def code_info_modal() -> rx.Component:
                 rx.vstack(
                     rx.hstack(
                         rx.icon(tag="git-branch"),
-                        rx.text("v1.1.0"),
+                        rx.text("v1.2.0"),
                         align_items="center"
                     ),
                     rx.hstack(
