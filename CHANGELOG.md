@@ -1,4 +1,23 @@
-# 2025-13-3 [v1.1.0]
+# 2025-2-3 [v0.0.0]
+
+## Added
+- Layout wireframing
+- Json resume
+
+# 2025-10-3
+
+## Added
+- Contact and source code odals
+- Picture
+- Icons standarization
+- Resume downloading feature
+
+## Changed
+- Modularization
+- States management
+- Styling modularization
+
+# [MVP] 2025-13-3 [v1.1.0]
 
 ## Changed
 - Changed font size in `link_style`.
@@ -18,7 +37,7 @@
 ## Fixed
 - Improved "projects" section identation in `resume.json`
 
-# 2025-9-2 [v1.2.0]
+# [PRD] 2025-9-2 [v1.2.0]
 
 ## Changed
 - Remove certificates.
