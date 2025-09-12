@@ -49,5 +49,8 @@
 
 # [PRD] 2025-9-2 [v1.3.0]
 
+# Added
+- Implement CI/CD pipeline using `Git Actions` and `DockerHub`.
+
 ## Fixed
 - Github and LinkedIn links were broken.
