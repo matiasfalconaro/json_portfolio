@@ -32,12 +32,12 @@ jobs:
         context: .
         push: true
         tags: |
-          mifelconaro/portfolio-reflex:test-11_cicd
-          mifelconaro/portfolio-reflex:test-latest
+          mifalconaro/portfolio-reflex:test-11_cicd
+          mifalconaro/portfolio-reflex:test-latest
         cache-from: type=gha
         cache-to: type=gha,mode=max
 
     - name: Test output
       run: |
         echo "✅ Build completed successfully!"
-        echo "Image: mifelconaro/portfolio-reflex:test-11_cicd"
+        echo "Image: mifalconaro/portfolio-reflex:test-11_cicd"
