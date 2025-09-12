@@ -37,7 +37,7 @@
 ## Fixed
 - Improved "projects" section identation in `resume.json`
 
-# [PRD] 2025-9-2 [v1.2.0]
+# [STG] 2025-9-2 [v1.2.0]
 
 ## Changed
 - Remove certificates.
@@ -45,3 +45,9 @@
 ## Fixed
 - Project cards responsivess and theme compatibility.
 - Navbar, footer and modals theme compatibility.
+
+
+# [PRD] 2025-9-2 [v1.3.0]
+
+## Fixed
+- Github and LinkedIn links were broken.
