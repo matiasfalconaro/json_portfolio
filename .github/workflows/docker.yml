@@ -2,7 +2,7 @@ name: Build and Push Docker Image
 
 on:
   push:
-    branches: [11_cicd]  # ✅ Cambia para que se ejecute en esta rama
+    branches: [11_cicd]
     tags:
       - 'v*.*.*'
   pull_request:
@@ -32,7 +32,7 @@ jobs:
         context: .
         push: true
         tags: |
-          mifelconaro/portfolio-reflex:test-11_cicd  # ✅ Tag temporal para testing
+          mifelconaro/portfolio-reflex:test-11_cicd
           mifelconaro/portfolio-reflex:test-latest
         cache-from: type=gha
         cache-to: type=gha,mode=max
