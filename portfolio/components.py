@@ -25,10 +25,12 @@ def navbar() -> rx.Component:
             ),
             rx.link(
                 rx.image(src="/github.svg", **icon_image_size),
+                href="https://github.com/matiasfalconaro",
                 is_external=True
             ),
             rx.link(
                 rx.image(src="/linkedin.svg", **icon_image_size),
+                href="https://www.linkedin.com/in/matiasfalconaro/",
                 is_external=True
             ),
             **nav_icons_container
