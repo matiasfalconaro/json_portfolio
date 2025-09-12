@@ -2,8 +2,12 @@ name: Build and Push Docker Image
 
 on:
   push:
+    branches: [11_cicd]  # ✅ Cambia para que se ejecute en esta rama
     tags:
-      - 'v*'
+      - 'v*.*.*'
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
 
 jobs:
   build-and-push:
@@ -12,10 +16,6 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-
-    - name: Extract version from tag
-      id: get_version
-      run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
@@ -26,13 +26,18 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    - name: Build and push
+    - name: Build and push Docker image (TEST)
       uses: docker/build-push-action@v5
       with:
         context: .
         push: true
         tags: |
-          mlfalconaro/portfolio-reflex:${{ steps.get_version.outputs.VERSION }}
-          mlfalconaro/portfolio-reflex:latest
+          mifelconaro/portfolio-reflex:test-11_cicd  # ✅ Tag temporal para testing
+          mifelconaro/portfolio-reflex:test-latest
         cache-from: type=gha
         cache-to: type=gha,mode=max
+
+    - name: Test output
+      run: |
+        echo "✅ Build completed successfully!"
+        echo "Image: mifelconaro/portfolio-reflex:test-11_cicd"
