@@ -232,9 +232,9 @@
         "AWS EC2",
         "Automation",
         "Docker",
-        "Caddy",
+        "Bash",
         "Reverse Proxy",
-        "Reflex"
+        "Linux"
       ],
       "url": null,
       "github": "https://github.com/matiasfalconaro/ec2-reflex-toolkit"
