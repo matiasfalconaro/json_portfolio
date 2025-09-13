@@ -1,3 +1,5 @@
+# CHANGELOG
+
 # 2025-2-3 [v0.0.0]
 ## Added
 - Layout wireframing
@@ -46,11 +48,13 @@
 # Added
 - Implement CI/CD pipeline using `Git Actions` and `DockerHub`.
 
+## Changed
+- Update PDF resume to v1.3.0
+
 ## Fixed
 - Github and LinkedIn links were broken.
 
 # [PRD] 2025-9-2 [v1.3.1]
-
 ## Changed
 - Modify CI/CD worflow
 
@@ -60,3 +64,16 @@
 
 # Changed
 - `Reflex-EC2-toolkit` card stack.
+
+# [PRD] 2025-9-13 [v1.3.3]
+## Hotfix
+- Update version in source code modal
+
+# [PRD] 2025-9-3 [v1.3.4]
+## Added
+- Update `CHANGELOG.md`
+- Update `README.md`
+
+## Changed
+- email in `resume.json`
+- Update version in frontend
