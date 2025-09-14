@@ -90,6 +90,22 @@
 ## Fix
 - Fix `find_resume_pdf()`
 
+## Changed
+- implement `version.txt`
+
+## Notes
+This version is not included in the [Dockerhub repository](https://hub.docker.com/repository/docker/mlfalconaro/portfolio-reflex/general) because it failed while building its image.
 
 # [PRD] 2025-9-13 [v1.3.7]
+## Changed
 - Update `Dockerfile`
+
+## Changed
+- implement `version.txt`
+
+# [PRD] 2025-9-13 [v1.3.8]
+## Rollback
+- `header_section()` is rolled back to `v1.3.4` of the feature `Resume Download Button`.
+
+## Changed
+- implement `version.txt`

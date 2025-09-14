@@ -140,36 +140,9 @@ def code_info_modal() -> rx.Component:
     )
 
 
-def find_resume_pdf() -> str:
-    """Finds matching file with 'resume' in its name."""
-    assets_path = "../assets"
-    
-    if os.path.exists(assets_path):
-        pdf_files = glob.glob(f"{assets_path}/**/*.pdf", recursive=True) # returns a list of matching paths
-        resume_files = [f for f in pdf_files if 'resume' in f.lower()]
-        
-        if resume_files:
-            resume_files.sort(key=os.path.getmtime, reverse=True)
-            selected_file = resume_files[0]
-            web_path = selected_file.replace('\\', '/')
-            return f"/{web_path}"
-    
-    pdf_files = glob.glob("**/*.pdf", recursive=True)
-    resume_files = [f for f in pdf_files if 'resume' in f.lower()]
-    
-    if resume_files:
-        resume_files.sort(key=os.path.getmtime, reverse=True)
-        selected_file = resume_files[0]
-        web_path = selected_file.replace('\\', '/')
-        return f"/{web_path}"
-    
-    return "/resume.pdf"
-
 def header_section() -> rx.Component:
     """Render header with name/title aligned vertically center with image."""
     basics = data["basics"]
-    
-    resume_path = find_resume_pdf()
 
     return rx.vstack(
         rx.grid(
@@ -183,19 +156,19 @@ def header_section() -> rx.Component:
                         on_click=States.toggle_modal,
                         **contact_button_style
                     ),
-                    rx.link(
-                        rx.button(
-                            rx.hstack(
-                                rx.text("Resume"),
-                                spacing="2",
-                                align="center"
-                            ),
-                            **download_button_style
+                rx.link(
+                    rx.button(
+                        rx.hstack(
+                            rx.text("Resume"),
+                            spacing="2",
+                            align="center"
                         ),
-                        href=resume_path,
-                        is_external=True,
-                        download=True
+                        **download_button_style
                     ),
+                    href="/resume_v1.3.0.pdf",
+                    is_external=True,
+                    download=True
+                ),
                     spacing="3"
                 ),
 
