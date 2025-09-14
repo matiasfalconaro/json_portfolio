@@ -1,3 +1,5 @@
+import glob
+import os
 import reflex as rx
 
 from .data import data
@@ -86,6 +88,15 @@ def contact_modal() -> rx.Component:
     )
 
 
+def get_version() -> str:
+    """Lee la versión desde un archivo."""
+    try:
+        with open('version.txt', 'r') as f:
+            return f.read().strip()
+    except FileNotFoundError:
+        return "dev"
+
+
 def code_info_modal() -> rx.Component:
     return rx.cond(
         States.show_code_modal,
@@ -96,8 +107,7 @@ def code_info_modal() -> rx.Component:
                 rx.vstack(
                     rx.hstack(
                         rx.icon(tag="git-branch"),
-                        rx.text("v1.3.4"
-                        ""),
+                        rx.text(get_version()),
                         align_items="center"
                     ),
                     rx.hstack(
@@ -130,9 +140,27 @@ def code_info_modal() -> rx.Component:
     )
 
 
+def find_resume_pdf() -> str:
+    """
+    Finds matching file with 'resume' in its name.
+    I want to keep track of my resumes version in their names, so names change.
+    """
+    pdf_files = glob.glob("**/*.pdf", recursive=True) # Returns a List of matching paths
+    
+    resume_files = [f for f in pdf_files if 'resume' in f.lower()]
+    
+    if resume_files:
+        resume_files.sort(key=os.path.getmtime, reverse=True)
+        return f"/{resume_files[0]}"
+    
+    return "/resume.pdf"
+
+
 def header_section() -> rx.Component:
     """Render header with name/title aligned vertically center with image."""
     basics = data["basics"]
+    
+    resume_path = find_resume_pdf()
 
     return rx.vstack(
         rx.grid(
@@ -146,19 +174,19 @@ def header_section() -> rx.Component:
                         on_click=States.toggle_modal,
                         **contact_button_style
                     ),
-                rx.link(
-                    rx.button(
-                        rx.hstack(
-                            rx.text("Resume"),
-                            spacing="2",
-                            align="center"
+                    rx.link(
+                        rx.button(
+                            rx.hstack(
+                                rx.text("Resume"),
+                                spacing="2",
+                                align="center"
+                            ),
+                            **download_button_style
                         ),
-                        **download_button_style
+                        href=resume_path,
+                        is_external=True,
+                        download=True
                     ),
-                    href="/resume.pdf",
-                    is_external=True,
-                    download=True
-                ),
                     spacing="3"
                 ),
 

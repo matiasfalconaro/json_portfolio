@@ -77,3 +77,11 @@
 ## Changed
 - email in `resume.json`
 - Update version in frontend
+
+# [PRD] 2025-9-13 [v1.3.5]
+## Changed
+- implement `version.txt` to simplify versioning in the frontend.
+
+## Fix
+- implement `find_resume_pdf()` to keep versioning my resumes in their names.
+- Change `header_section()` to integrate the new function.
