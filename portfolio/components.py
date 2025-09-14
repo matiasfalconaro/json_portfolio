@@ -141,20 +141,29 @@ def code_info_modal() -> rx.Component:
 
 
 def find_resume_pdf() -> str:
-    """
-    Finds matching file with 'resume' in its name.
-    I want to keep track of my resumes version in their names, so names change.
-    """
-    pdf_files = glob.glob("**/*.pdf", recursive=True) # Returns a List of matching paths
+    """Finds matching file with 'resume' in its name."""
+    assets_path = "../assets"
     
+    if os.path.exists(assets_path):
+        pdf_files = glob.glob(f"{assets_path}/**/*.pdf", recursive=True) # returns a list of matching paths
+        resume_files = [f for f in pdf_files if 'resume' in f.lower()]
+        
+        if resume_files:
+            resume_files.sort(key=os.path.getmtime, reverse=True)
+            selected_file = resume_files[0]
+            web_path = selected_file.replace('\\', '/')
+            return f"/{web_path}"
+    
+    pdf_files = glob.glob("**/*.pdf", recursive=True)
     resume_files = [f for f in pdf_files if 'resume' in f.lower()]
     
     if resume_files:
         resume_files.sort(key=os.path.getmtime, reverse=True)
-        return f"/{resume_files[0]}"
+        selected_file = resume_files[0]
+        web_path = selected_file.replace('\\', '/')
+        return f"/{web_path}"
     
     return "/resume.pdf"
-
 
 def header_section() -> rx.Component:
     """Render header with name/title aligned vertically center with image."""
