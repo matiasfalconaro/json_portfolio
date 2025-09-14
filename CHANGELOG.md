@@ -109,3 +109,7 @@ This version is not included in the [Dockerhub repository](https://hub.docker.co
 
 ## Changed
 - implement `version.txt`
+
+# [PRD] 2025-9-13 [v1.3.9]
+## Fixed
+- `resume.pdf` from A0 to A4
