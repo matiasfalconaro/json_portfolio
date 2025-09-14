@@ -89,3 +89,7 @@
 # [PRD] 2025-9-13 [v1.3.6]
 ## Fix
 - Fix `find_resume_pdf()`
+
+
+# [PRD] 2025-9-13 [v1.3.7]
+- Update `Dockerfile`
