@@ -2,7 +2,7 @@
 Hey! Welcome to my portfolio, and thank you for your interest!
 
 ## Overview
-![Architecture](docs\architecture.svg)
+![Architecture](https://github.com/matiasfalconaro/json_portfolio/raw/main/docs/architecture.svg)
 
 # Infrastructure
 ## Build (From an EC2 instance, using [Reflex-EC2-Toolkit](https://github.com/matiasfalconaro/ec2-reflex-toolkit), AWS)
