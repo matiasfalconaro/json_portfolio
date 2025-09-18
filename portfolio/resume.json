@@ -44,7 +44,7 @@
       "url": "https://www.baitcon.com/",
       "startDate": "12/2022",
       "endDate": "08/2024",
-      "summary": "Designed database schemas using ER diagrams, DDL, and SQL for efficient data storage and retrieval, and developed ETL processes to centralize data from various sources. Built RESTful APIs, integrated AI APIs and MMLs, ensured data security, and collaborated with data analysts, while managing data pipelines, backup strategies, and CI/CD pipelines for backend services.",
+      "summary": "Designed database schemas using ER diagrams, DDL, and SQL for efficient data storage and retrieval, and developed ETL processes to centralize data from various sources. Built RESTful APIs, integrated AI APIs and LLMs, ensured data security, and collaborated with data analysts, while managing data pipelines, backup strategies, and CI/CD pipelines for backend services.",
       "highlights": [
         "Corporate software, automation and pipelining factory"
         ]
@@ -76,7 +76,7 @@
     "position": "SAP Base Line Support",
     "url": "https://www.etexgroup.com/es-ar/",
     "startDate": "11/2013",
-    "endDate": "12/2024",
+    "endDate": "12/2014",
     "summary": "Configured technical locations and maintenance plans in SAP to support asset management, ensuring efficient scheduling and execution of preventive maintenance tasks. Managed work orders, purchase requests, and equipment master data, while providing user training and support on SAP maintenance functionalities.",
     "highlights": [
       "Started the SAP PM module implementation."
