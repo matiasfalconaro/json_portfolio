@@ -1,5 +1,62 @@
 # CHANGELOG
 
+## Versioning System
+This project follows Semantic Versioning 2.0.0:
+- MAJOR version (x): Breaking changes, major functionality shifts, and
+  significant refactoring
+- MINOR version (y): New features, important improvements, and substantial
+  enhancements
+- PATCH version (z): Bug fixes, minor improvements, documentation updates,
+  and hot-fixes
+
+### Version Format
+[x.y.z] - yyyy-mm-dd - [ENVIRONMENT/TYPE]
+
+Where:
+`x.y.z`: Semantic version number (MAJOR.MINOR.PATCH)
+`yyyy-mm-dd`: Date when the version was released
+
+`[ENVIRONMENT/TYPE]`: Deployment context or deliverable type:
+[POC]: Proof-of-Concept
+[MVP]: Minimum-Viable-Product
+[DEV]: Development-environment
+[QAS]: Quality-Assurance/Testing
+[UAT]: User-Acceptance-Testing
+[PRD]: Production-environment
+[ALPHA]: Alpha-release
+[BETA]: Beta-release
+[RC]: Release-Candidate
+
+## Branching
+1. Crear un issue con el nombre de la versión
+   #1 "vw.y.z"
+2. Crear la rama con el nombre de la versión
+   `git branch vx.y.z`
+3. Commits durante el desarrollo
+4. Squash con rebase antes del merge
+   (commits) ──► "vx.y.z"
+5. Actualizar el changelog
+6. Pull Request de la versión
+7. Merge a main
+8. Tag en Git
+   "vx.y.z"
+9. Push del tag a GitHub
+
+```
+ Issue ──► Branch ──► Commits ──► Squash ──► Changelog ──► PR ──► Merge ──► Tag
+ vx.y.z    vx.y.z                 vx.y.z                  vx.y.z            vx.y.z   
+```
+
+### Change Types
+- `Added`: New features, endpoints, models, or functionality
+- `Changed`: Modifications to existing functionality
+- `Deprecated`: Features that will be removed in future releases
+- `Removed`: Features that have been deleted
+- `Fixed`: Bug fixes and error corrections
+- `Security`: Vulnerability patches and security improvements
+
+# #############################################################################
+
 # 2025-2-3 [v0.0.0]
 ## Added
 - Layout wireframing
@@ -119,13 +176,24 @@ This version is not included in the [Dockerhub repository](https://hub.docker.co
 - Typos.
 
 
-# [PRD] 2025-9-19 [v1.4.0]
+# [DEV] 2025-9-19 [v1.4.0]
 ## Added
-- Unit tests for all components.
+- Unit tests for all components, data, links, assets, portfolio, states, and utils.
+- Test coverage verification for images, PDFs, and external URLs.
 
 ## Changed
 - Updated `version.txt` to reflect v1.4.0.
-- `get_version()` now returns `"1.4.0"`.
 
 ## Fixed
-- Makdown structure and typos in `CHANGELOG.md`
+- Paths in asset tests corrected.
+- Resume file path corrected for testing.
+- Footer text comparison fixed to properly decode.
+
+# [PRD] 2025-9-19 [v1.4.1]
+## Changed
+- Updated `version.txt` to reflect v1.4.1.
+- Update unit tests
+- Add `README.md` to the docker image
+
+## Fixed
+- Add type hints and docstrings to remaining methods

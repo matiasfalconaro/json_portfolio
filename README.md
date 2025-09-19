@@ -26,7 +26,7 @@ git push origin <vx.y.z>
 sudo ./run.sh --only deploy
 ```
 
-# Tests
+# Unit tests
 Version-dependent tests use version.txt.
 
 ## Run all, a test script, or a specific test:

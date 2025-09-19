@@ -14,8 +14,8 @@ yarn-error.log*
 .reflex/
 .DS_Store
 .git/
+.env
 .gitignore
-README.md
 Dockerfile
 .dockerignore
 *.log
