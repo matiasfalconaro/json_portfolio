@@ -45,7 +45,7 @@
 
 
 # [DEV] 2025-9-2 [v1.3.0]
-# Added
+## Added
 - Implement CI/CD pipeline using `Git Actions` and `DockerHub`.
 
 ## Changed
@@ -59,10 +59,10 @@
 - Modify CI/CD worflow
 
 # [PRD] 2025-9-13 [v1.3.2]
-# Added
+## Added
 - `README.md`.
 
-# Changed
+## Changed
 - `Reflex-EC2-toolkit` card stack.
 
 # [PRD] 2025-9-13 [v1.3.3]
@@ -117,3 +117,15 @@ This version is not included in the [Dockerhub repository](https://hub.docker.co
 # [PRD] 2025-9-13 [v1.3.10]
 ## Fixed
 - Typos.
+
+
+# [PRD] 2025-9-19 [v1.4.0]
+## Added
+- Unit tests for all components.
+
+## Changed
+- Updated `version.txt` to reflect v1.4.0.
+- `get_version()` now returns `"1.4.0"`.
+
+## Fixed
+- Makdown structure and typos in `CHANGELOG.md`

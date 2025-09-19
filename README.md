@@ -25,3 +25,13 @@ git push origin <vx.y.z>
 ```bash
 sudo ./run.sh --only deploy
 ```
+
+# Tests
+Version-dependent tests use version.txt.
+
+## Run all, a test script, or a specific test:
+```bash
+pytest -v
+pytest -v tests/test_components.py
+pytest -v tests/test_components.py::test_navbar_returns_component
+```
