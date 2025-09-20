@@ -8,7 +8,7 @@ Hey! Welcome to my portfolio, and thank you for your interest!
 ## Build (From an EC2 instance, using [Reflex-EC2-Toolkit](https://github.com/matiasfalconaro/ec2-reflex-toolkit), AWS)
 ```bash
 sudo su ec2-user
-cd ~/reflex_ec2_toolkit
+cd ~
 git clone https://github.com/matiasfalconaro/ec2-reflex-toolkit.git
 ```
 
@@ -18,7 +18,7 @@ For more information, visit [Reflex-EC2-Toolkit](https://github.com/matiasfalcon
 ## Trigger pipeline (From a tag in main, locally)
 ```bash
 git tag <vx.y.z>
-git push origin <vx.y.z>
+git push origin --tags
 ```
 
 ## Deploy (From an EC2 using [Reflex-EC2-Toolkit](https://github.com/matiasfalconaro/ec2-reflex-toolkit), AWS)
@@ -27,7 +27,7 @@ sudo ./run.sh --only deploy
 ```
 
 # Unit tests
-Version-dependent tests use version.txt.
+Version-dependent tests use `version.txt`.
 
 ## Run all, a test script, or a specific test:
 ```bash
