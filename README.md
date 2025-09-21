@@ -35,3 +35,26 @@ pytest -v
 pytest -v tests/test_components.py
 pytest -v tests/test_components.py::test_navbar_returns_component
 ```
+
+# BDD Tests
+Gherkin-style tests using pytest-bdd for behavior specification and acceptance criteria.
+
+## Run all BDD tests:
+```bash
+pytest -v tests/steps/
+```
+
+## Run specific BDD test categories:
+```bash
+pytest -v tests/steps/test_components_steps.py
+```
+
+## Run specific test functions:
+```bash
+pytest -v tests/test_components.py::test_navbar_returns_component
+```
+
+## Run Complete Test Suite
+```bash
+pytest -v tests/ tests/steps/
+```

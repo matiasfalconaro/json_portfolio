@@ -17,6 +17,6 @@ def tmp_version_file(tmp_path: Path, monkeypatch) -> Generator[Path, None, None]
     and changes the current working directory to the temporary path.    
     """
     file = tmp_path / "version.txt"
-    file.write_text("1.4.1")
+    file.write_text("1.4.2")
     monkeypatch.chdir(tmp_path)
     yield file

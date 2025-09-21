@@ -1,7 +1,7 @@
 import reflex as rx
 import pytest
-from typing import Callable
 
+from typing import Callable
 from portfolio.components import (navbar,
                                  contact_modal,
                                  code_info_modal,
