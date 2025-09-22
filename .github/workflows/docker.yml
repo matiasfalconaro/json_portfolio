@@ -60,12 +60,15 @@ jobs:
     - name: Run services with Docker Compose
       run: |
         TAG=latest docker compose up -d
-        sleep 15
+        echo "Waiting for MongoDB to be ready..."
+        docker compose exec -T mongo bash -c 'until mongo --username $MONGO_USER --password $MONGO_PASSWORD --eval "db.adminCommand({ping:1})"; do sleep 2; done'
+        echo "Waiting for app to be ready..."
+        sleep 10
         docker ps -a
 
     - name: Run pytest inside app container
       run: |
-        docker compose exec app pytest -vv --maxfail=1 --disable-warnings
+        docker compose exec -T app pytest -vv --maxfail=1 --disable-warnings
 
     - name: Tear down
       if: always()
