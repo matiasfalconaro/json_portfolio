@@ -2,6 +2,10 @@
 Hey! Welcome to my portfolio, and thank you for your interest!
 
 ## Overview
+This project is a personal portfolio built with [Reflex](https://reflex.dev) as the frontend/backend framework
+and **MongoDB** as the persistent datastore.  
+It evolved from a static JSON-based portfolio to a Dockerized microservice architecture.
+
 ![Architecture](https://github.com/matiasfalconaro/json_portfolio/raw/main/docs/architecture.svg)
 
 # Infrastructure
@@ -13,6 +17,24 @@ git clone https://github.com/matiasfalconaro/ec2-reflex-toolkit.git
 ```
 
 For more information, visit [Reflex-EC2-Toolkit](https://github.com/matiasfalconaro/ec2-reflex-toolkit).
+
+# Getting Started
+
+## Requirements
+- Docker & Docker Compose
+- Python 3.10+ (for local dev/test)
+
+## Run with Docker Compose
+```bash
+docker-compose up --build
+```
+
+# Data Import
+On first startup, import your resume.json into MongoDB:
+```bash
+python database/bulk_import.py
+```
+This will create collections and indexes if they don’t exist.
 
 # CI/CD
 ## Trigger pipeline (From a tag in main, locally)

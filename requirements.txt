@@ -2,3 +2,7 @@ reflex==0.8.4
 pytest
 pytest-mock
 requests
+pytest-bdd
+pymongo
+pydantic[email]
+python-dotenv

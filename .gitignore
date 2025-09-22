@@ -10,3 +10,4 @@ venv
 notes.md
 *.zip
 .env
+*.log

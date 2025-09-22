@@ -198,7 +198,7 @@ This version is not included in the [Dockerhub repository](https://hub.docker.co
 ### Fixed
 - Add type hints and docstrings to remaining methods
 
-## [STG] 2025-9-20 [v1.4.2]
+## [PRD] 2025-9-20 [v1.4.2]
 ### Added
 - BDD Testing Framework: Implemented Behavior-Driven Development testing using pytest-bdd
 - Gherkin Feature Files: Added .feature files for all test scenarios in tests/features/
@@ -211,3 +211,25 @@ README Documentation: Updated testing section to include BDD commands and test s
 #Notes
 - Backward Compatibility: All existing unit tests maintained and continue to pass
 - Mixed Approach: Both unit testing and BDD testing coexist, providing comprehensive test coverage
+
+## [DEV] 2025-09-21 [v1.5.0]
+### Added
+- Implement MongoDB as a Dockerized microservice for portfolio data.
+- Bulk import of existing `resume.json` data into MongoDB collections.
+- Docker Compose configuration to orchestrate Reflex app and MongoDB.
+- GitHub Actions workflow extended to build and push multi-service setup.
+- Initial test integration using `pytest` and `pytest-bdd`.
+
+### Changed
+- Replaced `JSON` file storage with MongoDB as the primary data source.
+- Updated data access in Reflex components to fetch from MongoDB instead of `resume.json`.
+- Generalized database configuration using environment variables.
+
+### Fixed
+- Added `pytest-bdd` to requirements.
+- Ensured MongoDB collections are initialized with required indexes at startup.
+
+### Notes
+- MongoDB service runs in Docker with authentication (`admin/secret` by default).
+- Reflex app now depends on the MongoDB service being available at startup.
+- Tests can run either in CI (with Docker services) or locally with `docker-compose`.

@@ -2,7 +2,11 @@ import glob
 import os
 import reflex as rx
 
-from .data import data
+from database.repository import (get_basics,
+                                 get_work,
+                                 get_education,
+                                 get_certificates,
+                                 get_projects)
 from .styles import *
 from .states import States
 
@@ -43,7 +47,7 @@ def navbar() -> rx.Component:
 
 
 def contact_modal() -> rx.Component:
-    basics = data["basics"]
+    basics = get_basics()
     return rx.cond(
         States.show_modal,
         rx.box(
@@ -142,7 +146,7 @@ def code_info_modal() -> rx.Component:
 
 def header_section() -> rx.Component:
     """Render header with name/title aligned vertically center with image."""
-    basics = data["basics"]
+    basics = get_basics()
 
     return rx.vstack(
         rx.grid(
@@ -204,7 +208,7 @@ def work_section() -> rx.Component:
                 ),
                 **work_item_style
             )
-            for job in data["work"]
+            for job in get_work()
         ],
         **work_section_style
     )
@@ -227,7 +231,7 @@ def education_section() -> rx.Component:
                 ) if edu.get("courses") else None,
                 **education_item_style
             )
-            for edu in data["education"]
+            for edu in get_education()
         ],
         **education_section_style
     )
@@ -247,7 +251,7 @@ def certificates_section() -> rx.Component:
                 ) if cert.get("url") else None,
                 **certificate_item_style
             )
-            for cert in data["certificates"]
+            for cert in get_certificates()
         ],
         **certificates_section_style
     )
@@ -291,7 +295,7 @@ def project_section() -> rx.Component:
                     ),
                     **project_card_style
                 )
-                for project in data["projects"]
+                for project in get_projects()
             ],
             **project_flex_container
         ),
