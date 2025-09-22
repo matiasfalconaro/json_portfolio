@@ -32,7 +32,7 @@ def call_get_version() -> str:
     return get_version()
 
 
-@then("it should return \"1.4.2\"")
+@then("it should return \"1.5.0\"")
 def verify_version(version_result: str) -> None:
     """Verify that get_version returns the expected version."""
     assert version_result == "1.5.0"
