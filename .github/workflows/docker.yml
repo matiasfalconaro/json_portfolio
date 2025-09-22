@@ -61,9 +61,12 @@ jobs:
       run: |
         TAG=latest docker compose up -d
         echo "Waiting for MongoDB to be ready..."
-        docker compose exec -T mongo bash -c 'until mongo --username $MONGO_USER --password $MONGO_PASSWORD --eval "db.adminCommand({ping:1})"; do sleep 2; done'
-        echo "Waiting for app to be ready..."
-        sleep 10
+        until nc -z mongo 27017; do
+          echo "MongoDB not ready yet..."
+          sleep 2
+        done
+        echo "MongoDB is ready!"
+        sleep 5
         docker ps -a
 
     - name: Run pytest inside app container
