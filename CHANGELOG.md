@@ -1,22 +1,23 @@
 # CHANGELOG
 
 ## Versioning System
-This project follows Semantic Versioning 2.0.0:
+This project follows Semantic Versioning x.y.z:
 - MAJOR version (x): Breaking changes, major functionality shifts, and
-  significant refactoring
+  significant refactoring.
 - MINOR version (y): New features, important improvements, and substantial
-  enhancements
+  enhancements.
 - PATCH version (z): Bug fixes, minor improvements, documentation updates,
-  and hot-fixes
+  and hot-fixes.
 
 ### Version Format
 [x.y.z] - yyyy-mm-dd - [ENVIRONMENT/TYPE] - [LIFE-CICLE]
+(x = 0): BC, POC, MVP,
+(x > 0): RC, GA, MTT, LTS, EOL, CANARY
 
 Where:
 - `x.y.z`: Semantic version number (MAJOR.MINOR.PATCH)
 - `yyyy-mm-dd`: Date when the version was released
 - `[LIFE-CICLE]`: Deployment context or deliverable type:
-[FS]:Factibility-Stage
 [BC]:Bussines-Concept
 [POC]:Prove-of-concept
 [MVP]: Minimum-viable-product
@@ -26,7 +27,6 @@ Where:
 [LTS]: Long-term-support
 [EOL]: End-of-life
 [CANARY]: Canary
-[BG]: Blue-green
 - `[ENVIRONMENT/TYPE]`:
 [GH]: Ready-to-DEV
 [DEV]: Development
@@ -37,23 +37,26 @@ Where:
 [STP]: Stopped
 
 ## Branching
-1. Crear un issue con el nombre de la versión
-   #1 "vw.y.z"
-2. Crear la rama con el nombre de la versión
+1. Create the issue named after the version
+   #X "vx.y.z"
+2. Create the branch named after the version
    `git branch vx.y.z`
-3. Commits durante el desarrollo
-4. Squash con rebase antes del merge
+3. Open a PR named after the version and issue
+   `vx.y.z #X`
+4. Commits during development
+5. Squash with rebase before merging
    (commits) ──► "vx.y.z"
-5. Actualizar el changelog
-6. Pull Request de la versión
-7. Merge a main
-8. Tag en Git
+6. Update changelog
+7. Pull Request of version
+8. Merge into main
+9. Tag in Git
    "vx.y.z"
-9. Push del tag a GitHub
+10. Push tag to GitHub
 
 ```
- Issue ──► Branch ──► Commits ──► Squash ──► Changelog ──► PR ──► Merge ──► Tag
- vx.y.z    vx.y.z                 vx.y.z                  vx.y.z            vx.y.z   
+Issue ──► Branch ──► Commits ──► Squash ──► Changelog  ──► PR      ──►      Merge ──► Tag
+#X        vx.y.z                                           vx.y.z #X #Y
+vx.y.z    vx.y.z                 vx.y.z                    vx.y.z           vx.y.z
 ```
 
 ## Change Types
@@ -256,8 +259,9 @@ README Documentation: Updated testing section to include BDD commands and test s
 - `push` to DockerHub now only occurs if tests pass.
 - Improved CI clarity and job dependency flow to prevent pushing failing builds.
 
-## [MVP] 2025-09-22 [v1.5.3] - [GH]
+## [MVP] 2025-09-22 [v1.5.3] - [DEV]
 ### Changed
+- Update 'version format' in `CHANGELOG.md`.
 - Refactored GitHub Actions workflow:
   - The same image tested in CI is used for push, avoiding unnecessary rebuilds.
 - Updated `docker-compose.yml` to support two modes:
