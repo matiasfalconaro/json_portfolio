@@ -65,7 +65,7 @@ jobs:
 
     - name: Run pytest inside app container
       run: |
-        docker exec app pytest -vv --maxfail=1 --disable-warnings
+        docker compose exec app pytest -vv --maxfail=1 --disable-warnings
 
     - name: Tear down
       if: always()

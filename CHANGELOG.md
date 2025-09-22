@@ -233,3 +233,10 @@ README Documentation: Updated testing section to include BDD commands and test s
 - MongoDB service runs in Docker with authentication (`admin/secret` by default).
 - Reflex app now depends on the MongoDB service being available at startup.
 - Tests can run either in CI (with Docker services) or locally with `docker-compose`.
+
+# [DEV] 2025-09-22 [v1.5.1]
+### Fixed
+- update GitHub Actions workflow to run tests using `docker compose exec`.
+
+### Notes
+- This release is a **workflow test only**; no functional changes were made to the application.

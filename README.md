@@ -6,7 +6,7 @@ This project is a personal portfolio built with [Reflex](https://reflex.dev) as 
 and **MongoDB** as the persistent datastore.  
 It evolved from a static JSON-based portfolio to a Dockerized microservice architecture.
 
-![Architecture](https://github.com/matiasfalconaro/json_portfolio/raw/main/docs/architecture.svg)
+![Architecture](docs/architecture.svg)
 
 # Infrastructure
 ## Build (From an EC2 instance, using [Reflex-EC2-Toolkit](https://github.com/matiasfalconaro/ec2-reflex-toolkit), AWS)
