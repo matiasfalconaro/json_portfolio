@@ -240,3 +240,9 @@ README Documentation: Updated testing section to include BDD commands and test s
 
 ### Notes
 - This release is a **workflow test only**; no functional changes were made to the application.
+
+# [DEV] 2025-09-22 [v1.5.2]
+### Changed
+- Refactored GitHub Actions workflow into separate `build`, `test`, and `push` jobs.
+- `push` to DockerHub now only occurs if tests pass.
+- Improved CI clarity and job dependency flow to prevent pushing failing builds.
