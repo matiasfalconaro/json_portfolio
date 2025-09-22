@@ -60,14 +60,14 @@ jobs:
     - name: Run services with Docker Compose
       run: |
         TAG=latest docker compose up -d
-        echo "Waiting for MongoDB to be ready..."
-        until nc -z mongo 27017; do
-          echo "MongoDB not ready yet..."
-          sleep 2
-        done
-        echo "MongoDB is ready!"
-        sleep 5
-        docker ps -a
+        echo "Waiting for MongoDB to be ready inside app container..."
+        docker compose exec app sh -c '
+          until nc -z mongo 27017; do
+            echo "MongoDB not ready yet..."
+            sleep 2
+          done
+          echo "MongoDB is ready!"
+        '
 
     - name: Run pytest inside app container
       run: |
