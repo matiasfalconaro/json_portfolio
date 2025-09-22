@@ -10,8 +10,8 @@ services:
       - "27017:27017"
 
   app:
-    build: .
-    image: mlfalconaro/portfolio-reflex:${TAG:-latest}
+    build: ${BUILD_APP:-.}
+    image: ${APP_IMAGE:-mlfalconaro/portfolio-reflex:latest}
     ports:
       - "3000:3000"
       - "8000:8000"

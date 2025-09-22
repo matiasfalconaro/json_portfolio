@@ -10,22 +10,31 @@ This project follows Semantic Versioning 2.0.0:
   and hot-fixes
 
 ### Version Format
-[x.y.z] - yyyy-mm-dd - [ENVIRONMENT/TYPE]
+[x.y.z] - yyyy-mm-dd - [ENVIRONMENT/TYPE] - [LIFE-CICLE]
 
 Where:
-`x.y.z`: Semantic version number (MAJOR.MINOR.PATCH)
-`yyyy-mm-dd`: Date when the version was released
-
-`[ENVIRONMENT/TYPE]`: Deployment context or deliverable type:
-[POC]: Proof-of-Concept
-[MVP]: Minimum-Viable-Product
-[DEV]: Development-environment
-[QAS]: Quality-Assurance/Testing
-[UAT]: User-Acceptance-Testing
-[PRD]: Production-environment
-[ALPHA]: Alpha-release
-[BETA]: Beta-release
-[RC]: Release-Candidate
+- `x.y.z`: Semantic version number (MAJOR.MINOR.PATCH)
+- `yyyy-mm-dd`: Date when the version was released
+- `[LIFE-CICLE]`: Deployment context or deliverable type:
+[FS]:Factibility-Stage
+[BC]:Bussines-Concept
+[POC]:Prove-of-concept
+[MVP]: Minimum-viable-product
+[RC]: Release-candidate
+[GA]: General-availability
+[MTT]: Maintenance
+[LTS]: Long-term-support
+[EOL]: End-of-life
+[CANARY]: Canary
+[BG]: Blue-green
+- `[ENVIRONMENT/TYPE]`:
+[GH]: Ready-to-DEV
+[DEV]: Development
+[QAS]: Testing
+[STG]: Staging
+[UAT]: User-aceptance-testing
+[PRD]: Productivd
+[STP]: Stopped
 
 ## Branching
 1. Crear un issue con el nombre de la versión
@@ -47,7 +56,7 @@ Where:
  vx.y.z    vx.y.z                 vx.y.z                  vx.y.z            vx.y.z   
 ```
 
-### Change Types
+## Change Types
 - `Added`: New features, endpoints, models, or functionality
 - `Changed`: Modifications to existing functionality
 - `Deprecated`: Features that will be removed in future releases
@@ -57,12 +66,12 @@ Where:
 
 ## ######################################################################
 
-## 2025-2-3 [v0.0.0]
+## [POC] 2025-2-3 [v0.0.0] - [GH]
 ### Added
 - Layout wireframing
 - Json resume
 
-## 2025-10-3 [v0.1.0]
+## [POC] 2025-10-3 [v0.1.0] - [GH]
 ### Added
 - Contact and source code odals
 - Picture
@@ -74,7 +83,7 @@ Where:
 - States management
 - Styling modularization
 
-## [MVP] 2025-13-3 [v1.1.0]
+## [MVP] 2025-13-3 [v1.1.0] - [GH]
 ### Changed
 - Changed font size in `link_style`.
 - Removed ENV API_URL=https://mfalconaro.onrender.com.
@@ -92,7 +101,7 @@ Where:
 ### Fixed
 - Improved "projects" section identation in `resume.json`
 
-## [STG] 2025-9-2 [v1.2.0]
+## [MVP] 2025-9-2 [v1.2.0] - [DEV]
 ### Changed
 - Remove certificates.
 
@@ -101,7 +110,7 @@ Where:
 - Navbar, footer and modals theme compatibility.
 
 
-## [DEV] 2025-9-2 [v1.3.0]
+## [MVP] 2025-9-2 [v1.3.0] - [GH]
 ### Added
 - Implement CI/CD pipeline using `Git Actions` and `DockerHub`.
 
@@ -111,22 +120,22 @@ Where:
 ### Fixed
 - Github and LinkedIn links were broken.
 
-## [PRD] 2025-9-2 [v1.3.1]
+## [MVP] 2025-9-2 [v1.3.1] - [DEV]
 ### Changed
 - Modify CI/CD worflow
 
-## [PRD] 2025-9-13 [v1.3.2]
+## [MVP] 2025-9-13 [v1.3.2] - [DEV]
 ### Added
 - `README.md`.
 
 ### Changed
 - `Reflex-EC2-toolkit` card stack.
 
-## [PRD] 2025-9-13 [v1.3.3]
+## [MVP] 2025-9-13 [v1.3.3] - [DEV]
 ### Hotfix
 - Update version in source code modal
 
-## [PRD] 2025-9-3 [v1.3.4]
+## [MVP] 2025-9-3 [v1.3.4] - [DEV]
 ### Added
 - Update `CHANGELOG.md`
 - Update `README.md`
@@ -135,7 +144,7 @@ Where:
 - email in `resume.json`
 - Update version in frontend
 
-## [PRD] 2025-9-13 [v1.3.5]
+## [MVP] 2025-9-13 [v1.3.5] - [DEV]
 ### Changed
 - implement `version.txt` to simplify versioning in the frontend.
 
@@ -143,7 +152,7 @@ Where:
 - implement `find_resume_pdf()` to keep versioning my resumes in their names.
 - Change `header_section()` to integrate the new function.
 
-## [DEV] 2025-9-13 [v1.3.6]
+## [MVP] 2025-9-13 [v1.3.6] - [GH]
 ### Fix
 - Fix `find_resume_pdf()`
 
@@ -153,30 +162,30 @@ Where:
 ### Notes
 This version is not included in the [Dockerhub repository](https://hub.docker.com/repository/docker/mlfalconaro/portfolio-reflex/general) because it failed while building its image.
 
-## [PRD] 2025-9-13 [v1.3.7]
+## [MVP] 2025-9-13 [v1.3.7] - [DEV]
 ### Changed
 - Update `Dockerfile`
 
 ### Changed
 - implement `version.txt`
 
-## [PRD] 2025-9-13 [v1.3.8]
+## [MVP] 2025-9-13 [v1.3.8] - [DEV]
 ### Rollback
 - `header_section()` is rolled back to `v1.3.4` of the feature `Resume Download Button`.
 
 ### Changed
 - implement `version.txt`
 
-## [PRD] 2025-9-13 [v1.3.9]
+## [MVP] 2025-9-13 [v1.3.9] - [DEV]
 ### Fixed
 - `resume.pdf` from A0 to A4
 
-## [PRD] 2025-9-13 [v1.3.10]
+## [MVP] 2025-9-13 [v1.3.10] - [DEV]
 ### Fixed
 - Typos.
 
 
-## [DEV] 2025-9-19 [v1.4.0]
+## [MVP] 2025-9-19 [v1.4.0] - [DEV]
 ### Added
 - Unit tests for all components, data, links, assets, portfolio, states, and utils.
 - Test coverage verification for images, PDFs, and external URLs.
@@ -189,7 +198,7 @@ This version is not included in the [Dockerhub repository](https://hub.docker.co
 - Resume file path corrected for testing.
 - Footer text comparison fixed to properly decode.
 
-## [PRD] 2025-9-19 [v1.4.1]
+## [MVP] 2025-9-19 [v1.4.1] - [DEV]
 ### Changed
 - Updated `version.txt` to reflect v1.4.1.
 - Update unit tests
@@ -198,7 +207,7 @@ This version is not included in the [Dockerhub repository](https://hub.docker.co
 ### Fixed
 - Add type hints and docstrings to remaining methods
 
-## [PRD] 2025-9-20 [v1.4.2]
+## [MVP] 2025-9-20 [v1.4.2] - [DEV]
 ### Added
 - BDD Testing Framework: Implemented Behavior-Driven Development testing using pytest-bdd
 - Gherkin Feature Files: Added .feature files for all test scenarios in tests/features/
@@ -212,7 +221,7 @@ README Documentation: Updated testing section to include BDD commands and test s
 - Backward Compatibility: All existing unit tests maintained and continue to pass
 - Mixed Approach: Both unit testing and BDD testing coexist, providing comprehensive test coverage
 
-## [DEV] 2025-09-21 [v1.5.0]
+## [MVP] 2025-09-21 [v1.5.0] - [GH]
 ### Added
 - Implement MongoDB as a Dockerized microservice for portfolio data.
 - Bulk import of existing `resume.json` data into MongoDB collections.
@@ -234,15 +243,24 @@ README Documentation: Updated testing section to include BDD commands and test s
 - Reflex app now depends on the MongoDB service being available at startup.
 - Tests can run either in CI (with Docker services) or locally with `docker-compose`.
 
-# [DEV] 2025-09-22 [v1.5.1]
+## [MVP] 2025-09-22 [v1.5.1] - [GH]
 ### Fixed
 - update GitHub Actions workflow to run tests using `docker compose exec`.
 
 ### Notes
 - This release is a **workflow test only**; no functional changes were made to the application.
 
-# [DEV] 2025-09-22 [v1.5.2]
+## [MVP] 2025-09-22 [v1.5.2] - [GH]
 ### Changed
 - Refactored GitHub Actions workflow into separate `build`, `test`, and `push` jobs.
 - `push` to DockerHub now only occurs if tests pass.
 - Improved CI clarity and job dependency flow to prevent pushing failing builds.
+
+## [MVP] 2025-09-22 [v1.5.3] - [GH]
+### Changed
+- Refactored GitHub Actions workflow:
+  - The same image tested in CI is used for push, avoiding unnecessary rebuilds.
+- Updated `docker-compose.yml` to support two modes:
+  - **Local development:** build the app from the Dockerfile (`BUILD_APP=.`).
+  - **Production:** use the DockerHub image directly (`APP_IMAGE=<REGISTRY>/<NAMESPACE>/<APP>:<TAG>`), without rebuilding.
+- MongoDB remains as the official image (`mongo:latest`) in both development and production.
