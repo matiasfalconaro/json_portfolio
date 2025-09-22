@@ -57,15 +57,25 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
+    - name: Build images with Docker Compose (force rebuild)
+      run: |
+        TAG=latest docker compose build --no-cache
+
     - name: Run services with Docker Compose
       run: |
         TAG=latest docker compose up -d
-        sleep 15
-        docker ps -a
+        echo "Waiting for MongoDB to be ready inside app container..."
+        docker compose exec app sh -c '
+          until nc -z mongo 27017; do
+            echo "MongoDB not ready yet..."
+            sleep 2
+          done
+          echo "MongoDB is ready!"
+        '
 
     - name: Run pytest inside app container
       run: |
-        docker compose exec app pytest -vv --maxfail=1 --disable-warnings
+        docker compose exec -T app pytest -vv --maxfail=1 --disable-warnings
 
     - name: Tear down
       if: always()

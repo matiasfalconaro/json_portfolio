@@ -10,7 +10,7 @@ FEATURE_FILE = Path(__file__).parent.parent / "features" / "version.feature"
 scenarios(str(FEATURE_FILE))
 
 
-@given("I have a version file with content \"1.4.2\"")
+@given("I have a version file with content \"1.5.0\"")
 def use_version_file(monkeypatch, tmp_version_file: Path) -> None:
     """Use the existing version file fixture."""
     monkeypatch.chdir(tmp_version_file.parent)
@@ -32,10 +32,10 @@ def call_get_version() -> str:
     return get_version()
 
 
-@then("it should return \"1.4.2\"")
+@then("it should return \"1.5.0\"")
 def verify_version(version_result: str) -> None:
     """Verify that get_version returns the expected version."""
-    assert version_result == "1.4.2"
+    assert version_result == "1.5.0"
 
 
 @then("it should return \"dev\"")

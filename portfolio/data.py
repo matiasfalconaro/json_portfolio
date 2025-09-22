@@ -17,6 +17,11 @@ with open(Path(__file__).parent / "resume.json", encoding="utf-8") as f:
     data = json.load(f)
 
 
+def load_portfolio() -> dict:
+    """Return the raw portfolio data from resume.json"""
+    return data
+
+
 def serialize(obj):
     """Convierte objetos complejos (HttpUrl, etc.) a tipos compatibles con MongoDB."""
     if isinstance(obj, list):
