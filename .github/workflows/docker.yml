@@ -57,11 +57,15 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
+    - name: Build images with Docker Compose (force rebuild)
+      run: |
+        TAG=latest docker compose build --no-cache
+
     - name: Run services with Docker Compose
       run: |
         TAG=latest docker compose up -d
         echo "Waiting for MongoDB to be ready inside app container..."
-        docker compose exec -T app sh -c '
+        docker compose exec app sh -c '
           until nc -z mongo 27017; do
             echo "MongoDB not ready yet..."
             sleep 2
