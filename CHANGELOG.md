@@ -268,3 +268,18 @@ README Documentation: Updated testing section to include BDD commands and test s
   - **Local development:** build the app from the Dockerfile (`BUILD_APP=.`).
   - **Production:** use the DockerHub image directly (`APP_IMAGE=<REGISTRY>/<NAMESPACE>/<APP>:<TAG>`), without rebuilding.
 - MongoDB remains as the official image (`mongo:latest`) in both development and production.
+
+## [MVP] 2025-09-22 [v2.0.0] - [GH]
+### Added
+- Admin CRUD Page
+
+### Changed
+- Refactored state management: `AdminState` now handles collection-specific editing independently.
+
+> TODO
+> - [1] Fix frontend updates from MongoDB.
+> - [1] Implement all collections.
+> - [1] Comply the design's layout.
+> - [1] Unit and BDD tests updated to cover new admin page and collection editing functionality.
+> - [2] JWT authentication implemented for secure access to the admin panel.
+> - [3] Added docstrings and type hints for all new and updated methods, improving code readability and maintainability.

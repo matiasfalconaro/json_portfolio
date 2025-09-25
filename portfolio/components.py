@@ -1,5 +1,3 @@
-import glob
-import os
 import reflex as rx
 
 from database.repository import (get_basics,
@@ -8,7 +6,7 @@ from database.repository import (get_basics,
                                  get_certificates,
                                  get_projects)
 from .styles import *
-from .states import States
+from .states import *
 
 
 def navbar() -> rx.Component:
@@ -160,19 +158,26 @@ def header_section() -> rx.Component:
                         on_click=States.toggle_modal,
                         **contact_button_style
                     ),
-                rx.link(
-                    rx.button(
-                        rx.hstack(
-                            rx.text("Resume"),
-                            spacing="2",
-                            align="center"
+                    rx.link(
+                        rx.button(
+                            rx.hstack(
+                                rx.text("Resume"),
+                                spacing="2",
+                                align="center"
+                            ),
+                            **download_button_style
                         ),
-                        **download_button_style
+                        href="/resume_v1.3.0.pdf",
+                        is_external=True,
+                        download=True
                     ),
-                    href="/resume_v1.3.0.pdf",
-                    is_external=True,
-                    download=True
-                ),
+                    rx.link(
+                        rx.button(
+                            "Admin",
+                            **contact_button_style
+                        ),
+                        href="/admin"
+                    ),
                     spacing="3"
                 ),
 

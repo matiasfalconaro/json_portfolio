@@ -36,11 +36,11 @@ modal_overlay_style = {
     "left": "0",
     "width": "100vw",
     "height": "100vh",
-    "background_color": "rgba(0, 0, 0, 0.4)",
+    "background_color": "rgba(0, 0, 0, 0.6)",
     "display": "flex",
     "justify_content": "center",
     "align_items": "center",
-    "z_index": "1000"
+    "z_index": "10000"
 }
 
 modal_card_style = {
@@ -179,7 +179,7 @@ project_card_style = {
     "border_color":"gray.200",
     "border_radius": "10px",
     "box_shadow": "sm",
-    "background_color": "backgrond",
+    "background_color": "background",
     "width": ["100%", "100%", "48%", "32%"],
     "margin_bottom": "16px"
 }

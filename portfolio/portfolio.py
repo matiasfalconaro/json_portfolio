@@ -1,5 +1,6 @@
 import reflex as rx
 
+from .admin import admin_page
 from .components import *
 from .styles import *
 
@@ -48,3 +49,4 @@ def index() -> rx.Component:
 # App Setup
 app = rx.App()
 app.add_page(index, title="Matias Falconaro | Portfolio")
+app.add_page(admin_page, route="/admin", title="Admin Panel")
