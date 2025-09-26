@@ -1,5 +1,6 @@
 import reflex as rx
 
+from .states import AdminState
 from .admin import admin_page
 from .components import *
 from .styles import *
@@ -11,7 +12,6 @@ def index() -> rx.Component:
             navbar(),
             header_section(),
             rx.divider(),
-
             rx.heading("Work Experience",
                        id="work",
                        **section_heading_style),
@@ -39,10 +39,13 @@ def index() -> rx.Component:
             footer(),
             contact_modal(),
             code_info_modal(),
-            
             **page_layout_style
         ),
-        **page_wrapper_style
+        **page_wrapper_style,
+        on_mount=[
+            AdminState.load_basics,
+            AdminState.load_work,
+        ]
     )
 
 

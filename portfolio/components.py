@@ -1,12 +1,10 @@
 import reflex as rx
 
-from database.repository import (get_basics,
-                                 get_work,
-                                 get_education,
+from database.repository import (get_education,
                                  get_certificates,
                                  get_projects)
-from .styles import *
 from .states import *
+from .styles import *
 
 
 def navbar() -> rx.Component:
@@ -16,7 +14,7 @@ def navbar() -> rx.Component:
             rx.link("Work", href="#work", **link_style),
             rx.link("Education", href="#education", **link_style),
             rx.link("Projects", href="#projects", **link_style),
-            **nav_links_container
+            **nav_links_container       
         ),
 
         rx.spacer(),
@@ -45,43 +43,40 @@ def navbar() -> rx.Component:
 
 
 def contact_modal() -> rx.Component:
-    basics = get_basics()
+    location = AdminState.basics["location"].to(dict)
     return rx.cond(
         States.show_modal,
         rx.box(
             rx.box(
                 rx.heading("Contact Information", **section_heading_style),
-
                 rx.vstack(
                     rx.hstack(
                         rx.icon(tag="mail"),
-                        rx.text(basics["email"]),
+                        rx.text(AdminState.basics["email"].to(str)),
                         align_items="center"
                     ),
                     rx.hstack(
                         rx.icon(tag="phone"),
-                        rx.text(basics.get("phone", "N/A")),
+                        rx.text(AdminState.basics.get("phone", "").to(str)),
                         align_items="center"
                     ),
                     rx.hstack(
                         rx.icon(tag="map-pin"),
-                        rx.text(
-                            f"{basics['location']['city']}, "
-                            f"{basics['location']['region']}, "
-                            f"{basics['location']['countryCode']}"
-                        ),
+                        rx.text([
+                            location.get("city", ""), ", ",
+                            location.get("region", ""), ", ",
+                            location.get("countryCode", "")
+                        ]),
                         align_items="center"
                     ),
                     **contact_info_style
                 ),
-
                 rx.center(
                     rx.button("Close",
                               on_click=States.toggle_modal,
                               **modal_button_style),
                     margin_top="16px"
                 ),
-
                 **modal_card_style
             ),
             **modal_overlay_style
@@ -143,14 +138,11 @@ def code_info_modal() -> rx.Component:
 
 
 def header_section() -> rx.Component:
-    """Render header with name/title aligned vertically center with image."""
-    basics = get_basics()
-
     return rx.vstack(
         rx.grid(
             rx.vstack(
-                rx.heading(basics["name"], size="8"),
-                rx.text(basics["label"], font_weight="bold"),
+                rx.heading(AdminState.basics.get("name", ""), size="8"),
+                rx.text(AdminState.basics.get("label", ""), font_weight="bold"),
 
                 rx.hstack(
                     rx.button(
@@ -180,41 +172,40 @@ def header_section() -> rx.Component:
                     ),
                     spacing="3"
                 ),
-
                 **header_text_block
             ),
             rx.box(
-                rx.image(src=basics["image"], **header_image_style),
+                rx.image(src=AdminState.basics.get("image", ""), **header_image_style),
                 display="flex",
                 justify_content="flex-end"
             ),
             **header_grid_style
         ),
-        rx.text(basics["summary"], **summary_text_style),
+        rx.text(AdminState.basics.get("summary", ""), **summary_text_style),
         **header_section_style
     )
 
 
 def work_section() -> rx.Component:
-    """Render the work experience section."""
     return rx.vstack(
-        *[
-            rx.box(
-                rx.heading(f'{job["position"]} @ {job["name"]}',
-                           **work_heading_style),
-                rx.text(
-                    f'{job["startDate"]} – '
-                    f'{job.get("endDate") or "Present"}'
+        rx.foreach(
+            AdminState.work_items,
+            lambda job: rx.box(
+                rx.heading(f'{job["position"]} @ {job["name"]}', **work_heading_style),
+                rx.cond(
+                    job["endDate"],
+                    rx.text(f'{job["startDate"]} – {job["endDate"]}'),
+                    rx.text(f'{job["startDate"]} – Present')
                 ),
                 rx.box(height="1em"),
                 rx.text(job["summary"]),
-                rx.unordered_list(
-                    *[rx.list_item(item) for item in job["highlights"]]
+                rx.foreach(
+                    job["highlights"],
+                    lambda highlight: rx.list_item(highlight)
                 ),
                 **work_item_style
             )
-            for job in get_work()
-        ],
+        ),
         **work_section_style
     )
 
