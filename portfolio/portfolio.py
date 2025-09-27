@@ -24,12 +24,6 @@ def index() -> rx.Component:
             education_section(),
             rx.divider(),
 
-            #rx.heading("Certificates",
-            #           id="certificates",
-            #           **section_heading_style),
-            #certificates_section(),
-            #rx.divider(),
-
             rx.heading("Projects",
                        id="projects",
                        **section_heading_style),
@@ -42,10 +36,7 @@ def index() -> rx.Component:
             **page_layout_style
         ),
         **page_wrapper_style,
-        on_mount=[
-            AdminState.load_basics,
-            AdminState.load_work,
-        ]
+        on_mount=AdminState.on_mount
     )
 
 
