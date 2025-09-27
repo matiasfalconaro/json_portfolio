@@ -8,7 +8,7 @@ def test_get_version_file(tmp_version_file: Path) -> None:
     """
     Test that `get_version` returns the correct version from the version file.
     """
-    assert get_version() == "1.5.3"
+    assert get_version() == "2.0.0"
 
 
 def test_get_version_missing(monkeypatch, tmp_path: Path) -> None:

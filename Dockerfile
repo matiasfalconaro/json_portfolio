@@ -1,4 +1,4 @@
-FROM python:3.10-slim
+FROM python:3.11-slim
 
 WORKDIR /app
 
@@ -21,4 +21,4 @@ ENV PYTHONPATH=/app
 EXPOSE 3000
 EXPOSE 8000
 
-CMD ["sh", "-c", "python portfolio/data.py && reflex run --env prod --loglevel debug --backend-host 0.0.0.0"]
+CMD ["sh", "-c", "python portfolio/data.py && reflex run --backend-host 0.0.0.0 --loglevel debug"]
