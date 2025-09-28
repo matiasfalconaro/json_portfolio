@@ -211,24 +211,39 @@ def work_section() -> rx.Component:
 
 
 def education_section() -> rx.Component:
-    """Render the education section."""
+    """Render the education section using state."""
     return rx.vstack(
-        *[
-            rx.box(
+        rx.foreach(
+            AdminState.education_items,
+            lambda edu: rx.box(
                 rx.heading(
                     f"{edu['studyType']} in {edu['area']}",
                     **heading_education_style
                 ),
                 rx.text(edu["institution"]),
-                rx.text(f"{edu['startDate']} – {edu.get('endDate') or 'Present'}"),
-                rx.text(f"GPA: {edu['score']}") if edu.get("score") else None,
-                rx.unordered_list(
-                    *[rx.list_item(course) for course in edu.get("courses", [])]
-                ) if edu.get("courses") else None,
+                rx.cond(
+                    edu["endDate"],
+                    rx.text(f"{edu['startDate']} – {edu['endDate']}"),
+                    rx.text(f"{edu['startDate']} – Present")
+                ),
+                rx.cond(
+                    edu["score"],
+                    rx.text(f"GPA: {edu['score']}"),
+                    None
+                ),
+                rx.cond(
+                    edu["courses"],
+                    rx.unordered_list(
+                        rx.foreach(
+                            edu["courses"],
+                            lambda course: rx.list_item(course)
+                        )
+                    ),
+                    None
+                ),
                 **education_item_style
             )
-            for edu in get_education()
-        ],
+        ),
         **education_section_style
     )
 
@@ -254,45 +269,44 @@ def certificates_section() -> rx.Component:
 
 
 def project_section() -> rx.Component:
-    """Render the projects section in a grid of cards."""
+    """Render the projects section using state."""
     return rx.box(
         rx.flex(
-            *[
-                rx.box(
+            rx.foreach(
+                AdminState.project_items,
+                lambda project: rx.box(
                     rx.vstack(
                         rx.heading(project["name"], **project_heading_style),
                         rx.text(project["description"]),
                         rx.hstack(
-                            *[
-                                rx.box(
+                            rx.foreach(
+                                project["highlights"],
+                                lambda tech: rx.box(
                                     tech,
                                     **tech_tag_style
                                 )
-                                for tech in project["highlights"]
-                            ],
+                            ),
                             **tech_tag_container_style
                         ),
                         rx.text(project["role"], font_weight="bold"),
-                        (
+                        rx.cond(
+                            project["github"].startswith("http"),
                             rx.link(
                                 "GitHub",
                                 href=project["github"],
                                 is_external=True
-                            )
-                            if project.get("github") 
-                               and project["github"].startswith("http")
-                            else (
-                                rx.text("Code under NDA", font_style="italic")
-                                if project.get("github") == "NDA"
-                                else None
+                            ),
+                            rx.cond(
+                                project["github"] == "NDA",
+                                rx.text("Code under NDA", font_style="italic"),
+                                None
                             )
                         ),
                         **project_content_style
                     ),
                     **project_card_style
                 )
-                for project in get_projects()
-            ],
+            ),
             **project_flex_container
         ),
         width="100%"

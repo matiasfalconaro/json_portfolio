@@ -59,9 +59,9 @@ def main():
 
     for name, items in collections.items():
         if name == "basics":
-            db.basics.replace_one({}, serialize(items.dict()), upsert=True)
+            db.basics.replace_one({}, serialize(items.model_dump()), upsert=True)
         else:
-            db[name].insert_many([serialize(i.dict()) for i in items])
+            db[name].insert_many([serialize(i.model_dump()) for i in items])
 
     print("✅ Resume validated and inserted into MongoDB!")
 
