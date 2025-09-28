@@ -51,6 +51,11 @@ class ProjectItem(TypedDict):
 class AdminState(rx.State):
     selected_collection: str = "basics"
 
+    # Track if creating new items
+    is_creating_work: bool = False
+    is_creating_education: bool = False
+    is_creating_project: bool = False
+
     # Basics
     basics: dict = {}
     basics_edit: dict = {}
@@ -211,7 +216,8 @@ class AdminState(rx.State):
     def select_work_item(self, idx):
         idx = int(idx) if isinstance(idx, (str, float)) else idx
         if isinstance(idx, int) and 0 <= idx < len(self.work_items):
-            self.work_edit = self.work_items[idx]
+            self.work_edit = dict(self.work_items[idx])
+            self.is_creating_work = False
 
 
     def update_work_field(self, field: str, value: str):
@@ -220,18 +226,49 @@ class AdminState(rx.State):
 
 
     def save_work(self):
+        """Save work item - handles both create and update."""
         work_doc = self.to_plain(self.work_edit)
-        db.work.replace_one({"name": work_doc["name"]}, work_doc, upsert=True)
+        
+        if self.is_creating_work:
+            db.work.insert_one(work_doc)
+        else:
+            db.work.replace_one({"name": work_doc["name"]}, work_doc, upsert=True)
+        
         self.load_collection("work")
+        self.is_creating_work = False
+
+
+    def create_new_work_item(self):
+        """Create a new empty work item."""
+        new_work = WorkItem(
+            name="",
+            position="", 
+            startDate="",
+            endDate="",
+            summary="",
+            highlights=[]
+        )
+        self.work_edit = new_work
+        self.is_creating_work = True
+
+
+    def delete_work_item(self, idx):
+        """Delete a work item."""
+        if 0 <= idx < len(self.work_items):
+            item = self.work_items[idx]
+            db.work.delete_one({"name": item["name"]})
+            self.load_collection("work")
+            if self.work_edit.get("name") == item["name"]:
+                self.create_new_work_item()
 
 
     # Education methods
     def select_education_item(self, idx):
         idx = int(idx) if isinstance(idx, (str, float)) else idx
         if isinstance(idx, int) and 0 <= idx < len(self.education_items):
-            self.education_edit = self.education_items[idx]
+            self.education_edit = dict(self.education_items[idx])
             self._update_courses_str()
-
+            self.is_creating_education = False
 
     def update_education_field(self, field: str, value: str):
         if field in self.education_edit:
@@ -246,17 +283,51 @@ class AdminState(rx.State):
 
 
     def save_education(self):
+        """Save education item - handles both create and update."""
         education_doc = self.to_plain(self.education_edit)
-        db.education.replace_one({"institution": education_doc["institution"]}, education_doc, upsert=True)
+        
+        if self.is_creating_education:
+            db.education.insert_one(education_doc)
+        else:
+            db.education.replace_one({"institution": education_doc["institution"]}, education_doc, upsert=True)
+        
         self.load_collection("education")
+        self.is_creating_education = False
+
+
+    def create_new_education_item(self):
+        """Create a new empty education item."""
+        new_education = EducationItem(
+            institution="",
+            area="",
+            studyType="", 
+            startDate="",
+            endDate="",
+            score="",
+            courses=[]
+        )
+        self.education_edit = new_education
+        self._update_courses_str()
+        self.is_creating_education = True
+
+
+    def delete_education_item(self, idx):
+        """Delete an education item."""
+        if 0 <= idx < len(self.education_items):
+            item = self.education_items[idx]
+            db.education.delete_one({"institution": item["institution"]})
+            self.load_collection("education")
+            if self.education_edit.get("institution") == item["institution"]:
+                self.create_new_education_item()
 
 
     # Projects methods
     def select_project_item(self, idx):
         idx = int(idx) if isinstance(idx, (str, float)) else idx
         if isinstance(idx, int) and 0 <= idx < len(self.project_items):
-            self.project_edit = self.project_items[idx]
+            self.project_edit = dict(self.project_items[idx])
             self._update_highlights_str()
+            self.is_creating_project = False
 
 
     def update_project_field(self, field: str, value: str):
@@ -276,6 +347,67 @@ class AdminState(rx.State):
 
 
     def save_project(self):
+        """Save project item - handles both create and update."""
         project_doc = self.to_plain(self.project_edit)
-        db.projects.replace_one({"name": project_doc["name"]}, project_doc, upsert=True)
+        
+        if self.is_creating_project:
+            db.projects.insert_one(project_doc)
+        else:
+            db.projects.replace_one({"name": project_doc["name"]}, project_doc, upsert=True)
+        
         self.load_collection("projects")
+        self.is_creating_project = False
+
+
+    def create_new_project_item(self):
+        """Create a new empty project item."""
+        new_project = ProjectItem(
+            name="",
+            role="",
+            description="",
+            highlights=[],
+            github="",
+            isActive=False
+        )
+        self.project_edit = new_project
+        self._update_highlights_str()
+        self.is_creating_project = True
+
+
+    def create_new_education_item(self):
+        """Create a new empty education item."""
+        new_education = EducationItem(
+            institution="",
+            area="",
+            studyType="", 
+            startDate="",
+            endDate="",
+            score="",
+            courses=[]
+        )
+        self.education_edit = new_education
+        self._update_courses_str()
+
+
+    def create_new_project_item(self):
+        """Create a new empty project item."""
+        new_project = ProjectItem(
+            name="",
+            role="",
+            description="",
+            highlights=[],
+            github="",
+            isActive=False
+        )
+        self.project_edit = new_project
+        self._update_highlights_str()
+
+
+    def delete_project_item(self, idx):
+        """Delete a project item."""
+        if 0 <= idx < len(self.project_items):
+            item = self.project_items[idx]
+            db.projects.delete_one({"name": item["name"]})
+            self.load_collection("projects")
+            if self.project_edit.get("name") == item["name"]:
+                self.create_new_project_item()
