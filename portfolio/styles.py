@@ -246,3 +246,143 @@ section_heading_style = {
     "size": "6"
 }
 
+# ==============================
+# ADMIN PANEL STYLES (CORREGIDOS)
+# ==============================
+
+# Input fields
+input_style = {
+    "width": "100%",
+    "background": "background",
+    "padding_x": "4", 
+    "margin_x": "2"   
+}
+
+text_area_style = {
+    "width": "100%",
+    "background": "background",
+    "padding_x": "4", 
+    "margin_x": "2"   
+}
+
+# Editor containers
+editor_container_style = {
+    "spacing": "4", 
+    "width": "100%",
+    "padding_x": "4" 
+}
+
+# Section headings
+section_title_style = {
+    "font_size": "xl",
+    "font_weight": "bold",
+    "margin_bottom": "4" 
+}
+
+# Sidebar buttons
+sidebar_button_style = {
+    "variant": "solid",
+    "width": "100%",
+    "border_radius": "8px",
+    "padding": "3",  
+    "margin_x": "2" 
+}
+
+# Item buttons in sidebar
+item_button_style = {
+    "variant": "solid",
+    "size": "2",
+    "width": "100%",
+    "text_align": "left",
+    "border_radius": "6px",
+    "padding": "2",  
+    "background": "gray.100",
+    "_hover": {"background": "gray.200"},
+    "margin_x": "2" 
+}
+
+# Sidebar container
+sidebar_container_style = {
+    "spacing": "4", 
+    "width": "100%",
+    "max_width": "250px",
+    "padding": "4",  
+    "padding_x": "2",
+    "height": "100vh",
+    "overflow_y": "auto"
+}
+
+# Item list containers
+item_list_container_style = {
+    "spacing": "3", 
+    "width": "100%",
+    "padding_x": "4" 
+}
+
+# Item list title
+item_list_title_style = {
+    "font_weight": "bold",
+    "font_size": "sm",
+    "margin_bottom": "2", 
+    "padding_x": "4"      
+}
+
+# Main content container
+main_content_style = {
+    "flex": "1",
+    "padding": "6",
+    "spacing": "6",
+    "width": "100%",
+    "max_width": "100%",
+    "background": "gray.50"
+}
+
+# Content box containers
+content_box_style = {
+    "width": "100%",
+    "max_width": "100%",
+    "padding_x": "4",
+    "margin_x": "2"
+}
+
+# Save button container
+save_button_container_style = {
+    "margin_top": "6",
+    "width": "100%",
+    "padding_x": "4"
+}
+
+# Save buttons
+save_button_style = {
+    "size": "3",
+    "width": "200px",
+    "variant": "solid",
+    "margin_x": "2"
+}
+
+# Main layout
+admin_layout_style = {
+    "spacing": "4",
+    "width": "100%",
+    "align_items": "stretch",
+    "padding_x": "4"
+}
+
+# Page container
+admin_page_style = {
+    "spacing": "0",
+    "width": "100%",
+    "min_height": "100vh"
+}
+
+# Checkbox container
+checkbox_container_style = {
+    "width": "100%",
+    "padding_x": "4"
+}
+
+# Checkbox style
+checkbox_style = {
+    "padding_x": "4",
+    "margin_x": "2"
+}
