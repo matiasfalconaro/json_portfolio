@@ -1,8 +1,6 @@
 import reflex as rx
 
-from database.repository import (get_education,
-                                 get_certificates,
-                                 get_projects)
+from database.repository import (get_certificates)
 from .states import *
 from .styles import *
 
@@ -11,9 +9,9 @@ def navbar() -> rx.Component:
     return rx.hstack(
         rx.hstack(
             rx.link("Home", href="/", **link_style),
-            rx.link("Work", href="#work", **link_style),
-            rx.link("Education", href="#education", **link_style),
-            rx.link("Projects", href="#projects", **link_style),
+            rx.link("Work", href="/#work", **link_style),
+            rx.link("Education", href="/#education", **link_style),
+            rx.link("Projects", href="/#projects", **link_style),
             **nav_links_container       
         ),
 

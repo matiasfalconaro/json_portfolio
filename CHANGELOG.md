@@ -282,6 +282,7 @@ README Documentation: Updated testing section to include BDD commands and test s
    - Removed `--env prod` to enable recompiling dinamically in each request (with manual refresh).
    - Update components from static, non-reactive call to a state.
 - Update framework to `reflex==0.8.12`.
+- Use absolute paths for section links.
 
 > TODO
 > - [1] Unit and BDD tests updated to cover new admin page and collection editing functionality.
