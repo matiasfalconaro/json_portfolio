@@ -321,6 +321,7 @@ item_list_title_style = {
     "padding_x": "4"      
 }
 
+# Main content area
 main_content_style = {
     "flex": "1",
     "padding": "6",
@@ -337,6 +338,7 @@ content_box_style = {
     "margin_x": "2"
 }
 
+# Buttons
 save_button_container_style = {
     "margin_top": "6",
     "width": "100%",
@@ -348,52 +350,6 @@ save_button_style = {
     "width": "200px",
     "variant": "solid",
     "margin_x": "2"
-}
-
-admin_layout_style = {
-    "spacing": "4",
-    "width": "100%",
-    "align_items": "stretch",
-    "padding_x": "4"
-}
-
-admin_page_style = {
-    "spacing": "0",
-    "width": "100%",
-    "min_height": "100vh"
-}
-
-checkbox_container_style = {
-    "width": "100%",
-    "padding_x": "4"
-}
-
-checkbox_style = {
-    "padding_x": "4",
-    "margin_x": "2"
-}
-
-item_button_style = {
-    "variant": "solid",
-    "size": "2",
-    "flex": "1",
-    "text_align": "left",
-    "border_radius": "6px",
-    "padding": "2",  
-    "background": "gray.100",
-    "_hover": {"background": "gray.200"},
-    "margin_x": "2",
-    "min_width": "0"
-}
-
-
-new_item_banner_style = {
-    "background_color": "blue.50",
-    "border": "1px solid",
-    "border_color": "blue.200",
-    "border_radius": "md",
-    "padding": "3",
-    "margin_bottom": "4"
 }
 
 delete_button_style = {
@@ -412,4 +368,52 @@ delete_button_style = {
 add_button_style = {
     "size": "2",
     "color_scheme": "green"
+}
+
+# Layout
+admin_layout_style = {
+    "spacing": "4",
+    "width": "100%",
+    "align_items": "stretch",
+    "padding_x": "4"
+}
+
+admin_page_style = {
+    "spacing": "0",
+    "width": "100%",
+    "min_height": "100vh"
+}
+
+checkbox_container_style = {
+    "width": "100%",
+    "padding_x": "4"
+}
+
+# Form controls
+checkbox_style = {
+    "padding_x": "4",
+    "margin_x": "2"
+}
+
+item_button_style = {
+    "variant": "solid",
+    "size": "2",
+    "flex": "1",
+    "text_align": "left",
+    "border_radius": "6px",
+    "padding": "2",  
+    "background": "gray.100",
+    "_hover": {"background": "gray.200"},
+    "margin_x": "2",
+    "min_width": "0"
+}
+
+# Item management
+new_item_banner_style = {
+    "background_color": "blue.50",
+    "border": "1px solid",
+    "border_color": "blue.200",
+    "border_radius": "md",
+    "padding": "3",
+    "margin_bottom": "4"
 }

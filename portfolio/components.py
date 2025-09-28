@@ -1,11 +1,12 @@
 import reflex as rx
 
-from database.repository import (get_certificates)
+from database.repository import get_certificates
 from .states import *
 from .styles import *
 
 
 def navbar() -> rx.Component:
+    """Renders the navbar section."""
     return rx.hstack(
         rx.hstack(
             rx.link("Home", href="/", **link_style),
@@ -41,6 +42,7 @@ def navbar() -> rx.Component:
 
 
 def contact_modal() -> rx.Component:
+    """Renders a modal dialog displaying contact information from the admin state."""
     location = AdminState.basics["location"].to(dict)
     return rx.cond(
         States.show_modal,
@@ -84,7 +86,7 @@ def contact_modal() -> rx.Component:
 
 
 def get_version() -> str:
-    """Lee la versión desde un archivo."""
+    """Reeds version from file."""
     try:
         with open('version.txt', 'r') as f:
             return f.read().strip()
@@ -93,6 +95,7 @@ def get_version() -> str:
 
 
 def code_info_modal() -> rx.Component:
+    """Renders a modal dialog displaying technical information about the application."""
     return rx.cond(
         States.show_code_modal,
         rx.box(
@@ -136,6 +139,7 @@ def code_info_modal() -> rx.Component:
 
 
 def header_section() -> rx.Component:
+    """Renders the header section."""
     return rx.vstack(
         rx.grid(
             rx.vstack(
@@ -185,6 +189,7 @@ def header_section() -> rx.Component:
 
 
 def work_section() -> rx.Component:
+    """Renders the work experience section."""
     return rx.vstack(
         rx.foreach(
             AdminState.work_items,

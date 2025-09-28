@@ -366,7 +366,7 @@ def sidebar_navigation() -> rx.Component:
 def main_content() -> rx.Component:
     """Main content area with form fields."""
     return rx.vstack(
-        # Show creation banners
+        # Creation banners
         rx.cond(
             (AdminState.selected_collection == "work") & AdminState.is_creating_work,
             rx.callout(
@@ -395,7 +395,7 @@ def main_content() -> rx.Component:
             )
         ),
 
-        # Show editing banners
+        # Editing banners
         rx.cond(
             (AdminState.selected_collection == "work") & ~AdminState.is_creating_work,
             rx.callout(
@@ -424,7 +424,7 @@ def main_content() -> rx.Component:
             )
         ),
 
-        # Form content (unchanged)
+        # Form content
         rx.cond(
             AdminState.selected_collection == "basics",
             rx.box(

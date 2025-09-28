@@ -7,6 +7,7 @@ from .styles import *
 
 
 def index() -> rx.Component:
+    """Main portfolio page component that renders the complete application layout."""
     return rx.center(
         rx.vstack(
             navbar(),
