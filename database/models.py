@@ -33,7 +33,7 @@ class Basics(BaseModel):
 class Work(BaseModel):
     name: str
     position: str
-    url: Optional[HttpUrl]
+    url: Optional[HttpUrl] = None
     startDate: str
     endDate: str
     summary: str
@@ -42,7 +42,7 @@ class Work(BaseModel):
 
 class Education(BaseModel):
     institution: str
-    url: Optional[HttpUrl]
+    url: Optional[HttpUrl] = None 
     area: str
     studyType: str
     startDate: str

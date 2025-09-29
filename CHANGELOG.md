@@ -275,6 +275,7 @@ README Documentation: Updated testing section to include BDD commands and test s
 - Add `admin/` styling to `styles.py`.
 - Create layout for `admin/` elements.
 - Frontend updates from MongoDB in real time.
+- Implement logging package (debug).
 
 ### Changed
 - Refactored state management: `AdminState` now handles collection-specific editing independently.
@@ -291,4 +292,3 @@ README Documentation: Updated testing section to include BDD commands and test s
 > TODO
 > - [1] Unit and BDD tests updated to cover new admin page and collection editing functionality.
 > - [2] JWT authentication implemented for secure access to the admin panel.
-> - [3] Update README: Simplify #testing - Update architecture diagram.

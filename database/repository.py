@@ -1,6 +1,7 @@
 from typing import (List,
                     Optional)
 from .db import db
+from portfolio.config import get_logger
 from .models import (Basics,
                      Work,
                      Education,
@@ -10,6 +11,9 @@ from .models import (Basics,
                      Interest,
                      Reference,
                      Project)
+
+
+logger = get_logger(__name__)
 
 
 def get_basics() -> Optional[Basics]:

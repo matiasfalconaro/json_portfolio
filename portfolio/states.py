@@ -1,5 +1,6 @@
 import reflex as rx
 
+from .config import get_logger
 from database.db import db
 from database.repository import (get_basics,
                                  get_work,
@@ -8,7 +9,11 @@ from database.repository import (get_basics,
 from typing import (List,
                     TypedDict,
                     Any,
+                    Optional,
                     Union)
+
+
+logger = get_logger(__name__)
 
 
 class States(rx.State):
@@ -27,6 +32,7 @@ class States(rx.State):
 class WorkItem(TypedDict):
     name: str
     position: str
+    url: Optional[str]
     startDate: str
     endDate: str
     summary: str
@@ -35,6 +41,7 @@ class WorkItem(TypedDict):
 
 class EducationItem(TypedDict):
     institution: str
+    url: Optional[str] 
     area: str
     studyType: str
     startDate: str
@@ -71,6 +78,7 @@ class AdminState(rx.State):
     # Education
     education_items: List[EducationItem] = []
     education_edit: EducationItem = {}
+    original_institution: str = ""
 
     # Projects
     project_items: List[ProjectItem] = []
@@ -103,6 +111,7 @@ class AdminState(rx.State):
     def to_plain(obj: Any) -> Union[dict, list, Any]:
         """
         Convert Reflex State objects to plain Python dict/lists for database operations.
+        Handles HttpUrl objects by converting them to strings.
         
         Args:
             obj: Any Python object to convert (dict, list, or primitive)
@@ -114,7 +123,10 @@ class AdminState(rx.State):
             return {k: AdminState.to_plain(v) for k, v in obj.items()}
         elif isinstance(obj, list):
             return [AdminState.to_plain(v) for v in obj]
-        return obj
+        elif hasattr(obj, '__str__') and hasattr(obj, 'scheme') and hasattr(obj, 'host'):
+            return str(obj)
+        else:
+            return obj
 
 
     def on_mount(self) -> None:
@@ -153,12 +165,44 @@ class AdminState(rx.State):
 
 
     def load_collection(self, collection: str) -> None:
-        """Load the specified collection data into state."""
+        """
+        Load and prepare collection data for the admin panel editing interface.
+        
+        Args:
+            collection: The name of the collection to load. Supported values:
+                    - 'basics': Personal information and contact details
+                    - 'work': Work experience history
+                    - 'education': Educational background and qualifications  
+                    - 'projects': Portfolio projects and technical work
+        
+        Workflow:
+            1. Sets the currently selected collection for UI tracking
+            2. Retrieves raw data from MongoDB via repository functions
+            3. Converts Pydantic models to dictionaries for state compatibility
+            4. Transforms data into TypedDict format for type-safe UI operations
+            5. Initializes edit states with first item or empty templates
+            6. Updates derived UI states (string representations, flags)
+        
+        Data Processing:
+            - Handles both Pydantic model instances and raw dictionaries
+            - Converts complex types (HttpUrl) to strings for UI compatibility  
+            - Maintains type safety through TypedDict conversions
+            - Preserves data integrity across the loading pipeline
+        
+        State Management:
+            - Populates main state arrays (work_items, education_items, etc.)
+            - Initializes edit states (work_edit, education_edit, etc.)
+            - Resets creation flags and tracking variables
+            - Updates string representations for list-based fields
+        
+        Raises:
+            AttributeError: If collection data structure is unexpected
+            KeyError: If required fields are missing from source data
+        """
         self.selected_collection = collection
 
         if collection == "basics":
             basics_data = get_basics() or {}
-            # Convert Pydantic model to dict if needed
             if basics_data and hasattr(basics_data, 'model_dump'):
                 basics_data = basics_data.model_dump()
             self.basics = basics_data
@@ -166,7 +210,6 @@ class AdminState(rx.State):
 
         elif collection == "work":
             raw_work = get_work() or []
-            # Convert Pydantic models to dictionaries
             work_dicts = []
             for item in raw_work:
                 if hasattr(item, 'model_dump'):
@@ -175,19 +218,21 @@ class AdminState(rx.State):
                     work_dicts.append(item)
                     
             self.work_items = [
-                WorkItem(
-                    name=item.get("name", ""),
-                    position=item.get("position", ""),
-                    startDate=item.get("startDate", ""),
-                    endDate=item.get("endDate", ""),
-                    summary=item.get("summary", ""),
-                    highlights=item.get("highlights") or []
-                )
-                for item in work_dicts
+                self._convert_to_work_item(item) for item in work_dicts
             ]
-            self.work_edit = self.work_items[0] if self.work_items else WorkItem(
-                name="", position="", startDate="", endDate="", summary="", highlights=[]
-            )
+            
+            if self.work_items:
+                self.work_edit = self.work_items[0]
+            else:
+                self.work_edit = WorkItem(
+                    name="",
+                    position="",
+                    url=None,
+                    startDate="",
+                    endDate="",
+                    summary="",
+                    highlights=[]
+                )
 
         elif collection == "education":
             raw_education = get_education() or []
@@ -199,22 +244,30 @@ class AdminState(rx.State):
                     education_dicts.append(item)
                     
             self.education_items = [
-                EducationItem(
-                    institution=item.get("institution", ""),
-                    area=item.get("area", ""),
-                    studyType=item.get("studyType", ""),
-                    startDate=item.get("startDate", ""),
-                    endDate=item.get("endDate", ""),
-                    score=item.get("score", ""),
-                    courses=item.get("courses") or []
-                )
-                for item in education_dicts
+                self._convert_to_education_item(item) for item in education_dicts
             ]
-            self.education_edit = self.education_items[0] if self.education_items else EducationItem(
-                institution="", area="", studyType="", startDate="", endDate="", score="", courses=[]
-            )
+            
+            if self.education_items:
+                self.education_edit = self.education_items[0]
+            else:
+                self.education_edit = EducationItem(
+                    institution="",
+                    url=None,
+                    area="",
+                    studyType="",
+                    startDate="",
+                    endDate="",
+                    score="",
+                    courses=[]
+                )
             self._update_courses_str()
 
+            self.original_institution = ""
+            logger.debug("Reset original_institution on collection load")
+            
+            self.is_creating_education = False
+            logger.debug(f"After load, is_creating_education = {self.is_creating_education}")
+            
         elif collection == "projects":
             raw_projects = get_projects() or []
             project_dicts = []
@@ -235,9 +288,12 @@ class AdminState(rx.State):
                 )
                 for item in project_dicts
             ]
-            self.project_edit = self.project_items[0] if self.project_items else ProjectItem(
-                name="", role="", description="", highlights=[], github="", isActive=False
-            )
+            if self.project_items:
+                self.project_edit = self.project_items[0]
+            else:
+                self.project_edit = ProjectItem(
+                    name="", role="", description="", highlights=[], github="", isActive=False
+                )
             self._update_highlights_str()
 
 
@@ -257,11 +313,24 @@ class AdminState(rx.State):
 
 
     # Work methods
+    def _convert_to_work_item(self, data: dict) -> WorkItem:
+        """Convert dictionary to WorkItem, handling HttpUrl conversion."""
+        return WorkItem(
+            name=data.get("name", ""),
+            position=data.get("position", ""),
+            url=str(data["url"]) if data.get("url") else None,
+            startDate=data.get("startDate", ""),
+            endDate=data.get("endDate", ""),
+            summary=data.get("summary", ""),
+            highlights=data.get("highlights") or []
+        )
+
+
     def select_work_item(self, idx: Union[str, float, int]) -> None:
         """Select a work item for editing."""
         idx = int(idx) if isinstance(idx, (str, float)) else idx
         if isinstance(idx, int) and 0 <= idx < len(self.work_items):
-            self.work_edit = dict(self.work_items[idx])
+            self.work_edit = self.work_items[idx]
             self.is_creating_work = False
 
 
@@ -286,15 +355,15 @@ class AdminState(rx.State):
 
     def create_new_work_item(self) -> None:
         """Create a new empty work item."""
-        new_work = WorkItem(
+        self.work_edit = WorkItem(
             name="",
             position="", 
+            url=None,
             startDate="",
             endDate="",
             summary="",
             highlights=[]
         )
-        self.work_edit = new_work
         self.is_creating_work = True
 
 
@@ -309,13 +378,48 @@ class AdminState(rx.State):
 
 
     # Education methods
+    def _convert_to_education_item(self, data: dict) -> EducationItem:
+        """Convert dictionary to EducationItem, handling HttpUrl conversion."""
+        return EducationItem(
+            institution=data.get("institution", ""),
+            url=str(data["url"]) if data.get("url") else None,
+            area=data.get("area", ""),
+            studyType=data.get("studyType", ""),
+            startDate=data.get("startDate", ""),
+            endDate=data.get("endDate", ""),
+            score=data.get("score", ""),
+            courses=data.get("courses") or []
+        )
+
+
     def select_education_item(self, idx: Union[str, float, int]) -> None:
         """Select an education item for editing."""
+        logger.debug(f"select_education_item called with idx={idx}, type={type(idx)}")
+        
         idx = int(idx) if isinstance(idx, (str, float)) else idx
+        
         if isinstance(idx, int) and 0 <= idx < len(self.education_items):
-            self.education_edit = dict(self.education_items[idx])
+            selected_item = self.education_items[idx]
+            logger.debug(f"Selected institution: {selected_item.get('institution')}")
+            
+            self.original_institution = selected_item.get("institution", "")
+            logger.debug(f"Original institution saved: {self.original_institution}")
+            
+            self.education_edit = EducationItem(
+                institution=selected_item.get("institution", ""),
+                url=selected_item.get("url"),
+                area=selected_item.get("area", ""),
+                studyType=selected_item.get("studyType", ""),
+                startDate=selected_item.get("startDate", ""),
+                endDate=selected_item.get("endDate", ""),
+                score=selected_item.get("score", ""),
+                courses=selected_item.get("courses") or []
+            )
+            
             self._update_courses_str()
             self.is_creating_education = False
+            logger.info(f"Education item selected for editing: {self.original_institution}")
+
 
     def update_education_field(self, field: str, value: str) -> None:
         """Update a specific field in the education edit state."""
@@ -332,21 +436,44 @@ class AdminState(rx.State):
 
     def save_education(self) -> None:
         """Save education item - handles both create and update."""
+        logger.info(f"save_education called, is_creating_education = {self.is_creating_education}")
+        logger.debug(f"education_edit institution: {self.education_edit.get('institution')}")
+        logger.debug(f"original_institution: {self.original_institution}")
+        
         education_doc = self.to_plain(self.education_edit)
         
         if self.is_creating_education:
-            db.education.insert_one(education_doc)
+            logger.info("Creating NEW education item")
+            result = db.education.insert_one(education_doc)
+            logger.info(f"New education item created with id: {result.inserted_id}")
         else:
-            db.education.replace_one({"institution": education_doc["institution"]}, education_doc, upsert=True)
+            logger.info("UPDATING existing education item")
+            
+            filter_query = {"institution": self.original_institution}
+            logger.debug(f"Searching for education item with: {filter_query}")
+            
+            result = db.education.replace_one(
+                filter_query, 
+                education_doc, 
+                upsert=True
+            )
+            logger.info(f"Education item updated, matched: {result.matched_count}, modified: {result.modified_count}")
+            
+            if result.matched_count == 0:
+                logger.warning(f"No education item found with institution: {self.original_institution}")
         
         self.load_collection("education")
         self.is_creating_education = False
+        self.original_institution = ""
+        logger.debug(f"After save, is_creating_education = {self.is_creating_education}")
 
 
     def create_new_education_item(self) -> None:
         """Create a new empty education item."""
-        new_education = EducationItem(
+        logger.info("Creating new empty education item")
+        self.education_edit = EducationItem(
             institution="",
+            url=None,
             area="",
             studyType="", 
             startDate="",
@@ -354,9 +481,10 @@ class AdminState(rx.State):
             score="",
             courses=[]
         )
-        self.education_edit = new_education
         self._update_courses_str()
         self.is_creating_education = True
+        self.original_institution = ""
+        logger.debug(f"Set is_creating_education to {self.is_creating_education}")
 
 
     def delete_education_item(self, idx: int) -> None:
@@ -374,10 +502,9 @@ class AdminState(rx.State):
         """Select a project item for editing."""
         idx = int(idx) if isinstance(idx, (str, float)) else idx
         if isinstance(idx, int) and 0 <= idx < len(self.project_items):
-            self.project_edit = dict(self.project_items[idx])
+            self.project_edit = self.project_items[idx]
             self._update_highlights_str()
             self.is_creating_project = False
-
 
     def update_project_field(self, field: str, value: str) -> None:
         """Update a specific field in the project edit state."""
@@ -423,35 +550,6 @@ class AdminState(rx.State):
         self.project_edit = new_project
         self._update_highlights_str()
         self.is_creating_project = True
-
-
-    def create_new_education_item(self) -> None:
-        """Create a new empty education item."""
-        new_education = EducationItem(
-            institution="",
-            area="",
-            studyType="", 
-            startDate="",
-            endDate="",
-            score="",
-            courses=[]
-        )
-        self.education_edit = new_education
-        self._update_courses_str()
-
-
-    def create_new_project_item(self) -> None:
-        """Create a new empty project item."""
-        new_project = ProjectItem(
-            name="",
-            role="",
-            description="",
-            highlights=[],
-            github="",
-            isActive=False
-        )
-        self.project_edit = new_project
-        self._update_highlights_str()
 
 
     def delete_project_item(self, idx: int) -> None:
