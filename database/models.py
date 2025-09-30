@@ -81,8 +81,8 @@ class Reference(BaseModel):
 class Project(BaseModel):
     name: str
     role: str
-    isActive: bool
     description: str
-    highlights: List[str]
-    url: Optional[HttpUrl]
-    github: Optional[str]
+    highlights: List[str] = []
+    github: str
+    isActive: bool = False
+    url: Optional[str] = None

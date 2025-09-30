@@ -275,6 +275,15 @@ section_title_style = {
     "margin_bottom": "4" 
 }
 
+# View mode styles
+view_field_style = {
+    "width": "100%",
+    "padding": "12px",
+    "border": "1px solid #e2e8f0",
+    "border_radius": "8px",
+    "background_color": "white",
+}
+
 # Sidebar
 sidebar_button_style = {
     "variant": "solid",

@@ -276,13 +276,14 @@ README Documentation: Updated testing section to include BDD commands and test s
 - Create layout for `admin/` elements.
 - Frontend updates from MongoDB in real time.
 - Implement logging package (debug).
+- Add `.pytest_cache` to `.gitignore`.
 
 ### Changed
 - Refactored state management: `AdminState` now handles collection-specific editing independently.
 - Build command:
    - Removed `--env prod` to enable recompiling dinamically in each request (with manual refresh).
    - Update components from static, non-reactive call to a state.
-- Update framework to `reflex==0.8.12`.
+- Update framework to `reflex==0.8.13`.
 - Use absolute paths for section links.
 - Improve self-documentation.
 
@@ -290,5 +291,7 @@ README Documentation: Updated testing section to include BDD commands and test s
 - Fixed missing typehints and docstrings.
 
 > TODO
+> - [1] Fix `highligts` in `project cards`.
+> - [1] Fix `project cards` description overflow.
 > - [1] Unit and BDD tests updated to cover new admin page and collection editing functionality.
 > - [2] JWT authentication implemented for secure access to the admin panel.

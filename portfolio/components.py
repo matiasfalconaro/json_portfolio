@@ -43,7 +43,6 @@ def navbar() -> rx.Component:
 
 def contact_modal() -> rx.Component:
     """Renders a modal dialog displaying contact information from the admin state."""
-    location = AdminState.basics["location"].to(dict)
     return rx.cond(
         States.show_modal,
         rx.box(
@@ -52,21 +51,23 @@ def contact_modal() -> rx.Component:
                 rx.vstack(
                     rx.hstack(
                         rx.icon(tag="mail"),
-                        rx.text(AdminState.basics["email"].to(str)),
+                        rx.text(AdminState.basics.get("email", "")),
                         align_items="center"
                     ),
                     rx.hstack(
                         rx.icon(tag="phone"),
-                        rx.text(AdminState.basics.get("phone", "").to(str)),
+                        rx.text(AdminState.basics.get("phone", "")),
                         align_items="center"
                     ),
                     rx.hstack(
                         rx.icon(tag="map-pin"),
-                        rx.text([
-                            location.get("city", ""), ", ",
-                            location.get("region", ""), ", ",
-                            location.get("countryCode", "")
-                        ]),
+                        rx.text(
+                            rx.cond(
+                                AdminState.basics.get("location"),
+                                AdminState.basics["location"].to(str),
+                                "Location not available"
+                            )
+                        ),
                         align_items="center"
                     ),
                     **contact_info_style
@@ -188,64 +189,94 @@ def header_section() -> rx.Component:
     )
 
 
+def _render_work_item(job: dict) -> rx.Component:
+    """Render a single work item."""
+    position = job.get("position", "")
+    name = job.get("name", "")
+    start_date = job.get("startDate", "")
+    end_date = job.get("endDate", "")
+    summary = job.get("summary", "")
+    highlights = job.get("highlights", [])
+    
+    if not isinstance(highlights, list):
+        highlights = []
+        
+    return rx.box(
+        rx.heading(f'{position} @ {name}', **work_heading_style),
+        rx.cond(
+            end_date,
+            rx.text(f'{start_date} – {end_date}'),
+            rx.text(f'{start_date} – Present')
+        ),
+        rx.box(height="1em"),
+        rx.text(summary),
+        rx.foreach(
+            highlights,
+            lambda highlight: rx.list_item(highlight)
+        ),
+        **work_item_style
+    )
+
+
 def work_section() -> rx.Component:
-    """Renders the work experience section."""
+    """Renders the work experience section."""    
     return rx.vstack(
         rx.foreach(
             AdminState.work_items,
-            lambda job: rx.box(
-                rx.heading(f'{job["position"]} @ {job["name"]}', **work_heading_style),
-                rx.cond(
-                    job["endDate"],
-                    rx.text(f'{job["startDate"]} – {job["endDate"]}'),
-                    rx.text(f'{job["startDate"]} – Present')
-                ),
-                rx.box(height="1em"),
-                rx.text(job["summary"]),
-                rx.foreach(
-                    job["highlights"],
-                    lambda highlight: rx.list_item(highlight)
-                ),
-                **work_item_style
-            )
+            _render_work_item
         ),
         **work_section_style
     )
 
 
+def _render_education_item(edu: dict) -> rx.Component:
+    """Render a single education item."""
+    study_type = edu.get("studyType", "")
+    area = edu.get("area", "")
+    institution = edu.get("institution", "")
+    start_date = edu.get("startDate", "")
+    end_date = edu.get("endDate", "")
+    score = edu.get("score", "")
+    courses = edu.get("courses", [])
+    
+    if not isinstance(courses, list):
+        courses = []
+        
+    return rx.box(
+        rx.heading(
+            f"{study_type} in {area}",
+            **heading_education_style
+        ),
+        rx.text(institution),
+        rx.cond(
+            end_date,
+            rx.text(f"{start_date} – {end_date}"),
+            rx.text(f"{start_date} – Present")
+        ),
+        rx.cond(
+            score,
+            rx.text(f"GPA: {score}"),
+            None
+        ),
+        rx.cond(
+            courses,
+            rx.unordered_list(
+                rx.foreach(
+                    courses,
+                    lambda course: rx.list_item(course)
+                )
+            ),
+            None
+        ),
+        **education_item_style
+    )
+
 def education_section() -> rx.Component:
-    """Render the education section using state."""
+    """Render the education section using state."""    
     return rx.vstack(
         rx.foreach(
             AdminState.education_items,
-            lambda edu: rx.box(
-                rx.heading(
-                    f"{edu['studyType']} in {edu['area']}",
-                    **heading_education_style
-                ),
-                rx.text(edu["institution"]),
-                rx.cond(
-                    edu["endDate"],
-                    rx.text(f"{edu['startDate']} – {edu['endDate']}"),
-                    rx.text(f"{edu['startDate']} – Present")
-                ),
-                rx.cond(
-                    edu["score"],
-                    rx.text(f"GPA: {edu['score']}"),
-                    None
-                ),
-                rx.cond(
-                    edu["courses"],
-                    rx.unordered_list(
-                        rx.foreach(
-                            edu["courses"],
-                            lambda course: rx.list_item(course)
-                        )
-                    ),
-                    None
-                ),
-                **education_item_style
-            )
+            _render_education_item
         ),
         **education_section_style
     )
@@ -271,44 +302,56 @@ def certificates_section() -> rx.Component:
     )
 
 
+def _render_project_item(project: dict) -> rx.Component:
+    """Render a single project item."""
+    name = project.get("name", "")
+    description = project.get("description", "")
+    highlights = project.get("highlights", [])
+    role = project.get("role", "")
+    github = project.get("github", "")
+    
+    if not isinstance(highlights, list):
+        highlights = []
+
+    github_component = rx.cond(
+        github == "NDA",
+        rx.text("Code under NDA", font_style="italic"),
+        rx.cond(
+            github != "",
+            rx.link("GitHub", href=github, is_external=True),
+            None
+        )
+    )
+        
+    return rx.box(
+        rx.vstack(
+            rx.heading(name, **project_heading_style),
+            rx.text(description),
+            rx.hstack(
+                rx.foreach(
+                    highlights,
+                    lambda tech: rx.box(
+                        tech,
+                        **tech_tag_style
+                    )
+                ),
+                **tech_tag_container_style
+            ),
+            rx.text(role, font_weight="bold"),
+            github_component,
+            **project_content_style
+        ),
+        **project_card_style
+    )
+
+
 def project_section() -> rx.Component:
-    """Render the projects section using state."""
+    """Render the projects section using state."""    
     return rx.box(
         rx.flex(
             rx.foreach(
                 AdminState.project_items,
-                lambda project: rx.box(
-                    rx.vstack(
-                        rx.heading(project["name"], **project_heading_style),
-                        rx.text(project["description"]),
-                        rx.hstack(
-                            rx.foreach(
-                                project["highlights"],
-                                lambda tech: rx.box(
-                                    tech,
-                                    **tech_tag_style
-                                )
-                            ),
-                            **tech_tag_container_style
-                        ),
-                        rx.text(project["role"], font_weight="bold"),
-                        rx.cond(
-                            project["github"].startswith("http"),
-                            rx.link(
-                                "GitHub",
-                                href=project["github"],
-                                is_external=True
-                            ),
-                            rx.cond(
-                                project["github"] == "NDA",
-                                rx.text("Code under NDA", font_style="italic"),
-                                None
-                            )
-                        ),
-                        **project_content_style
-                    ),
-                    **project_card_style
-                )
+                _render_project_item
             ),
             **project_flex_container
         ),

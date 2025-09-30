@@ -39,6 +39,34 @@ def basics_editor() -> rx.Component:
     )
 
 
+def basics_view() -> rx.Component:
+    """Render the Basics collection in read-only view."""
+    return rx.vstack(
+        rx.text("Basic Information", **section_title_style),
+        rx.box(
+            rx.text("Name:", font_weight="bold"),
+            rx.text(AdminState.basics.get("name", "")),
+            **view_field_style
+        ),
+        rx.box(
+            rx.text("Label:", font_weight="bold"),
+            rx.text(AdminState.basics.get("label", "")),
+            **view_field_style
+        ),
+        rx.box(
+            rx.text("Email:", font_weight="bold"),
+            rx.text(AdminState.basics.get("email", "")),
+            **view_field_style
+        ),
+        rx.box(
+            rx.text("Summary:", font_weight="bold"),
+            rx.text(AdminState.basics.get("summary", "")),
+            **view_field_style
+        ),
+        **editor_container_style
+    )
+
+
 def work_editor() -> rx.Component:
     """Render the Work collection editor."""
     return rx.vstack(
@@ -73,6 +101,40 @@ def work_editor() -> rx.Component:
             on_change=lambda e: AdminState.update_work_field("summary", e),
             height="200px",
             **text_area_style
+        ),
+        **editor_container_style
+    )
+
+
+def work_view() -> rx.Component:
+    """Render the Work collection in read-only view."""
+    current_work = AdminState.work_edit
+    return rx.vstack(
+        rx.text("Work Experience", **section_title_style),
+        rx.box(
+            rx.text("Company:", font_weight="bold"),
+            rx.text(current_work.get("name", "Select a work item")),
+            **view_field_style
+        ),
+        rx.box(
+            rx.text("Position:", font_weight="bold"),
+            rx.text(current_work.get("position", "")),
+            **view_field_style
+        ),
+        rx.box(
+            rx.text("Start Date:", font_weight="bold"),
+            rx.text(current_work.get("startDate", "")),
+            **view_field_style
+        ),
+        rx.box(
+            rx.text("End Date:", font_weight="bold"),
+            rx.text(current_work.get("endDate", "")),
+            **view_field_style
+        ),
+        rx.box(
+            rx.text("Summary:", font_weight="bold"),
+            rx.text(current_work.get("summary", "")),
+            **view_field_style
         ),
         **editor_container_style
     )
@@ -129,6 +191,49 @@ def education_editor() -> rx.Component:
     )
 
 
+def education_view() -> rx.Component:
+    """Render the Education collection in read-only view."""
+    return rx.vstack(
+        rx.text("Education", **section_title_style),
+        rx.box(
+            rx.text("Institution:", font_weight="bold"),
+            rx.text(AdminState.education_edit.get("institution", "Select an education item")),
+            **view_field_style
+        ),
+        rx.box(
+            rx.text("Area of Study:", font_weight="bold"),
+            rx.text(AdminState.education_edit.get("area", "")),
+            **view_field_style
+        ),
+        rx.box(
+            rx.text("Study Type:", font_weight="bold"),
+            rx.text(AdminState.education_edit.get("studyType", "")),
+            **view_field_style
+        ),
+        rx.box(
+            rx.text("Start Date:", font_weight="bold"),
+            rx.text(AdminState.education_edit.get("startDate", "")),
+            **view_field_style
+        ),
+        rx.box(
+            rx.text("End Date:", font_weight="bold"),
+            rx.text(AdminState.education_edit.get("endDate", "")),
+            **view_field_style
+        ),
+        rx.box(
+            rx.text("GPA/Score:", font_weight="bold"),
+            rx.text(AdminState.education_edit.get("score", "")),
+            **view_field_style
+        ),
+        rx.box(
+            rx.text("Courses:", font_weight="bold"),
+            rx.text(AdminState.education_edit.get("courses", "No courses")),
+            **view_field_style
+        ),
+        **editor_container_style
+    )
+
+
 def projects_editor() -> rx.Component:
     """Render the Projects collection editor."""
     return rx.vstack(
@@ -178,31 +283,69 @@ def projects_editor() -> rx.Component:
     )
 
 
+def projects_view() -> rx.Component:
+    """Render the Projects collection in read-only view."""
+    return rx.vstack(
+        rx.text("Project Details", **section_title_style),
+        rx.box(
+            rx.text("Project Name:", font_weight="bold"),
+            rx.text(AdminState.project_edit.get("name", "Select a project")),
+            **view_field_style
+        ),
+        rx.box(
+            rx.text("Role:", font_weight="bold"),
+            rx.text(AdminState.project_edit.get("role", "")),
+            **view_field_style
+        ),
+        rx.box(
+            rx.text("GitHub URL:", font_weight="bold"),
+            rx.text(AdminState.project_edit.get("github", "")),
+            **view_field_style
+        ),
+        rx.box(
+            rx.text("Description:", font_weight="bold"),
+            rx.text(AdminState.project_edit.get("description", "")),
+            **view_field_style
+        ),
+        rx.box(
+            rx.text("Technologies:", font_weight="bold"),
+            rx.text(AdminState.project_edit.get("highlights", "No technologies")),
+            **view_field_style
+        ),
+        rx.box(
+            rx.text("Is Active:", font_weight="bold"),
+            rx.text(rx.cond(AdminState.project_edit.get("isActive", False), "Yes", "No")),
+            **view_field_style
+        ),
+        **editor_container_style
+    )
+
+
 def sidebar_navigation() -> rx.Component:
     """Sidebar navigation with collection buttons and item selection."""
     return rx.vstack(
         rx.text("Sections", **item_list_title_style),
         rx.button(
             "Basics",
-            on_click=lambda: AdminState.load_collection("basics"),
+            on_click=lambda: [AdminState.load_collection("basics"), AdminState.reset_editing_states()],
             color_scheme=rx.cond(AdminState.selected_collection == "basics", "blue", "gray"),
             **sidebar_button_style
         ),
         rx.button(
             "Work",
-            on_click=lambda: AdminState.load_collection("work"),
+            on_click=lambda: [AdminState.load_collection("work"), AdminState.reset_editing_states()],
             color_scheme=rx.cond(AdminState.selected_collection == "work", "blue", "gray"),
             **sidebar_button_style
         ),
         rx.button(
             "Education", 
-            on_click=lambda: AdminState.load_collection("education"),
+            on_click=lambda: [AdminState.load_collection("education"), AdminState.reset_editing_states()],
             color_scheme=rx.cond(AdminState.selected_collection == "education", "blue", "gray"),
             **sidebar_button_style
         ),
         rx.button(
             "Projects",
-            on_click=lambda: AdminState.load_collection("projects"), 
+            on_click=lambda: [AdminState.load_collection("projects"), AdminState.reset_editing_states()],
             color_scheme=rx.cond(AdminState.selected_collection == "projects", "blue", "gray"),
             **sidebar_button_style
         ),
@@ -229,18 +372,26 @@ def sidebar_navigation() -> rx.Component:
                     lambda item, i: rx.hstack(
                         rx.button(
                             rx.text(
-                                item['position'] + " @ " + item['name'],
+                                f"{item.get('position', '')} @ {item.get('name', '')}",
                                 overflow="hidden",
                                 text_overflow="ellipsis", 
                                 white_space="nowrap",
                             ),
-                            on_click=lambda e, idx=i: AdminState.select_work_item(idx),
+                            on_click=lambda e, idx=i: [AdminState.select_work_item(idx), AdminState.reset_editing_states()],
                             color_scheme=rx.cond(
                                 (AdminState.work_edit.get("name") == item["name"]) & ~AdminState.is_creating_work,
                                 "blue",
                                 "gray"
                             ),
                             **item_button_style
+                        ),
+                        rx.button(
+                            "✏️",
+                            on_click=lambda e, idx=i: AdminState.start_editing_work(idx),
+                            size="1",
+                            color_scheme="yellow",
+                            margin_left="2",
+                            min_width="30px"
                         ),
                         rx.button(
                             "×",
@@ -279,18 +430,26 @@ def sidebar_navigation() -> rx.Component:
                     lambda item, i: rx.hstack(
                         rx.button(
                             rx.text(
-                                item['studyType'] + " @ " + item['institution'],
+                                f"{item.get('studyType', '')} @ {item.get('institution', '')}",
                                 overflow="hidden",
                                 text_overflow="ellipsis",
                                 white_space="nowrap",
                             ),
-                            on_click=lambda e, idx=i: AdminState.select_education_item(idx),
+                            on_click=lambda e, idx=i: [AdminState.select_education_item(idx), AdminState.reset_editing_states()],
                             color_scheme=rx.cond(
                                 (AdminState.education_edit.get("institution") == item["institution"]) & ~AdminState.is_creating_education,
                                 "blue",
                                 "gray"
                             ),
                             **item_button_style
+                        ),
+                        rx.button(
+                            "✏️",
+                            on_click=lambda e, idx=i: AdminState.start_editing_education(idx),
+                            size="1",
+                            color_scheme="yellow",
+                            margin_left="2",
+                            min_width="30px"
                         ),
                         rx.button(
                             "×", 
@@ -334,13 +493,21 @@ def sidebar_navigation() -> rx.Component:
                                 text_overflow="ellipsis",
                                 white_space="nowrap", 
                             ),
-                            on_click=lambda e, idx=i: AdminState.select_project_item(idx),
+                            on_click=lambda e, idx=i: [AdminState.select_project_item(idx), AdminState.reset_editing_states()],
                             color_scheme=rx.cond(
                                 (AdminState.project_edit.get("name") == item["name"]) & ~AdminState.is_creating_project,
                                 "blue",
                                 "gray"
                             ),
                             **item_button_style
+                        ),
+                        rx.button(
+                            "✏️",
+                            on_click=lambda e, idx=i: AdminState.start_editing_project(idx),
+                            size="1",
+                            color_scheme="yellow",
+                            margin_left="2",
+                            min_width="30px"
                         ),
                         rx.button(
                             "×",
@@ -397,7 +564,7 @@ def main_content() -> rx.Component:
 
         # Editing banners
         rx.cond(
-            (AdminState.selected_collection == "work") & ~AdminState.is_creating_work,
+            AdminState.editing_work_id != "",
             rx.callout(
                 f"Editing: {AdminState.work_edit.get('position', '')} @ {AdminState.work_edit.get('name', '')}",
                 icon="pencil",
@@ -406,7 +573,7 @@ def main_content() -> rx.Component:
             )
         ),
         rx.cond(
-            (AdminState.selected_collection == "education") & ~AdminState.is_creating_education,
+            AdminState.editing_education_id != "",
             rx.callout(
                 f"Editing: {AdminState.education_edit.get('studyType', '')} @ {AdminState.education_edit.get('institution', '')}",
                 icon="pencil",
@@ -415,9 +582,18 @@ def main_content() -> rx.Component:
             )
         ),
         rx.cond(
-            (AdminState.selected_collection == "projects") & ~AdminState.is_creating_project,
+            AdminState.editing_project_id != "",
             rx.callout(
                 f"Editing: {AdminState.project_edit.get('name', '')}",
+                icon="pencil",
+                color_scheme="green",
+                width="100%"
+            )
+        ),
+        rx.cond(
+            AdminState.is_editing_basics,
+            rx.callout(
+                "Editing Basic Information",
                 icon="pencil",
                 color_scheme="green",
                 width="100%"
@@ -427,30 +603,34 @@ def main_content() -> rx.Component:
         # Form content
         rx.cond(
             AdminState.selected_collection == "basics",
-            rx.box(
-                basics_editor(),
-                **content_box_style
+            rx.cond(
+                AdminState.is_editing_basics,
+                rx.box(basics_editor(), **content_box_style),
+                rx.box(basics_view(), **content_box_style)
             )
         ),
         rx.cond(
             AdminState.selected_collection == "work", 
-            rx.box(
-                work_editor(),
-                **content_box_style
+            rx.cond(
+                (AdminState.editing_work_id != "") | AdminState.is_creating_work,
+                rx.box(work_editor(), **content_box_style),
+                rx.box(work_view(), **content_box_style)
             )
         ),
         rx.cond(
             AdminState.selected_collection == "education",
-            rx.box(
-                education_editor(),
-                **content_box_style
+            rx.cond(
+                (AdminState.editing_education_id != "") | AdminState.is_creating_education,
+                rx.box(education_editor(), **content_box_style),
+                rx.box(education_view(), **content_box_style)
             )
         ),
         rx.cond(
             AdminState.selected_collection == "projects",
-            rx.box(
-                projects_editor(),
-                **content_box_style
+            rx.cond(
+                (AdminState.editing_project_id != "") | AdminState.is_creating_project,
+                rx.box(projects_editor(), **content_box_style),
+                rx.box(projects_view(), **content_box_style)
             )
         ),
 
@@ -459,45 +639,68 @@ def main_content() -> rx.Component:
             # Basics
             rx.cond(
                 AdminState.selected_collection == "basics",
-                rx.button("Save Basics", on_click=AdminState.save_basics, **save_button_style)
+                rx.cond(
+                    AdminState.is_editing_basics,
+                    rx.hstack(
+                        rx.button("Save Basics", on_click=AdminState.save_basics, **save_button_style),
+                        rx.button("Cancel", on_click=AdminState.cancel_editing, color_scheme="gray"),
+                        spacing="3"
+                    ),
+                    rx.button("Edit Basics", on_click=AdminState.start_editing_basics, color_scheme="blue", **save_button_style)
+                )
             ),
             
             # Work
             rx.cond(
                 AdminState.selected_collection == "work", 
-                rx.hstack(
-                    rx.cond(
-                        AdminState.is_creating_work,
-                        rx.button("Create Work", on_click=AdminState.save_work, color_scheme="green", **save_button_style),
-                        rx.button("Update Work", on_click=AdminState.save_work, color_scheme="blue", **save_button_style)
+                rx.cond(
+                    (AdminState.editing_work_id != "") | AdminState.is_creating_work,
+                    rx.hstack(
+                        rx.cond(
+                            AdminState.is_creating_work,
+                            rx.button("Create Work", on_click=AdminState.save_work, color_scheme="green", **save_button_style),
+                            rx.button("Update Work", on_click=AdminState.save_work, color_scheme="blue", **save_button_style)
+                        ),
+                        rx.button("Cancel", on_click=AdminState.cancel_editing, color_scheme="gray"),
+                        spacing="3"
                     ),
-                    spacing="3"
+                    rx.button("Select an item to edit", disabled=True, color_scheme="gray", **save_button_style)
                 )
             ),
             
             # Education
             rx.cond(
                 AdminState.selected_collection == "education",
-                rx.hstack(
-                    rx.cond(
-                        AdminState.is_creating_education,
-                        rx.button("Create Education", on_click=AdminState.save_education, color_scheme="green", **save_button_style),
-                        rx.button("Update Education", on_click=AdminState.save_education, color_scheme="blue", **save_button_style)
+                rx.cond(
+                    (AdminState.editing_education_id != "") | AdminState.is_creating_education,
+                    rx.hstack(
+                        rx.cond(
+                            AdminState.is_creating_education,
+                            rx.button("Create Education", on_click=AdminState.save_education, color_scheme="green", **save_button_style),
+                            rx.button("Update Education", on_click=AdminState.save_education, color_scheme="blue", **save_button_style)
+                        ),
+                        rx.button("Cancel", on_click=AdminState.cancel_editing, color_scheme="gray"),
+                        spacing="3"
                     ),
-                    spacing="3"
+                    rx.button("Select an item to edit", disabled=True, color_scheme="gray", **save_button_style)
                 )
             ),
             
             # Projects
             rx.cond(
                 AdminState.selected_collection == "projects",
-                rx.hstack(
-                    rx.cond(
-                        AdminState.is_creating_project,
-                        rx.button("Create Project", on_click=AdminState.save_project, color_scheme="green", **save_button_style),
-                        rx.button("Update Project", on_click=AdminState.save_project, color_scheme="blue", **save_button_style)
+                rx.cond(
+                    (AdminState.editing_project_id != "") | AdminState.is_creating_project,
+                    rx.hstack(
+                        rx.cond(
+                            AdminState.is_creating_project,
+                            rx.button("Create Project", on_click=AdminState.save_project, color_scheme="green", **save_button_style),
+                            rx.button("Update Project", on_click=AdminState.save_project, color_scheme="blue", **save_button_style)
+                        ),
+                        rx.button("Cancel", on_click=AdminState.cancel_editing, color_scheme="gray"),
+                        spacing="3"
                     ),
-                    spacing="3"
+                    rx.button("Select an item to edit", disabled=True, color_scheme="gray", **save_button_style)
                 )
             ),
             **save_button_container_style
