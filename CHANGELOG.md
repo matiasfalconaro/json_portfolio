@@ -277,6 +277,7 @@ README Documentation: Updated testing section to include BDD commands and test s
 - Frontend updates from MongoDB in real time.
 - Implement logging package (debug).
 - Add `.pytest_cache` to `.gitignore`.
+- Unit and BDD tests updated to cover new admin page and collection editing functionality.
 
 ### Changed
 - Refactored state management: `AdminState` now handles collection-specific editing independently.
@@ -292,6 +293,21 @@ README Documentation: Updated testing section to include BDD commands and test s
 
 > TODO
 > - [1] Fix `highligts` in `project cards`.
-> - [1] Fix `project cards` description overflow.
-> - [1] Unit and BDD tests updated to cover new admin page and collection editing functionality.
 > - [2] JWT authentication implemented for secure access to the admin panel.
+> - [1] Security
+>       CRITICAL SECURITY GAPS IDENTIFIED:
+>       1. NO AUTHENTICATION: Admin panel (/admin) is publicly accessible without any login
+>       2. NO INPUT SANITIZATION: XSS vulnerabilities in all admin forms
+>       3. NO CSRF PROTECTION: Forms vulnerable to cross-site request forgery
+>       4. NO RATE LIMITING: Endpoints vulnerable to automated attacks
+>       5. NO DATA VALIDATION: Data saved to database without validation
+>       6. NO SECURITY HEADERS: Missing X-Frame-Options, CSP, X-Content-Type-Options
+>       7. NO SESSION MANAGEMENT: No session timeout or token invalidation
+>       8. NO PERMISSION SYSTEM: No role-based access control
+>       All security tests marked as @skip pending implementation
+>       
+>       ### Notes
+>       - Some tests marked as `skip` due to Reflex State mocking complexity
+>       - Security tests are intentionally skipped to document missing features
+>       - All skipped security tests represent CRITICAL missing security features
+>       - Backward compatibility maintained: all original tests continue to pass

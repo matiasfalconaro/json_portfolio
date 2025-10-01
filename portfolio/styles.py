@@ -281,7 +281,7 @@ view_field_style = {
     "padding": "12px",
     "border": "1px solid #e2e8f0",
     "border_radius": "8px",
-    "background_color": "white",
+    "background_color": "background",
 }
 
 # Sidebar
