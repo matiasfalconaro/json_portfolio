@@ -1,4 +1,4 @@
-reflex==0.8.4
+reflex==0.8.13
 pytest
 pytest-mock
 requests
@@ -6,3 +6,5 @@ pytest-bdd
 pymongo
 pydantic[email]
 python-dotenv
+pyjwt
+bcrypt

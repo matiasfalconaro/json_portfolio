@@ -2,6 +2,7 @@
 *.py[cod]
 .states
 __pycache__/
+.pytest_cache
 assets/external/
 
 *.db

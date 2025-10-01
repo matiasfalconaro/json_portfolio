@@ -1,23 +1,18 @@
-import glob
-import os
 import reflex as rx
 
-from database.repository import (get_basics,
-                                 get_work,
-                                 get_education,
-                                 get_certificates,
-                                 get_projects)
+from database.repository import get_certificates
+from .states import *
 from .styles import *
-from .states import States
 
 
 def navbar() -> rx.Component:
+    """Renders the navbar section."""
     return rx.hstack(
         rx.hstack(
             rx.link("Home", href="/", **link_style),
-            rx.link("Work", href="#work", **link_style),
-            rx.link("Education", href="#education", **link_style),
-            rx.link("Projects", href="#projects", **link_style),
+            rx.link("Work", href="/#work", **link_style),
+            rx.link("Education", href="/#education", **link_style),
+            rx.link("Projects", href="/#projects", **link_style),
             **nav_links_container
         ),
 
@@ -39,6 +34,33 @@ def navbar() -> rx.Component:
                 href="https://www.linkedin.com/in/matiasfalconaro/",
                 is_external=True
             ),
+            rx.cond(
+                States.is_logged_in,
+                rx.button(
+                    "Logout",
+                    on_click=States.logout,
+                    size="1",
+                    cursor="pointer",
+                    background_color="#94A2AF",
+                    color="#FFFFFF",
+                    _hover={
+                        "background_color": "#E2E8F0",
+                        "color": "#94A2AF"
+                    }
+                ),
+                rx.button(
+                    "Login",
+                    on_click=States.toggle_login_modal,
+                    size="1",
+                    cursor="pointer",
+                    background_color="#94A2AF",
+                    color="#FFFFFF",
+                    _hover={
+                        "background_color": "#E2E8F0",
+                        "color": "#94A2AF"
+                    }
+                )
+            ),
             **nav_icons_container
         ),
 
@@ -47,43 +69,42 @@ def navbar() -> rx.Component:
 
 
 def contact_modal() -> rx.Component:
-    basics = get_basics()
+    """Renders a modal dialog displaying contact information from the admin state."""
     return rx.cond(
         States.show_modal,
         rx.box(
             rx.box(
                 rx.heading("Contact Information", **section_heading_style),
-
                 rx.vstack(
                     rx.hstack(
                         rx.icon(tag="mail"),
-                        rx.text(basics["email"]),
+                        rx.text(AdminState.basics.get("email", "")),
                         align_items="center"
                     ),
                     rx.hstack(
                         rx.icon(tag="phone"),
-                        rx.text(basics.get("phone", "N/A")),
+                        rx.text(AdminState.basics.get("phone", "")),
                         align_items="center"
                     ),
                     rx.hstack(
                         rx.icon(tag="map-pin"),
                         rx.text(
-                            f"{basics['location']['city']}, "
-                            f"{basics['location']['region']}, "
-                            f"{basics['location']['countryCode']}"
+                            rx.cond(
+                                AdminState.basics.get("location"),
+                                AdminState.basics["location"].to(str),
+                                "Location not available"
+                            )
                         ),
                         align_items="center"
                     ),
                     **contact_info_style
                 ),
-
                 rx.center(
                     rx.button("Close",
                               on_click=States.toggle_modal,
                               **modal_button_style),
                     margin_top="16px"
                 ),
-
                 **modal_card_style
             ),
             **modal_overlay_style
@@ -93,7 +114,7 @@ def contact_modal() -> rx.Component:
 
 
 def get_version() -> str:
-    """Lee la versión desde un archivo."""
+    """Reeds version from file."""
     try:
         with open('version.txt', 'r') as f:
             return f.read().strip()
@@ -102,6 +123,7 @@ def get_version() -> str:
 
 
 def code_info_modal() -> rx.Component:
+    """Renders a modal dialog displaying technical information about the application."""
     return rx.cond(
         States.show_code_modal,
         rx.box(
@@ -144,15 +166,67 @@ def code_info_modal() -> rx.Component:
     )
 
 
-def header_section() -> rx.Component:
-    """Render header with name/title aligned vertically center with image."""
-    basics = get_basics()
+def login_modal() -> rx.Component:
+    """Renders a modal dialog for user login."""
+    return rx.cond(
+        States.show_login_modal,
+        rx.box(
+            rx.box(
+                rx.heading("Login", **section_heading_style),
+                rx.vstack(
+                    rx.vstack(
+                        rx.text("Username", font_weight="bold"),
+                        rx.input(
+                            placeholder="Enter username",
+                            value=States.login_username,
+                            on_change=States.update_login_username,
+                            width="100%"
+                        ),
+                        rx.text("Password", font_weight="bold", margin_top="12px"),
+                        rx.input(
+                            placeholder="Enter password",
+                            type="password",
+                            value=States.login_password,
+                            on_change=States.update_login_password,
+                            width="100%"
+                        ),
+                        rx.cond(
+                            States.login_error != "",
+                            rx.text(States.login_error, color="red", margin_top="8px"),
+                            None
+                        ),
+                        width="100%",
+                        spacing="2"
+                    ),
+                    **contact_info_style
+                ),
+                rx.center(
+                    rx.hstack(
+                        rx.button("Login",
+                                  on_click=States.attempt_login,
+                                  **modal_button_style),
+                        rx.button("Cancel",
+                                  on_click=States.toggle_login_modal,
+                                  **modal_button_style),
+                        spacing="3"
+                    ),
+                    margin_top="16px"
+                ),
+                **modal_card_style
+            ),
+            **modal_overlay_style
+        ),
+        None
+    )
 
+
+def header_section() -> rx.Component:
+    """Renders the header section."""
     return rx.vstack(
         rx.grid(
             rx.vstack(
-                rx.heading(basics["name"], size="8"),
-                rx.text(basics["label"], font_weight="bold"),
+                rx.heading(AdminState.basics.get("name", ""), size="8"),
+                rx.text(AdminState.basics.get("label", ""), font_weight="bold"),
 
                 rx.hstack(
                     rx.button(
@@ -160,79 +234,135 @@ def header_section() -> rx.Component:
                         on_click=States.toggle_modal,
                         **contact_button_style
                     ),
-                rx.link(
-                    rx.button(
-                        rx.hstack(
-                            rx.text("Resume"),
-                            spacing="2",
-                            align="center"
+                    rx.link(
+                        rx.button(
+                            rx.hstack(
+                                rx.text("Resume"),
+                                spacing="2",
+                                align="center"
+                            ),
+                            **download_button_style
                         ),
-                        **download_button_style
+                        href="/resume_v1.3.0.pdf",
+                        is_external=True,
+                        download=True
                     ),
-                    href="/resume_v1.3.0.pdf",
-                    is_external=True,
-                    download=True
-                ),
+                    rx.cond(
+                        States.is_logged_in,
+                        rx.link(
+                            rx.button(
+                                "Admin",
+                                **contact_button_style
+                            ),
+                            href="/admin"
+                        ),
+                        None
+                    ),
                     spacing="3"
                 ),
-
                 **header_text_block
             ),
             rx.box(
-                rx.image(src=basics["image"], **header_image_style),
+                rx.image(src=AdminState.basics.get("image", ""), **header_image_style),
                 display="flex",
                 justify_content="flex-end"
             ),
             **header_grid_style
         ),
-        rx.text(basics["summary"], **summary_text_style),
+        rx.text(AdminState.basics.get("summary", ""), **summary_text_style),
         **header_section_style
     )
 
 
+def _render_work_item(job: dict) -> rx.Component:
+    """Render a single work item."""
+    position = job.get("position", "")
+    name = job.get("name", "")
+    start_date = job.get("startDate", "")
+    end_date = job.get("endDate", "")
+    summary = job.get("summary", "")
+    highlights = job.get("highlights", [])
+    
+    if not isinstance(highlights, list):
+        highlights = []
+        
+    return rx.box(
+        rx.heading(f'{position} @ {name}', **work_heading_style),
+        rx.cond(
+            end_date,
+            rx.text(f'{start_date} – {end_date}'),
+            rx.text(f'{start_date} – Present')
+        ),
+        rx.box(height="1em"),
+        rx.text(summary),
+        rx.foreach(
+            highlights,
+            lambda highlight: rx.list_item(highlight)
+        ),
+        **work_item_style
+    )
+
+
 def work_section() -> rx.Component:
-    """Render the work experience section."""
+    """Renders the work experience section."""    
     return rx.vstack(
-        *[
-            rx.box(
-                rx.heading(f'{job["position"]} @ {job["name"]}',
-                           **work_heading_style),
-                rx.text(
-                    f'{job["startDate"]} – '
-                    f'{job.get("endDate") or "Present"}'
-                ),
-                rx.box(height="1em"),
-                rx.text(job["summary"]),
-                rx.unordered_list(
-                    *[rx.list_item(item) for item in job["highlights"]]
-                ),
-                **work_item_style
-            )
-            for job in get_work()
-        ],
+        rx.foreach(
+            AdminState.work_items,
+            _render_work_item
+        ),
         **work_section_style
     )
 
 
+def _render_education_item(edu: dict) -> rx.Component:
+    """Render a single education item."""
+    study_type = edu.get("studyType", "")
+    area = edu.get("area", "")
+    institution = edu.get("institution", "")
+    start_date = edu.get("startDate", "")
+    end_date = edu.get("endDate", "")
+    score = edu.get("score", "")
+    courses = edu.get("courses", [])
+    
+    if not isinstance(courses, list):
+        courses = []
+        
+    return rx.box(
+        rx.heading(
+            f"{study_type} in {area}",
+            **heading_education_style
+        ),
+        rx.text(institution),
+        rx.cond(
+            end_date,
+            rx.text(f"{start_date} – {end_date}"),
+            rx.text(f"{start_date} – Present")
+        ),
+        rx.cond(
+            score,
+            rx.text(f"GPA: {score}"),
+            None
+        ),
+        rx.cond(
+            courses,
+            rx.unordered_list(
+                rx.foreach(
+                    courses,
+                    lambda course: rx.list_item(course)
+                )
+            ),
+            None
+        ),
+        **education_item_style
+    )
+
 def education_section() -> rx.Component:
-    """Render the education section."""
+    """Render the education section using state."""    
     return rx.vstack(
-        *[
-            rx.box(
-                rx.heading(
-                    f"{edu['studyType']} in {edu['area']}",
-                    **heading_education_style
-                ),
-                rx.text(edu["institution"]),
-                rx.text(f"{edu['startDate']} – {edu.get('endDate') or 'Present'}"),
-                rx.text(f"GPA: {edu['score']}") if edu.get("score") else None,
-                rx.unordered_list(
-                    *[rx.list_item(course) for course in edu.get("courses", [])]
-                ) if edu.get("courses") else None,
-                **education_item_style
-            )
-            for edu in get_education()
-        ],
+        rx.foreach(
+            AdminState.education_items,
+            _render_education_item
+        ),
         **education_section_style
     )
 
@@ -257,46 +387,57 @@ def certificates_section() -> rx.Component:
     )
 
 
+def _render_project_item(project: dict) -> rx.Component:
+    """Render a single project item."""
+    name = project.get("name", "")
+    description = project.get("description", "")
+    highlights = project.get("highlights", [])
+    role = project.get("role", "")
+    github = project.get("github", "")
+    
+    if not isinstance(highlights, list):
+        highlights = []
+
+    github_component = rx.cond(
+        github == "NDA",
+        rx.text("Code under NDA", font_style="italic"),
+        rx.cond(
+            github != "",
+            rx.link("GitHub", href=github, is_external=True),
+            None
+        )
+    )
+        
+    return rx.box(
+        rx.vstack(
+            rx.heading(name, **project_heading_style),
+            rx.text(description),
+            rx.hstack(
+                rx.foreach(
+                    highlights,
+                    lambda tech: rx.box(
+                        tech,
+                        **tech_tag_style
+                    )
+                ),
+                **tech_tag_container_style
+            ),
+            rx.text(role, font_weight="bold"),
+            github_component,
+            **project_content_style
+        ),
+        **project_card_style
+    )
+
+
 def project_section() -> rx.Component:
-    """Render the projects section in a grid of cards."""
+    """Render the projects section using state."""    
     return rx.box(
         rx.flex(
-            *[
-                rx.box(
-                    rx.vstack(
-                        rx.heading(project["name"], **project_heading_style),
-                        rx.text(project["description"]),
-                        rx.hstack(
-                            *[
-                                rx.box(
-                                    tech,
-                                    **tech_tag_style
-                                )
-                                for tech in project["highlights"]
-                            ],
-                            **tech_tag_container_style
-                        ),
-                        rx.text(project["role"], font_weight="bold"),
-                        (
-                            rx.link(
-                                "GitHub",
-                                href=project["github"],
-                                is_external=True
-                            )
-                            if project.get("github") 
-                               and project["github"].startswith("http")
-                            else (
-                                rx.text("Code under NDA", font_style="italic")
-                                if project.get("github") == "NDA"
-                                else None
-                            )
-                        ),
-                        **project_content_style
-                    ),
-                    **project_card_style
-                )
-                for project in get_projects()
-            ],
+            rx.foreach(
+                AdminState.project_items,
+                _render_project_item
+            ),
             **project_flex_container
         ),
         width="100%"
