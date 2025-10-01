@@ -13,7 +13,7 @@ def navbar() -> rx.Component:
             rx.link("Work", href="/#work", **link_style),
             rx.link("Education", href="/#education", **link_style),
             rx.link("Projects", href="/#projects", **link_style),
-            **nav_links_container       
+            **nav_links_container
         ),
 
         rx.spacer(),
@@ -33,6 +33,33 @@ def navbar() -> rx.Component:
                 rx.image(src="/linkedin.svg", **icon_image_size),
                 href="https://www.linkedin.com/in/matiasfalconaro/",
                 is_external=True
+            ),
+            rx.cond(
+                States.is_logged_in,
+                rx.button(
+                    "Logout",
+                    on_click=States.logout,
+                    size="1",
+                    cursor="pointer",
+                    background_color="#94A2AF",
+                    color="#FFFFFF",
+                    _hover={
+                        "background_color": "#E2E8F0",
+                        "color": "#94A2AF"
+                    }
+                ),
+                rx.button(
+                    "Login",
+                    on_click=States.toggle_login_modal,
+                    size="1",
+                    cursor="pointer",
+                    background_color="#94A2AF",
+                    color="#FFFFFF",
+                    _hover={
+                        "background_color": "#E2E8F0",
+                        "color": "#94A2AF"
+                    }
+                )
             ),
             **nav_icons_container
         ),
@@ -139,6 +166,60 @@ def code_info_modal() -> rx.Component:
     )
 
 
+def login_modal() -> rx.Component:
+    """Renders a modal dialog for user login."""
+    return rx.cond(
+        States.show_login_modal,
+        rx.box(
+            rx.box(
+                rx.heading("Login", **section_heading_style),
+                rx.vstack(
+                    rx.vstack(
+                        rx.text("Username", font_weight="bold"),
+                        rx.input(
+                            placeholder="Enter username",
+                            value=States.login_username,
+                            on_change=States.update_login_username,
+                            width="100%"
+                        ),
+                        rx.text("Password", font_weight="bold", margin_top="12px"),
+                        rx.input(
+                            placeholder="Enter password",
+                            type="password",
+                            value=States.login_password,
+                            on_change=States.update_login_password,
+                            width="100%"
+                        ),
+                        rx.cond(
+                            States.login_error != "",
+                            rx.text(States.login_error, color="red", margin_top="8px"),
+                            None
+                        ),
+                        width="100%",
+                        spacing="2"
+                    ),
+                    **contact_info_style
+                ),
+                rx.center(
+                    rx.hstack(
+                        rx.button("Login",
+                                  on_click=States.attempt_login,
+                                  **modal_button_style),
+                        rx.button("Cancel",
+                                  on_click=States.toggle_login_modal,
+                                  **modal_button_style),
+                        spacing="3"
+                    ),
+                    margin_top="16px"
+                ),
+                **modal_card_style
+            ),
+            **modal_overlay_style
+        ),
+        None
+    )
+
+
 def header_section() -> rx.Component:
     """Renders the header section."""
     return rx.vstack(
@@ -166,12 +247,16 @@ def header_section() -> rx.Component:
                         is_external=True,
                         download=True
                     ),
-                    rx.link(
-                        rx.button(
-                            "Admin",
-                            **contact_button_style
+                    rx.cond(
+                        States.is_logged_in,
+                        rx.link(
+                            rx.button(
+                                "Admin",
+                                **contact_button_style
+                            ),
+                            href="/admin"
                         ),
-                        href="/admin"
+                        None
                     ),
                     spacing="3"
                 ),

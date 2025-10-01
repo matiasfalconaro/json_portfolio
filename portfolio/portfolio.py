@@ -34,6 +34,7 @@ def index() -> rx.Component:
             footer(),
             contact_modal(),
             code_info_modal(),
+            login_modal(),
             **page_layout_style
         ),
         **page_wrapper_style,

@@ -20,6 +20,16 @@ logger = get_logger(__name__)
 class States(rx.State):
     show_modal: bool = False
     show_code_modal: bool = False
+    show_login_modal: bool = False
+    is_logged_in: bool = False
+    login_username: str = ""
+    login_password: str = ""
+    login_error: str = ""
+
+    # Mock credentials dictionary
+    mock_credentials = {
+        "admin": "admin123"
+    }
 
     def toggle_modal(self) -> None:
         """Toggle the contact modal visibility state."""
@@ -28,6 +38,41 @@ class States(rx.State):
     def toggle_code_modal(self) -> None:
         """Toggle the code information modal visibility state."""
         self.show_code_modal = not self.show_code_modal
+
+    def toggle_login_modal(self) -> None:
+        """Toggle the login modal visibility state."""
+        self.show_login_modal = not self.show_login_modal
+        self.login_error = ""
+        if not self.show_login_modal:
+            self.login_username = ""
+            self.login_password = ""
+
+    def update_login_username(self, value: str) -> None:
+        """Update login username."""
+        self.login_username = value
+
+    def update_login_password(self, value: str) -> None:
+        """Update login password."""
+        self.login_password = value
+
+    def attempt_login(self) -> None:
+        """Attempt to login with provided credentials."""
+        if self.login_username in self.mock_credentials:
+            if self.mock_credentials[self.login_username] == self.login_password:
+                self.is_logged_in = True
+                self.show_login_modal = False
+                self.login_error = ""
+                self.login_username = ""
+                self.login_password = ""
+            else:
+                self.login_error = "Invalid username or password"
+        else:
+            self.login_error = "Invalid username or password"
+
+    def logout(self) -> None:
+        """Logout user."""
+        self.is_logged_in = False
+        return rx.redirect("/")
 
 
 class WorkItem(TypedDict):
