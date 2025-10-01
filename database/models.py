@@ -87,3 +87,9 @@ class Project(BaseModel):
     github: str
     isActive: bool = False
     url: Optional[str] = None
+
+
+class User(BaseModel):
+    username: str
+    password_hash: str
+    created_at: Optional[str] = None

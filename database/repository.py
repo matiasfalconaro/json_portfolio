@@ -1,16 +1,20 @@
 from typing import (List,
                     Optional)
+from datetime import datetime
 from .db import db
 from portfolio.config import get_logger
 from .models import (Basics,
                      Work,
                      Education,
-                     Certificate, 
+                     Certificate,
                      Skill,
                      Language,
                      Interest,
                      Reference,
-                     Project)
+                     Project,
+                     User)
+from .auth import (hash_password,
+                   verify_password)
 
 
 logger = get_logger(__name__)
@@ -68,3 +72,57 @@ def get_projects() -> List[Project]:
     """Returns the list of projects."""
     projects_data = db.projects.find({}, {"_id": 0})
     return [Project(**item) for item in projects_data]
+
+
+def create_user(username: str, password: str) -> Optional[User]:
+    """Create a new user with hashed password."""
+    try:
+        existing_user = db.users.find_one({"username": username})
+        if existing_user:
+            logger.warning(f"User {username} already exists")
+            return None
+
+        password_hash = hash_password(password)
+        user_doc = {
+            "username": username,
+            "password_hash": password_hash,
+            "created_at": datetime.utcnow().isoformat()
+        }
+
+        db.users.insert_one(user_doc)
+        logger.info(f"User {username} created successfully")
+        return User(**user_doc)
+    except Exception as e:
+        logger.error(f"Error creating user: {e}")
+        return None
+
+
+def authenticate_user(username: str, password: str) -> Optional[User]:
+    """Authenticate a user with username and password."""
+    try:
+        user_data = db.users.find_one({"username": username}, {"_id": 0})
+        if not user_data:
+            logger.warning(f"User {username} not found")
+            return None
+
+        if verify_password(password, user_data["password_hash"]):
+            logger.info(f"User {username} authenticated successfully")
+            return User(**user_data)
+        else:
+            logger.warning(f"Invalid password for user {username}")
+            return None
+    except Exception as e:
+        logger.error(f"Error authenticating user: {e}")
+        return None
+
+
+def get_user(username: str) -> Optional[User]:
+    """Get user by username."""
+    try:
+        user_data = db.users.find_one({"username": username}, {"_id": 0})
+        if user_data:
+            return User(**user_data)
+        return None
+    except Exception as e:
+        logger.error(f"Error getting user: {e}")
+        return None

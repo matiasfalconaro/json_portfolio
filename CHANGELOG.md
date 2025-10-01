@@ -278,6 +278,7 @@ README Documentation: Updated testing section to include BDD commands and test s
 - Implement logging package (debug).
 - Add `.pytest_cache` to `.gitignore`.
 - Unit and BDD tests updated to cover new admin page and collection editing functionality.
+- JWT authentication implemented for secure access to the admin panel.
 
 ### Changed
 - Refactored state management: `AdminState` now handles collection-specific editing independently.
@@ -293,7 +294,6 @@ README Documentation: Updated testing section to include BDD commands and test s
 
 > TODO
 > - [1] Fix `highligts` in `project cards`.
-> - [2] JWT authentication implemented for secure access to the admin panel.
 > - [1] Security
 >       CRITICAL SECURITY GAPS IDENTIFIED:
 >       1. NO AUTHENTICATION: Admin panel (/admin) is publicly accessible without any login

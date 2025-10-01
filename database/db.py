@@ -1,6 +1,7 @@
 import os
 
-from pymongo import MongoClient, errors
+from pymongo import (MongoClient,
+                     errors)
 from dotenv import load_dotenv
 from typing import (List,
                     Tuple,
@@ -26,7 +27,13 @@ def _ensure_index(collection: str, field: str, unique: bool = False) -> None:
     """
     Private helper to create an index if it does not already exist.
     """
-    existing_indexes = [idx["key"][0][0] for idx in db[collection].list_indexes()]
+    existing_indexes = []
+    for idx in db[collection].list_indexes():
+        if "key" in idx:
+            for key_tuple in idx["key"]:
+                field_name = key_tuple[0]
+                existing_indexes.append(field_name)
+
     if field not in existing_indexes:
         try:
             db[collection].create_index(field, unique=unique)
@@ -51,7 +58,8 @@ def init_collections() -> None:
         "languages": [],
         "interests": [],
         "references": [],
-        "projects": [("name", False)]
+        "projects": [("name", False)],
+        "users": [("username", True)]
     }
 
     for col_name, indexes in collections.items():

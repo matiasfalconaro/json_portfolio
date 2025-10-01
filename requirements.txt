@@ -6,3 +6,5 @@ pytest-bdd
 pymongo
 pydantic[email]
 python-dotenv
+pyjwt
+bcrypt

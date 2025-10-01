@@ -6,7 +6,9 @@ from database.db import db
 from database.repository import (get_basics,
                                  get_work,
                                  get_education,
-                                 get_projects)
+                                 get_projects,
+                                 authenticate_user)
+from database.auth import create_jwt_token, verify_jwt_token
 from typing import (List,
                     TypedDict,
                     Any,
@@ -25,11 +27,8 @@ class States(rx.State):
     login_username: str = ""
     login_password: str = ""
     login_error: str = ""
-
-    # Mock credentials dictionary
-    mock_credentials = {
-        "admin": "admin123"
-    }
+    jwt_token: str = ""
+    current_username: str = ""
 
     def toggle_modal(self) -> None:
         """Toggle the contact modal visibility state."""
@@ -56,22 +55,47 @@ class States(rx.State):
         self.login_password = value
 
     def attempt_login(self) -> None:
-        """Attempt to login with provided credentials."""
-        if self.login_username in self.mock_credentials:
-            if self.mock_credentials[self.login_username] == self.login_password:
+        """Attempt to login with provided credentials using JWT."""
+        try:
+            user = authenticate_user(self.login_username, self.login_password)
+            if user:
+                token = create_jwt_token(user.username)
+                self.jwt_token = token
+                self.current_username = user.username
                 self.is_logged_in = True
                 self.show_login_modal = False
                 self.login_error = ""
                 self.login_username = ""
                 self.login_password = ""
+                logger.info(f"User {user.username} logged in successfully")
             else:
                 self.login_error = "Invalid username or password"
+                logger.warning(f"Failed login attempt for username: {self.login_username}")
+        except Exception as e:
+            self.login_error = "Login failed. Please try again."
+            logger.error(f"Login error: {e}")
+
+    def verify_token(self) -> bool:
+        """Verify the current JWT token."""
+        if not self.jwt_token:
+            return False
+        username = verify_jwt_token(self.jwt_token)
+        if username:
+            self.is_logged_in = True
+            self.current_username = username
+            return True
         else:
-            self.login_error = "Invalid username or password"
+            self.is_logged_in = False
+            self.jwt_token = ""
+            self.current_username = ""
+            return False
 
     def logout(self) -> None:
         """Logout user."""
+        logger.info(f"User {self.current_username} logged out")
         self.is_logged_in = False
+        self.jwt_token = ""
+        self.current_username = ""
         return rx.redirect("/")
 
 
