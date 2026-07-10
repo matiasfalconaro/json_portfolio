@@ -1,16 +1,16 @@
 {
   "basics": {
     "name": "Matias Falconaro",
-    "label": "Software Developer",
+    "label": "IT support analyst",
     "image": "1736345293938.jfif",
     "email": "mlfalconaro@gmail.com",
     "phone": "+54 9 (011) 15-3271-1841",
     "url": "https://www.mfalconaro.dev",
-    "summary": "As a developer, I'm driven by the excitement of creating meaningful and impactful solutions. Crafting code that not only solves business problems but also brings me joy is at the core of my work. Some of my soft skills are being analytical, adaptable, collaborative, and committed. I also enjoy spending time with my family and friends, cycling, and swimming.",
+    "summary": "IT Support Analyst specializing in end-to-end resolution of infrastructure, network, and connectivity incidents. Experienced in developing automation solutions to optimize operational processes, identity management, and monitoring.",
     "location": {
       "address": null,
-      "postalCode": "B1828AAK",
-      "city": "Banfield",
+      "postalCode": "B1832DQA",
+      "city": "Lomas de Zamora",
       "countryCode": "AR",
       "region": "Buenos Aires"
     },
@@ -28,64 +28,86 @@
   },
   "work": [
     {
+      "name": "W&R Producciones",
+      "position": "IT Support Analyst",
+      "url": "",
+      "startDate": "03/2026",
+      "endDate": "Present",
+      "summary": "Hardware, software, and network troubleshooting; creation of knowledge base articles (KBs). Deployment and administration of VirtualBox VMs, featuring external networking, virtual switching, and physical resource allocation. Management of 100+ virtualized workstations via TeamViewer, including diagnostics, updates, configuration, and systems maintenance. Administration, configuration, and monitoring of Fortinet VPN infrastructure alongside multi-protocol tunnel deployment (IPsec, SSL/TLS, L2TP, SSTP, and WireGuard); management of access policies, user authentication, and connectivity troubleshooting for remote work and branch offices. Development and implementation of PowerShell scripts for CTI integration between IVR and CRM platforms utilizing ANI detection. Centralized identity and access management (IAM) using Active Directory for user provisioning, de-provisioning, and modifications across corporate ecosystems and monitoring tools (Salesforce CRM, LMS training platforms, and real-time supervision dashboards).",
+      "highlights": [
+        "VPN & Network Administration", "Identity Management (IAM)", "CTI/IVR Scripting Automation"
+      ]
+    },
+    {
+      "name": "CAT Technologies Argentina",
+      "position": "IT Support Analyst",
+      "url": "https://cat-technologies.com/",
+      "startDate": "02/2025",
+      "endDate": "02/2026",
+      "summary": "Implementation of escalation workflows to reduce ticket transfers and decrease resolution times for complex incidents. Hybrid Network Diagnostics (HFC/FTTH): Layer 1 and Layer 2 incident resolution involving routers, modems, ONTs, and Wi-Fi Mesh extenders. IoT Ecosystem Configuration: Integration of set-top boxes (STBs), Wi-Fi IP cameras, and smart sensors across residential and corporate environments. Multichannel Technical Assistance (IVR, AnyDesk, WhatsApp): Remote support for incident resolution and end-user terminal configuration. Active Directory user profile and permission administration for account provisioning and de-provisioning across Salesforce CRM, LMS training platforms, and real-time monitoring dashboards. Critical boot and storage failure management utilizing Pre-installation Environments (PE), Live USB environments, and deployment/imaging tools. SSD, NVMe, and HDD diagnostics, SATA/PCIe interface troubleshooting, disk cloning, and GPT/MBR partitioning. BIOS/UEFI configuration, firmware updates, controller modes (AHCI/RAID), and Secure Boot setup.",
+      "highlights": [
+        "Telecom & HFC/FTTH Diagnostics", "Escalation Workflow Optimization", "IoT Ecosystem Integration"
+      ]
+    },
+    {
       "name": "Scienza Argentina",
-      "position": "Python Developer",
+      "position": "Applications Support Analyst",
       "url": "https://www.scienza.com.ar/",
       "startDate": "08/2024",
-      "endDate": "Present",
-      "summary": "Led automation initiatives using Python and virtualization tools. Integrated OpenAI API for document auditing, prescription analysis, and cross-referencing with lab delivery notes. Developed and consumed APIs using FastAPI. Created comprehensive documentation and training resources. Championed DevOps practices with Git/GitHub and enforced clean architecture through OOP, SOLID principles, and modular design.",
+      "endDate": "01/2025",
+      "summary": "Development and optimization of Python scripts integrated with SAP HANA to automate critical operational processes (billing, reporting, and master data), significantly reducing manual workload across the department. Data integration automation. Implementation and maintenance of ETL processes pulling from multiple sources (external APIs, CSVs, and heterogeneous databases) into centralized repositories to eliminate information silos. Standardization of technical development methodologies within the team using Git/GitHub, ensuring scalable code, peer reviews, and controlled testing environments.",
       "highlights": [
-        "Process automation, AI, Systems migration"
+        "Python & SAP HANA Automation", "ETL Pipeline Implementation", "Git/GitHub DevOps Standardization"
       ]
     },
     {
       "name": "Baitcon SA",
-      "position": "Python Developer",
+      "position": "Applications Support Analyst",
       "url": "https://www.baitcon.com/",
       "startDate": "12/2022",
       "endDate": "08/2024",
-      "summary": "Designed database schemas using ER diagrams, DDL, and SQL for efficient data storage and retrieval, and developed ETL processes to centralize data from various sources. Built RESTful APIs, integrated AI APIs and LLMs, ensured data security, and collaborated with data analysts, while managing data pipelines, backup strategies, and CI/CD pipelines for backend services.",
+      "summary": "Administration and maintenance of SAP HANA Cloud integrations for internal web applications on SAP BTP. Configuration and support of automated ETL processes in headless Windows Server environments. Integration of SQL Server and Windows Server with Active Directory for centralized authentication, role-based access control (RBAC), and GPOs. Administration of an on-premise SFTP server for secure data exchange with external sources, featuring access auditing and centralized logging. Monitoring and incident resolution for data flows across systems (SAP, SQL Server, SFTP, and HANA Cloud) to ensure business continuity. Operational continuity, optimization, and execution of backup policies and disaster recovery (DR) plans for both on-premise and cloud databases.",
       "highlights": [
-        "Corporate software, automation and pipelining factory"
-        ]
-    },
-    {
-      "name": "Freelance web developer",
-      "position": "FS Developer",
-      "url": null,
-      "startDate": "12/2018",
-      "endDate": "12/2023",
-      "summary": "Developed and maintained web pages, including landing pages and e-commerce sites, focusing on enterprise clients. Leveraged Python for backend development and the Flask framework for web application interfaces.",
-      "highlights": [
-        "Commercial landing pages development, deployment, hosting, maintenance and improvement"
+        "SAP BTP & HANA Cloud Integration", "Headless Windows Server ETLs", "Disaster Recovery & Security Auditing"
         ]
     },
     {
       "name": "Pilcomayo SRL",
-      "position": "IT Support",
+      "position": "Ssr. IT Support Analyst",
       "url": "https://b2argentina.com.ar/hotsite/pilcomayosrl/details",
-      "startDate": "01/2015",
-      "endDate": "02/2022",
-      "summary": "Managed and maintained the company's IT infrastructure, including servers, networks, and workstations, ensuring performance, uptime, and secure connectivity through the configuration of routers, switches, firewalls, and VPNs. Provided technical support to employees, handled software installations and updates, managed user accounts and data backup solutions, enforced IT security policies, and coordinated with vendors for hardware and software procurement.",
+      "startDate": "02/2018",
+      "endDate": "11/2022",
+      "summary": "Deployment and administration of VMware VMs, featuring internal networking, virtual switching, and physical resource allocation. Backup and disaster recovery policies incorporating data synchronization and replication between physical servers and NAS/SAN storage, with centralized log and event analysis in Splunk. Procurement and installation management of hardware (servers, switches, firewalls, storage, and printers), alongside SLA monitoring for connectivity and equipment. PowerShell, Bash, and Python scripting for repetitive tasks, utilizing Git for version control and integrating with Datadog. Monitoring of processes, services, and hardware status (temperature, disks, power supplies, and network traffic) using Zabbix for alerting and SNMP network device monitoring to guarantee critical service availability and uptime.",
       "highlights": [
-        "Systems maintenance, update and implementation"
+        "VMware Cluster & Infrastructure Admin", "Datadog & Zabbix Infrastructure Monitoring", "Multi-platform Scripting (PowerShell/Bash/Python)"
         ]
-      },
+    },
+      {
+    "name": "Pilcomayo SRL",
+    "position": "Jr. IT Support Analyst",
+    "url": "https://b2argentina.com.ar/hotsite/pilcomayosrl/details",
+    "startDate": "01/2015",
+    "endDate": "02/2022",
+    "summary": "Hardware, software, and network troubleshooting; creation of knowledge base articles (KBs). Preventive, corrective, and scheduled maintenance for 10+ workstations, 2 servers (incorporating servers, ToR/OOB switches, KVMs, UPSs, PDUs, patch panels, rack shelves, and storage), and 6 printers, including diagnostics, component upgrades, assembly, and structured UTP/FTP cabling (TIA-568). Configuration and administration of routers, switches, and firewalls (NAT policies, ACLs, and filtering); support for analog PABX systems. Management of VLANs, subnets, routing, and port/MAC-based policies, with availability and performance monitoring via Zabbix. User provisioning, de-provisioning, and modifications (Joiners, Movers, Leavers) in Tango Gestión and LDAP, alongside role-based permission assignment and GPOs. Implementation of SSH, RDP, and SFTP tunnels with access authentication and auditing between servers, featuring centralized logging in Splunk.",
+    "highlights": [
+      "L2/L3 Network & Firewall Configuration", "Data Center Rack & Hardware Maintenance", "Splunk Centralized Log Auditing"
+      ]
+    },
     {
     "name": "Etex Group Argentina",
     "position": "SAP Base Line Support",
     "url": "https://www.etexgroup.com/es-ar/",
     "startDate": "11/2013",
     "endDate": "12/2014",
-    "summary": "Configured technical locations and maintenance plans in SAP to support asset management, ensuring efficient scheduling and execution of preventive maintenance tasks. Managed work orders, purchase requests, and equipment master data, while providing user training and support on SAP maintenance functionalities.",
+    "summary": "User assistance in the creation, release, and technical closure of Maintenance Notifications and Work Orders. Troubleshooting and guidance on the basic display and modification of Technical Objects, such as Functional Locations and Equipment. Unlocking user accounts and assigning permissions for key module transactions or specific roles for maintenance planners, supervisors, and technicians. Incident resolution for time confirmation logging issues and troubleshooting errors during the Technical Completion (TECO) of work orders. Preventive Maintenance Plans, inspection cycle scheduling, and measurement reading uploads into Measuring Points. Creation of shop floor and plant guides and manuals on how to report breakdowns and log data. Reporting of unscheduled breakdowns via corrective notifications and their subsequent conversion into urgent Work Orders.",
     "highlights": [
-      "Started the SAP PM module implementation."
+      "SAP PM Functional Support", "Preventive Maintenance Planning", "SLA & Work Order Lifecycle Management"
       ]
     }
   ],
   "education": [
     {
-      "institution": "UTN - Universidad Tecnologica Nacional",
+      "institution": "UP ' Universidad de Palermo",
       "url": "https://up.edu.ar/",
       "area": "Systems Analysis",
       "studyType": "Associate of Science Degree",
@@ -115,89 +137,79 @@
         "issuer": "Google",
         "url": null
     }],
-  "skills": [
+"skills": [
     {
-      "name": "Front-End Development",
-      "level": "Intermediate",
-      "keywords": [
-        "HTML",
-        "CSS",
-        "JavaScript",
-        "React",
-        "Bootstrap"
-      ]
-    },
-    {
-      "name": "Back-End Development",
+      "name": "Automation & Scripting",
       "level": "Advanced",
       "keywords": [
         "Python",
-        "SQLAlchemy",
-        "Flask",
-        "Pandas",
-        "TDD",
-        "pETL"
+        "PowerShell",
+        "Bash Scripting",
+        "ETL Processes",
+        "Git / GitHub"
       ]
     },
     {
-      "name": "Database",
+      "name": "Enterprise Software & Cloud",
       "level": "Advanced",
       "keywords": [
-        "PostgreSQL",
-        "MongoDB",
-        "SQLite3",
         "SAP HANA Cloud",
-        "SAP S/4 Hana"
+        "SAP BTP",
+        "SAP PM Module",
+        "Tango Gestión",
+        "Salesforce CRM"
       ]
     },
     {
-      "name": "Systems management",
-      "level": "Intermediate",
-      "keywords": [
-        "linux",
-        "Git",
-        "GitHub",
-        "Bash Scripting"
-      ]
-    },
-    {
-      "name": "Cloud Computing",
+      "name": "Databases",
       "level": "Advanced",
       "keywords": [
-        "AWS",
-        "SAP BTP",
-        "Docker",
-        "CloudFoundry"
+        "SQL Server",
+        "SAP HANA",
+        "PostgreSQL",
+        "MongoDB"
       ]
     },
     {
-      "name": "AI and Machine Learning",
-      "level": "Intermediate",
+      "name": "Infrastructure & Virtualization",
+      "level": "Advanced",
       "keywords": [
-        "Open AI API",
-        "Ollama",
-        "Llama 2",
-        "nomic-embed-text",
-        "LangChain",
-        "GPT-4 Turbo",
-        "GPT-3.5 Turbo"
+        "Windows Server",
+        "Linux",
+        "VMware",
+        "VirtualBox",
+        "Active Directory (IAM / GPOs)"
       ]
     },
     {
-      "name": "Project Management",
-      "level": "Intermediate",
+      "name": "Networking & Security",
+      "level": "Advanced",
       "keywords": [
-        "Scrum",
-        "Kaban"
+        "Fortinet VPN",
+        "Network Protocols (IPsec, SSL/TLS, WireGuard)",
+        "HFC / FTTH (Layer 1 & 2)",
+        "Firewalls (NAT / ACLs)",
+        "Structured Cabling (TIA-568)"
       ]
     },
     {
-      "name": "Data Analysis and Reporting",
-      "level": "Intermediate",
+      "name": "Monitoring & Observability",
+      "level": "Advanced",
       "keywords": [
-        "MS Excel",
-        "SAP Analytics Cloud",
-        "Tableu"
+        "Zabbix (SNMP)",
+        "Splunk (Centralized Logging)",
+        "Datadog"
+      ]
+    },
+    {
+      "name": "IT Support & Operations",
+      "level": "Advanced",
+      "keywords": [
+        "End-to-End Troubleshooting",
+        "Disaster Recovery (DR) & Backups",
+        "SLA & Procurement Management",
+        "ITIL / Knowledge Base (KBs)",
+        "CTI / IVR Integrations"
       ]
     }
   ],
@@ -300,21 +312,6 @@
       "github": "https://github.com/matiasfalconaro/Tkinter_expense_manager"
     },
     {
-      "name": "Investment App",
-      "role": "Associate",
-      "isActive": true,
-      "description": "Cloud-based application for mass data import, processing, and management of engineering project investment data, integrated for use with SAP Analytics Cloud.",
-      "highlights": [
-        "SAP HANA",
-        "SAP BTP",
-        "Python",
-        "Flask",
-        "Cloud"
-      ],
-      "url": null,
-      "github": "NDA"
-    },
-    {
       "name": "GIS ETL pipeline",
       "role": "Associate",
       "isActive": true,
@@ -331,20 +328,6 @@
       "github": "NDA"
     },
     {
-      "name": "Direction mgmt. App",
-      "role": "Associate",
-      "isActive": true,
-      "description": "Cloud platform for managing the import, export, and monitoring of engineering projects within a corporate enterprise's presidency.",
-      "highlights": [
-        "API",
-        "SAP HANA",
-        "Flask",
-        "SQLAlchemy"
-      ],
-      "url": null,
-      "github": "NDA"
-    },
-    {
       "name": "DBs ETL Pipeline",
       "role": "Associate",
       "isActive": true,
@@ -354,21 +337,6 @@
         "SQLAlchemy",
         "SQL Server",
         "Automation"
-      ],
-      "url": null,
-      "github": "NDA"
-    },
-    {
-      "name": "Chat AWS",
-      "role": "Lead",
-      "isActive": false,
-      "description": "Cloud Python application leveraging OpenAI's API models for natural language queries to fetch data from a database.",
-      "highlights": [
-        "API",
-        "AWS",
-        "PostgreSQL",
-        "OpenAI",
-        "ChatGpt"
       ],
       "url": null,
       "github": "NDA"
