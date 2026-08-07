@@ -1,8 +1,15 @@
 import os
 
-from pymongo import MongoClient, errors
+from pymongo import (MongoClient,
+                     errors)
 from dotenv import load_dotenv
+from typing import (List,
+                    Tuple,
+                    Dict)
 
+
+IndexDefinition = Tuple[str, bool]
+CollectionConfig = Dict[str, List[IndexDefinition]]
 
 load_dotenv()
 MONGO_USER = os.getenv("MONGO_USER", "user_placeholder")
@@ -16,11 +23,17 @@ client = MongoClient(MONGO_URI)
 db = client[DB_NAME]
 
 
-def _ensure_index(collection, field, unique=False):
+def _ensure_index(collection: str, field: str, unique: bool = False) -> None:
     """
     Private helper to create an index if it does not already exist.
     """
-    existing_indexes = [idx["key"][0][0] for idx in db[collection].list_indexes()]
+    existing_indexes = []
+    for idx in db[collection].list_indexes():
+        if "key" in idx:
+            for key_tuple in idx["key"]:
+                field_name = key_tuple[0]
+                existing_indexes.append(field_name)
+
     if field not in existing_indexes:
         try:
             db[collection].create_index(field, unique=unique)
@@ -31,12 +44,12 @@ def _ensure_index(collection, field, unique=False):
         print(f"Index already exists on '{collection}.{field}'")
 
 
-def init_collections():
+def init_collections() -> None:
     """
     Initialize all necessary collections and their indexes.
     Can be executed multiple times without errors.
     """
-    collections = {
+    collections: CollectionConfig = {
         "basics": [("email", True)],
         "work": [("name", False)],
         "education": [],
@@ -45,7 +58,8 @@ def init_collections():
         "languages": [],
         "interests": [],
         "references": [],
-        "projects": [("name", False)]
+        "projects": [("name", False)],
+        "users": [("username", True)]
     }
 
     for col_name, indexes in collections.items():

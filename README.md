@@ -6,7 +6,14 @@ This project is a personal portfolio built with [Reflex](https://reflex.dev) as 
 and **MongoDB** as the persistent datastore.  
 It evolved from a static JSON-based portfolio to a Dockerized microservice architecture.
 
-![Architecture](docs/architecture.svg)
+# Features
+| Feature             | Notes                                             |
+|---------------------|---------------------------------------------------|
+| Portfolio CRUD      | Create, Read, Update and Delete admin panel.      |
+| JSON Resume upload  | Bulk upload to MongoDB from a template JSON file. |
+| PDF Resume download | Download resume as a PDF file.                    |
+| PDF Resume upload   | Upload a resume as a PDF file.                    |
+| JWT Authentication  |                                                   |
 
 # Infrastructure
 ## Build (From an EC2 instance, using [Reflex-EC2-Toolkit](https://github.com/matiasfalconaro/ec2-reflex-toolkit), AWS)
@@ -15,6 +22,8 @@ sudo su ec2-user
 cd ~
 git clone https://github.com/matiasfalconaro/ec2-reflex-toolkit.git
 ```
+
+![Architecture](docs/architecture.svg)
 
 For more information, visit [Reflex-EC2-Toolkit](https://github.com/matiasfalconaro/ec2-reflex-toolkit).
 
@@ -61,22 +70,9 @@ pytest -v tests/test_components.py::test_navbar_returns_component
 # BDD Tests
 Gherkin-style tests using pytest-bdd for behavior specification and acceptance criteria.
 
-## Run all BDD tests:
 ```bash
-pytest -v tests/steps/
-```
-
-## Run specific BDD test categories:
-```bash
-pytest -v tests/steps/test_components_steps.py
-```
-
-## Run specific test functions:
-```bash
-pytest -v tests/test_components.py::test_navbar_returns_component
-```
-
-## Run Complete Test Suite
-```bash
-pytest -v tests/ tests/steps/
+pytest -v tests/steps/  # Run all BDD tests
+pytest -v tests/steps/test_components_steps.py  # Run specific BDD test categories
+pytest -v tests/test_components.py::test_navbar_returns_component  # Run specific test functions
+pytest -v tests/ tests/steps/  # Run Complete Test Suite
 ```

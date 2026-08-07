@@ -1,8 +1,11 @@
 import os
 import pytest
 
-from typing import Dict, List, Any
-from portfolio.data import load_portfolio, data
+from typing import (Dict,
+                    List,
+                    Any)
+from portfolio.data import (load_portfolio,
+                            data)
 
 
 def test_load_portfolio_returns_dict() -> None:

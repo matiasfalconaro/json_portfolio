@@ -36,11 +36,11 @@ modal_overlay_style = {
     "left": "0",
     "width": "100vw",
     "height": "100vh",
-    "background_color": "rgba(0, 0, 0, 0.4)",
+    "background_color": "rgba(0, 0, 0, 0.6)",
     "display": "flex",
     "justify_content": "center",
     "align_items": "center",
-    "z_index": "1000"
+    "z_index": "10000"
 }
 
 modal_card_style = {
@@ -179,7 +179,7 @@ project_card_style = {
     "border_color":"gray.200",
     "border_radius": "10px",
     "box_shadow": "sm",
-    "background_color": "backgrond",
+    "background_color": "background",
     "width": ["100%", "100%", "48%", "32%"],
     "margin_bottom": "16px"
 }
@@ -246,3 +246,183 @@ section_heading_style = {
     "size": "6"
 }
 
+# ADMIN PANEL STYLES
+
+# Inputs
+input_style = {
+    "width": "100%",
+    "background": "background",
+    "padding_x": "4", 
+    "margin_x": "2"   
+}
+
+text_area_style = {
+    "width": "100%",
+    "background": "background",
+    "padding_x": "4", 
+    "margin_x": "2"   
+}
+
+editor_container_style = {
+    "spacing": "4", 
+    "width": "100%",
+    "padding_x": "4" 
+}
+
+section_title_style = {
+    "font_size": "xl",
+    "font_weight": "bold",
+    "margin_bottom": "4" 
+}
+
+# View mode styles
+view_field_style = {
+    "width": "100%",
+    "padding": "12px",
+    "border": "1px solid #e2e8f0",
+    "border_radius": "8px",
+    "background_color": "background",
+}
+
+# Sidebar
+sidebar_button_style = {
+    "variant": "solid",
+    "width": "100%",
+    "border_radius": "8px",
+    "padding": "3",  
+    "margin_x": "2" 
+}
+
+item_button_style = {
+    "variant": "solid",
+    "size": "2",
+    "width": "100%",
+    "text_align": "left",
+    "border_radius": "6px",
+    "padding": "2",  
+    "background": "gray.100",
+    "_hover": {"background": "gray.200"},
+    "margin_x": "2" 
+}
+
+sidebar_container_style = {
+    "spacing": "4", 
+    "width": "280px",
+    "min_width": "280px",
+    "padding": "4",  
+    "padding_x": "2",
+    "height": "100vh",
+    "overflow_y": "auto",
+    "border_right": "1px solid #e2e8f0"
+}
+
+item_list_container_style = {
+    "spacing": "3", 
+    "width": "100%",
+    "padding_x": "4",
+    "max_width": "100%"
+}
+
+item_list_title_style = {
+    "font_weight": "bold",
+    "font_size": "sm",
+    "margin_bottom": "2", 
+    "padding_x": "4"      
+}
+
+# Main content area
+main_content_style = {
+    "flex": "1",
+    "padding": "6",
+    "spacing": "6",
+    "width": "100%",
+    "max_width": "100%",
+    "background": "gray.50"
+}
+
+content_box_style = {
+    "width": "100%",
+    "max_width": "100%",
+    "padding_x": "4",
+    "margin_x": "2"
+}
+
+# Buttons
+save_button_container_style = {
+    "margin_top": "6",
+    "width": "100%",
+    "padding_x": "4"
+}
+
+save_button_style = {
+    "size": "3",
+    "width": "200px",
+    "variant": "solid",
+    "margin_x": "2"
+}
+
+delete_button_style = {
+    "size": "1",
+    "color_scheme": "red", 
+    "background_color": "red.500",
+    "color": "white",
+    "min_width": "30px",
+    "height": "30px",
+    "border_radius": "4px",
+    "_hover": {
+        "background_color": "red.600"
+    }
+}
+
+add_button_style = {
+    "size": "2",
+    "color_scheme": "green"
+}
+
+# Layout
+admin_layout_style = {
+    "spacing": "4",
+    "width": "100%",
+    "align_items": "stretch",
+    "padding_x": "4"
+}
+
+admin_page_style = {
+    "spacing": "0",
+    "width": "100%",
+    "min_height": "100vh"
+}
+
+checkbox_container_style = {
+    "width": "100%",
+    "padding_x": "4"
+}
+
+# Form controls
+checkbox_style = {
+    "padding_x": "4",
+    "margin_x": "2"
+}
+
+item_button_style = {
+    "variant": "solid",
+    "size": "2",
+    "flex": "1",
+    "text_align": "left",
+    "border_radius": "6px",
+    "padding": "2",  
+    "background": "gray.100",
+    "_hover": {"background": "gray.200"},
+    "margin_x": "2",
+    "min_width": "0"
+}
+
+# Item management
+new_item_banner_style = {
+    "background_color": "blue.50",
+    "border": "1px solid",
+    "border_color": "blue.200",
+    "border_radius": "md",
+    "padding": "3",
+    "margin_bottom": "4"
+}

@@ -44,6 +44,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Create test environment file
+        run: |
+          cat > .env << EOF
+          MONGO_USER=admin
+          MONGO_PASSWORD=secret
+          MONGO_HOST=mongo
+          MONGO_PORT=27017
+          MONGO_DB=portfolio_db
+          JWT_SECRET=test-jwt-secret-for-ci-cd-pipeline
+          DEFAULT_ADMIN_USER=testadmin
+          DEFAULT_ADMIN_PASSWORD=testpassword123
+          EOF
+
       - name: Build images with Docker Compose
         run: |
           TAG=latest docker compose build --no-cache
@@ -59,6 +72,23 @@ jobs:
             done
             echo "MongoDB ready!"
           '
+
+      - name: Wait for application to initialize
+        run: |
+          echo "Waiting for application initialization..."
+          sleep 10
+
+      - name: Verify admin user creation
+        run: |
+          docker compose exec -T app python -c "
+          from database.repository import get_user
+          user = get_user('testadmin')
+          if user:
+              print('✅ Admin user created successfully')
+          else:
+              print('❌ Admin user not found')
+              exit(1)
+          "
 
       - name: Run tests
         run: |

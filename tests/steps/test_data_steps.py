@@ -52,11 +52,9 @@ def check_assets_exist() -> None:
     """Check that main image and logo assets exist."""
     assets_dir = Path("assets")
     
-    # Check main image
     main_image_path = assets_dir / data["basics"]["image"]
     assert main_image_path.exists(), f"{main_image_path} no existe"
     
-    # Check logos
     for logo_name in ["code.svg", "github.svg", "linkedin.svg", "python.svg"]:
         logo_path = assets_dir / logo_name
         assert logo_path.exists(), f"{logo_path} no existe"

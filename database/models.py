@@ -8,23 +8,23 @@ from typing import (List,
 class Profile(BaseModel):
     network: str
     username: str
-    url: Optional[HttpUrl]
+    url: Optional[HttpUrl] = None
 
 
 class Location(BaseModel):
-    postalCode: Optional[str]
-    city: Optional[str]
-    countryCode: Optional[str]
-    region: Optional[str]
+    postalCode: Optional[str] = None
+    city: Optional[str] = None
+    countryCode: Optional[str] = None
+    region: Optional[str] = None
 
 
 class Basics(BaseModel):
     name: str
     label: str
-    image: Optional[str]
+    image: Optional[str] = None
     email: EmailStr
-    phone: Optional[str]
-    url: Optional[HttpUrl]
+    phone: Optional[str] = None
+    url: Optional[HttpUrl] = None
     summary: str
     location: Location
     profiles: List[Profile]
@@ -33,7 +33,7 @@ class Basics(BaseModel):
 class Work(BaseModel):
     name: str
     position: str
-    url: Optional[HttpUrl]
+    url: Optional[HttpUrl] = None
     startDate: str
     endDate: str
     summary: str
@@ -42,19 +42,20 @@ class Work(BaseModel):
 
 class Education(BaseModel):
     institution: str
-    url: Optional[HttpUrl]
+    url: Optional[HttpUrl] = None
     area: str
     studyType: str
     startDate: str
     endDate: str
-    score: Optional[str]
+    score: Optional[str] = None
+    courses: List[str] = []
 
 
 class Certificate(BaseModel):
     name: str
     date: str
     issuer: str
-    url: Optional[HttpUrl]
+    url: Optional[HttpUrl] = None
 
 
 class Skill(BaseModel):
@@ -81,8 +82,14 @@ class Reference(BaseModel):
 class Project(BaseModel):
     name: str
     role: str
-    isActive: bool
     description: str
-    highlights: List[str]
-    url: Optional[HttpUrl]
-    github: Optional[str]
+    highlights: List[str] = []
+    github: str
+    isActive: bool = False
+    url: Optional[str] = None
+
+
+class User(BaseModel):
+    username: str
+    password_hash: str
+    created_at: Optional[str] = None

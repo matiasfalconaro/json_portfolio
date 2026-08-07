@@ -49,6 +49,7 @@ def render_sections() -> List[rx.Component]:
 
 @then("each should be a Reflex Component")
 def check_sections() -> None:
+    """Verify that all main portfolio sections are valid Reflex components."""
     sections = [
         header_section(),
         work_section(),
@@ -70,5 +71,6 @@ def enable_modals(state) -> States:
 
 @then("contact_modal and code_info_modal should be Reflex Components")
 def check_modals() -> None:
+    """Verify that both modal components are valid Reflex components."""
     assert isinstance(contact_modal(), rx.Component)
     assert isinstance(code_info_modal(), rx.Component)
